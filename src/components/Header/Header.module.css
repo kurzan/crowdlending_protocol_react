@@ -1,0 +1,17 @@
+.elements {
+  position: sticky;
+  top: 0;
+  padding: 0 24px 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.46) 0px 0px 4px 0px;
+  margin-bottom: 3px;
+  background-color: white;
+}
+
+
+.company {
+  padding: 12px;
+  font-weight: 700;
+}

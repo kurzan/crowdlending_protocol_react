@@ -1,0 +1,28 @@
+.button {
+  padding: 12px 31px 12px 31px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  background-color: black;
+  opacity: 0.9;
+  border-radius: 40px;
+  filter: drop-shadow(0 0 12px rgba(4, 48, 89, 0.4));
+}
+
+.button:hover {
+  background-color: rgb(39, 98, 255);
+  opacity: 0.8;
+}
+
+.button:active {
+  opacity: 1;
+}
+
+.button:disabled {
+  opacity: 0.5;
+}
+
+.text {
+  margin: 0;
+  font-size: 14px;
+}
