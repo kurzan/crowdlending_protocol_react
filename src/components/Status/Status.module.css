@@ -1,0 +1,20 @@
+.open {
+  border: 1px solid;
+  border-radius: 8px;
+  text-align: center;
+  color: green;
+}
+
+.active {
+  border: 1px solid;
+  border-radius: 8px;
+  text-align: center;
+  color: blue;
+}
+
+.closed {
+  border: 1px solid;
+  border-radius: 8px;
+  text-align: center;
+  color: gray;
+}

@@ -3,27 +3,22 @@ import styles from "./CompanyLogo.module.css";
 import { getImage } from "../../services/utils";
 
 type TCompanyLogoProps = {
-  src: string,
-  alt: string
+  src?: string,
+  alt?: string
 };
 
 const CompanyLogo: FC<TCompanyLogoProps> = ({src, alt}) => {
 
-  const [isImage, setIsImage] = useState(false);
+  // const [isImage, setIsImage] = useState(false);
 
-  useEffect(() => {
-    getImage(src)
-      .then(() => setIsImage(true))
-      .catch(() => setIsImage(false))
+  // useEffect(() => {
+  //   getImage(src)
+  //     .then(() => setIsImage(true))
+  //     .catch(() => setIsImage(false))
+  // }, [src, isImage])
 
-    console.log(isImage)
-  }, [src, isImage])
-
-  return isImage ? (
+  return(
     <img src={src} alt={alt} />
-  ) : (
-    <div style={{width: '3rem', height: '3rem', backgroundColor: 'gray' }}>
-    </div>
   )
 };
 

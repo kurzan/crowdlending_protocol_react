@@ -5,33 +5,18 @@ import Header from "../../components/Header/Header";
 import styles from "./Borrow.module.css";
 import Button from "../../components/Button/Button";
 import Box from "../../components/Box/Box";
-
-
-type TCompany = {
-  image: string,
-  alt: string,
-}
-
-
-const mockBorrow =
-  {
-    id: 0,
-    image: "http://localhost:3000/logos/FIVE.png",
-    companyName: 'Сбербанк',
-    description: 'Банковская деятельность',
-    status: 'Активный',
-    totalBorrowed: 0.88,
-    interestRate: 3,
-    info: "ПАО «Сберба́нк» — российский финансовый конгломерат, крупнейший универсальный банк России и Восточной Европы. По итогам 2019 года у Сбербанка 96,2 миллионов активных частных клиентов и 2,6 миллиона активных корпоративных клиентов. Среди крупнейших банков мира по размеру активов находится в восьмом десятке."
-  };
+import { useData } from "../../hooks/useData";
+import { useParams } from "react-router-dom";
 
 
 const Borrow = () => {
 
-  const [company, setCompany] = useState<TCompany>();
+  const { id } = useParams(); 
+  const {borrows, isLoading} = useData();
 
+  const currentBorrow = borrows?.find(borrow => borrow.id === id);
 
-  return(
+  return (
     <>
       <Header/>
       <main className={styles.container}>
@@ -39,9 +24,9 @@ const Borrow = () => {
 
           <div className={styles.companyInfo}>
             <div className={styles.companyLogo}>
-              <CompanyLogo src={mockBorrow.image} alt={mockBorrow.companyName} />
+              <CompanyLogo src={currentBorrow?.image} alt={currentBorrow?.companyName} />
             </div>
-            <p>{mockBorrow.companyName}</p>
+            <p>{currentBorrow?.companyName}</p>
           </div>
           <Button title="Инвестировать" />
         </div>
@@ -51,7 +36,7 @@ const Borrow = () => {
         </Box>  
 
         <Box title="О компании">
-          <p>{mockBorrow.info}</p>
+          <p>{currentBorrow?.info}</p>
         </Box>  
 
       </main>

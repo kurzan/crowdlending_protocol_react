@@ -1,76 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import './BorrowsList.css';
-import { GoKebabVertical } from 'react-icons/go';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import CompanyLogo from '../CompanyLogo/CompanyLogo';
 import { useNavigate } from "react-router-dom";
-
-const mockBorrows = [
-  {
-    id: 0,
-    image: "https://raw.githubusercontent.com/kurzan/invest_market/main/public/images/isins/gfdgdfg.png",
-    companyName: 'Сбербанк',
-    description: 'Банковская деятельность',
-    status: 'Активный',
-    totalBorrowed: 0.88,
-    interestRate: 3
-  },
-  {
-    id: 1,
-    image: "http://localhost:3000/logos/FIVE.png",
-    companyName: 'Сбербанк',
-    description: 'Банковская деятельность',
-    status: 'Активный',
-    totalBorrowed: 0.88,
-    interestRate: 3
-  },
-  {
-    id: 2,
-    image: "http://localhost:3000/logos/FIVE.png",
-    companyName: 'Сбербанк',
-    description: 'Банковская деятельность',
-    status: 'Активный',
-    totalBorrowed: 0.88,
-    interestRate: 3
-  },
-  {
-    id: 3,
-    image: "http://localhost:3000/logos/FIVE.png",
-    companyName: 'Сбербанк',
-    description: 'Банковская деятельность',
-    status: 'Активный',
-    totalBorrowed: 0.88,
-    interestRate: 3
-  },
-  {
-    id: 4,
-    image: "http://localhost:3000/logos/FIVE.png",
-    companyName: 'Сбербанк',
-    description: 'Банковская деятельность',
-    status: 'Активный',
-    totalBorrowed: 0.88,
-    interestRate: 3
-  },
-  {
-    id: 5,
-    image: "http://localhost:3000/logos/FIVE.png",
-    companyName: 'Сбербанк',
-    description: 'Банковская деятельность',
-    status: 'Активный',
-    totalBorrowed: 0.88,
-    interestRate: 3
-  },
-]
+import { useData } from '../../hooks/useData';
+import Status from '../Status/Status';
 
 
 const BorrowsList = () => {
-    const [borrows, setBorrows] = useState(mockBorrows);
     const [page, setPage] = useState(1);
+    
+    const {isLoading, isError, borrows} = useData();
 
     const navigate = useNavigate();
 
     const selectPageHandle = (selectedPage: any) => { // Pagination Logic
-        if (selectedPage >= 1 &&
+        if (borrows && selectedPage >= 1 &&
             selectedPage <= Math.ceil(borrows.length / 5) &&
             selectedPage !== page) {
             setPage(selectedPage)
@@ -95,7 +40,7 @@ return (
               </thead> 
               <tbody>
                 {
-                    borrows.slice(page * 5 - 5, page * 5).map((borrow, index) => {
+                   borrows && borrows.slice(page * 5 - 5, page * 5).map((borrow, index) => {
                         return (
                         
                         <tr key={index} onClick={() => navigate(`/borrows/${borrow.id}`)}>
@@ -111,10 +56,10 @@ return (
                                     </div>
                                 </div>
                             </td>
-                            <td className='userBirth f-weight'>{borrow.status}</td>
+                            <td className='userBirth f-weight'><Status status={borrow.status}/></td>
                             <td className='contact'><button className='contactCTA'>Contact</button></td>
                             <td className='userPhone f-weight'>{borrow.totalBorrowed}</td>
-                            <td className='userAddress f-weight'>{borrow.interestRate}</td>
+                            <td className='interestRate'>{borrow.interestRate}%</td>
 
                         </tr>
                         )
@@ -125,7 +70,7 @@ return (
 
 
             {
-                borrows.length > 0 && <div className='pagination'>
+                borrows && borrows.length > 0 && <div className='pagination'>
                     <div className='arrows' onClick={() => selectPageHandle(page - 1)}>
                         <MdKeyboardArrowLeft size={25} />
                     </div>

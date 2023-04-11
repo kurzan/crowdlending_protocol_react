@@ -97,9 +97,13 @@ th{
   width: 30px;
   cursor: pointer;;
 }
+.interestRate {
+  text-align: center;
+  font-weight: 600;
+  color: green;
+}
 .contact,
-.userAction, .userPhone,
-.userAddress {
+.userAction, .userPhone {
   text-align: center;
 }
 .f-weight{

@@ -1,77 +1,47 @@
-import { addDoc, collection } from "@firebase/firestore";
-import { onAuthStateChanged, User } from "firebase/auth";
+import { addDoc, getDocs, collection } from "@firebase/firestore";
 import { createContext, FC, useEffect, useMemo, useState } from "react";
-import { register, db, login, logout, auth } from '../firebase'
+import { db } from '../firebase';
+import { TBorrow } from "../types";
 
 interface IContext {
-  user: User | null,
+  borrows: TBorrow[] | null,
   isLoading: boolean,
-  register: (email: string, password: string) => Promise<void>,
-  login: (email: string, password: string) => Promise<void>,
-  logout: (email: string, password: string) => Promise<void>,
-
+  isError: boolean,
 }
 
 export const DataContext = createContext<IContext>({} as IContext);
 
-export const AuthProvider = ({children}: {children: any}) => {
-  const [user, setUser] = useState<User | null>(null)
-  const [isLoadingInitial, setIsLoadingInitial] = useState(true)
-  const [isLoading, setIsLoading] = useState(false)
+export const DataProvider = ({children}: {children: any}) => {
+  const [borrows, setBorrows] = useState<any | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
-  const registerHandler = async (email: string, password: string) => {
-    setIsLoading(true)
+  const getBorrows = async () => {
+    setIsLoading(true);
 
     try {
-      const { user } = await register(email, password)
-
-      await addDoc(collection(db, 'users'), {
-        _id: user.uid,
-        displaName: 'No name'
+      await getDocs(collection(db, "borrows"))
+      .then((querySnapshot)=>{               
+          const newData = querySnapshot.docs
+              .map((doc) => ({...doc.data(), id:doc.id }));
+              setBorrows(newData);                
       })
-    } catch (error: any) {
-      alert('Ошибка регистрации')
-    } finally {
-      setIsLoading(false)
+    } catch (error) {
+      setIsError(true);
     }
   }
 
-  const loginHandler = async (email: string, password: string) => {
-    setIsLoading(true)
 
-    try {
-      await login(email, password);
-    } catch (error: any) {
-      alert('Ошибка входа')
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const logoutHandler = async () => {
-    setIsLoading(true)
-
-    try {
-      await logout();
-    } catch (error: any) {
-      alert('Ошибка при выходе')
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  useEffect(
-    () => onAuthStateChanged(auth, user => {
-      setUser(user || null);
-      setIsLoadingInitial(false);
-  }), [])
+  useEffect(() => {
+    getBorrows();
+  }, [])
 
   const value = useMemo(() => ({
-    user, isLoading, login: loginHandler, logout: logoutHandler, register: registerHandler
-  }), [user, isLoading])
+    borrows, isLoading, isError
+  }), [borrows, isLoading, isError])
 
   return <DataContext.Provider value={value}>
-    {!isLoadingInitial && children}
+    {children}
   </DataContext.Provider>
 
 };

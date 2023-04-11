@@ -9,6 +9,7 @@ import {
 
 import Home from './pages/home/Home';
 import Borrow from './pages/borrow/Borrow';
+import { DataProvider } from './services/providers/DataProvider';
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <DataProvider>
+      <RouterProvider router={router} />
+    </DataProvider>
   </React.StrictMode>
 );
 
