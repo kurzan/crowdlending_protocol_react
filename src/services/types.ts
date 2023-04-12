@@ -9,3 +9,20 @@ export type TBorrow = {
     info: string;
     goal: number;
 };
+
+type TInvestors = {
+
+};
+
+export type TBorrowFromContract = {
+  borrowId: BigInt;
+  borrower: string;
+  borrowingGoal: BigInt;
+  borrowingPeriod: BigInt;
+  closeTime: BigInt;
+  interestRate: BigInt;
+  investors: any[];
+  startTime: BigInt;
+  status: BigInt;
+  totalBorrowed: BigInt;
+};

@@ -1,14 +1,15 @@
 import { addDoc, getDocs, collection } from "@firebase/firestore";
-import { createContext, FC, useEffect, useMemo, useState } from "react";
+import { createContext, FC, useCallback, useEffect, useMemo, useState } from "react";
 import { db } from '../firebase';
 import { TBorrow } from "../types";
-import { useContractRead } from "wagmi";
+import { useContractRead,useProvider, useContract } from "wagmi";
 import { contract } from "../web3config";
 
 interface IContext {
   borrows: TBorrow[] | null,
   isLoading: boolean,
   isError: boolean,
+  borrowsContracts: any
 }
 
 export const DataContext = createContext<IContext>({} as IContext);
@@ -19,6 +20,15 @@ export const DataProvider = ({children}: {children: any}) => {
   const [isError, setIsError] = useState(false);
 
   const [borrowsIds, setBorrowsIds] = useState<number[]>();
+  const [borrowsContracts, setBorrowsContract] = useState<any>();
+
+  const provider = useProvider();
+
+  const contractBorrow = useContract({
+    address: contract.address,
+    abi: contract.abi,
+    signerOrProvider: provider,
+  });
 
 
   const getBorrowIds = useContractRead({
@@ -36,29 +46,6 @@ export const DataProvider = ({children}: {children: any}) => {
     },
   });
 
-
-  const getBorrow = useContractRead({
-    address: contract.address,
-    abi: contract.abi,
-    functionName: 'getBorrow',
-    args: [0],
-    watch: true,
-    onSuccess(data) {
-      console.log(data);
-    },
-  });
-
-
-  // const getAllBorrows = () => {
-  //   if (borrowsIds && borrowsIds.length) {
-  //     borrowsIds.forEach(borrow => {
-
-  //     })
-  //   }
-  // };
-
-
-
   const getBorrows = async () => {
     setIsLoading(true);
 
@@ -74,14 +61,27 @@ export const DataProvider = ({children}: {children: any}) => {
     }
   }
 
+  const fetchBorrowsFromContract = useCallback(async () => {
+    let borrowsArr = [];
+
+    if (borrowsIds) {
+      for (let i = 0; i < borrowsIds.length; i++) {
+        const borrow = await contractBorrow?.getBorrow(i);
+        borrowsArr.push(borrow);
+      }
+    }
+
+    setBorrowsContract(borrowsArr);
+  }, [contractBorrow, borrowsIds]);
 
   useEffect(() => {
     getBorrows();
-  }, [])
+    fetchBorrowsFromContract();
+  }, [fetchBorrowsFromContract])
 
   const value = useMemo(() => ({
-    borrows, isLoading, isError, borrowsIds
-  }), [borrows, isLoading, isError, borrowsIds])
+    borrows, isLoading, isError, borrowsContracts
+  }), [borrows, isLoading, isError, borrowsContracts])
 
   return <DataContext.Provider value={value}>
     {children}

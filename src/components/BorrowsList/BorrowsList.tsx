@@ -10,7 +10,13 @@ import Status from '../Status/Status';
 const BorrowsList = () => {
     const [page, setPage] = useState(1);
     
-    const {isLoading, isError, borrows} = useData();
+    const {isLoading, isError, borrows, borrowsContracts} = useData();
+
+    useEffect(() => {
+
+      console.log(borrowsContracts)
+      console.log(borrows)
+    }, [borrowsContracts, borrows])
 
     const navigate = useNavigate();
 
