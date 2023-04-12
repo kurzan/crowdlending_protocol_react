@@ -20,7 +20,8 @@ const BorrowsList = () => {
             selectedPage !== page) {
             setPage(selectedPage)
         }
-    }
+    };
+
 
 
 return (

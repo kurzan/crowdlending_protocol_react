@@ -6,7 +6,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { contractAbi } from "./abi";
 
 
-const CONTRACT_ADDRESS: `0x${string}` = "0x61C0A8C1eA7e715F3DBf0365b56E4Ee57be51E22";
+const CONTRACT_ADDRESS: `0x${string}` = "0x57a0836773FFd237bC4Aec8cd3fac0222f53C362";
 
 export const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -16,7 +16,7 @@ export const { chains, provider, webSocketProvider } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'EaryBird',
+  appName: 'EarlyBird',
   chains,
 });
 
