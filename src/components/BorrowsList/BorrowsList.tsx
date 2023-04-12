@@ -33,7 +33,6 @@ return (
                 <tr>
                     <th className='userHeading'>Компания</th>
                     <th className='userBirth'>Статус</th>
-                    <th className='contact'></th>
                     <th className='userPhone'>Собрано</th>
                     <th className='userAddress'>Ставка</th>
                 </tr>
@@ -57,10 +56,8 @@ return (
                                 </div>
                             </td>
                             <td className='userBirth f-weight'><Status status={borrow.status}/></td>
-                            <td className='contact'><button className='contactCTA'>Contact</button></td>
-                            <td className='userPhone f-weight'>{borrow.totalBorrowed}</td>
+                            <td className='userPhone'>{borrow.totalBorrowed} из {borrow.goal} tBNB</td>
                             <td className='interestRate'>{borrow.interestRate}%</td>
-
                         </tr>
                         )
                     })

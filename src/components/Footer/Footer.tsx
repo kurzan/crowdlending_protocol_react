@@ -1,11 +1,13 @@
 import styles from "./Footer.module.css";
-import binanceImg from "../../images/Binancefooter.svg";
+import binanceImg from '../../images/Binancefooter.svg'
+import { contract } from "../../services/web3config";
 
 const Footer = () => {
   return(
     <footer className={styles.footer}>
-      {/* <Image src={binanceImg} alt="Binance Chain" /> */}
-      <a href="https://testnet.bscscan.com/address/0x61c0a8c1ea7e715f3dbf0365b56e4ee57be51e22" target="_blank">Contract address</a>
+      <p>Z2H Team 2023</p>
+      <img src={binanceImg} alt={"BNB Chain"} width="32px" height="32px" />
+      <a href={`https://testnet.bscscan.com/address/${contract.address}`} target="_blank" rel="noreferrer">Contract address</a>
     </footer>
   )
 };

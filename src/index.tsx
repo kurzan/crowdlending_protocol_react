@@ -7,6 +7,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
+import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { WagmiConfig } from "wagmi";
+import { wagmiClient, chains } from './services/web3config';
+
 import Home from './pages/home/Home';
 import Borrow from './pages/borrow/Borrow';
 import { DataProvider } from './services/providers/DataProvider';
@@ -27,9 +31,13 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <DataProvider>
-      <RouterProvider router={router} />
-    </DataProvider>
+    <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider chains={chains}>
+        <DataProvider>
+          <RouterProvider router={router} />
+        </DataProvider>
+      </RainbowKitProvider>
+    </WagmiConfig>  
   </React.StrictMode>
 );
 

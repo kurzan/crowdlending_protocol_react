@@ -15,3 +15,9 @@
   padding: 12px;
   font-weight: 700;
 }
+
+.logobox>img {
+  padding: 8px;
+  max-width: 35%;
+
+}

@@ -1,11 +1,15 @@
 import styles from "./Header.module.css";
+import logo from '../../images/logo.png';
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const Header = () => {
   return(
     <header className={styles.header}>
       <div className={styles.elements}>
-        <p className={styles.company}>Crowdlending Protocol</p>
-        <p>Connect Wallet</p>
+        <div className={styles.logobox}>
+          <img src={logo} alt="" />
+        </div>
+        <ConnectButton/>
       </div>
     </header>
   )

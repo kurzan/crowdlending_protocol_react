@@ -7,4 +7,5 @@ export type TBorrow = {
     totalBorrowed: number,
     interestRate: number,
     info: string;
+    goal: number;
 };

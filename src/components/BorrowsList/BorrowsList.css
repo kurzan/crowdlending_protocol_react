@@ -98,7 +98,7 @@ th{
   cursor: pointer;;
 }
 .interestRate {
-  text-align: center;
+  text-align: right;
   font-weight: 600;
   color: green;
 }
