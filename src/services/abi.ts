@@ -104,6 +104,31 @@ export const contractAbi = [
 			{
 				"indexed": false,
 				"internalType": "uint256",
+				"name": "number",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "_message",
+				"type": "string"
+			}
+		],
+		"name": "borrowDeposited",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "message",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
 				"name": "_Id",
 				"type": "uint256"
 			}
@@ -216,6 +241,19 @@ export const contractAbi = [
 				"type": "uint256"
 			}
 		],
+		"name": "depositMoney",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_borrowId",
+				"type": "uint256"
+			}
+		],
 		"name": "getBorrow",
 		"outputs": [
 			{
@@ -256,6 +294,11 @@ export const contractAbi = [
 						"type": "uint256"
 					},
 					{
+						"internalType": "uint256",
+						"name": "borrowBalance",
+						"type": "uint256"
+					},
+					{
 						"components": [
 							{
 								"internalType": "address",
@@ -292,6 +335,25 @@ export const contractAbi = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_borrowId",
+				"type": "uint256"
+			}
+		],
+		"name": "getBorrowBalance",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "getBorrowIds",
 		"outputs": [
@@ -313,6 +375,24 @@ export const contractAbi = [
 			}
 		],
 		"name": "invest",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_borrowId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "percent",
+				"type": "uint256"
+			}
+		],
+		"name": "withdrawMoney",
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"

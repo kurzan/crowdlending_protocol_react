@@ -1,13 +1,18 @@
+import { BigNumberish } from "ethers";
+
 export type TBorrow = {
-    id: string,
+    borrowId: number,
     image: string,
     companyName: string,
     description: string,
     status: string,
-    totalBorrowed: number,
+    totalBorrowed: BigNumberish,
     interestRate: number,
     info: string;
-    goal: number;
+    borrowingGoal: BigNumberish;
+    investors: any[];
+    borrowingPeriod: number;
+    startTime: number;
 };
 
 type TInvestors = {

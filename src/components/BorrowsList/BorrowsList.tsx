@@ -5,18 +5,19 @@ import CompanyLogo from '../CompanyLogo/CompanyLogo';
 import { useNavigate } from "react-router-dom";
 import { useData } from '../../hooks/useData';
 import Status from '../Status/Status';
+import { toEth } from '../../services/utils';
+import { ethers } from 'ethers';
 
 
 const BorrowsList = () => {
     const [page, setPage] = useState(1);
     
-    const {isLoading, isError, borrows, borrowsContracts} = useData();
+    const {isLoading, isError, borrows} = useData();
 
     useEffect(() => {
+      console.log(isLoading);
 
-      console.log(borrowsContracts)
-      console.log(borrows)
-    }, [borrowsContracts, borrows])
+    }, [isLoading])
 
     const navigate = useNavigate();
 
@@ -41,15 +42,24 @@ return (
                     <th className='userHeading'>Компания</th>
                     <th className='userBirth'>Статус</th>
                     <th className='userPhone'>Собрано</th>
+                    <th className='userPhone'>Срок / дней</th>
+                    <th className='userPhone'>Инвесторы</th>
                     <th className='userAddress'>Ставка</th>
                 </tr>
               </thead> 
               <tbody>
                 {
                    borrows && borrows.slice(page * 5 - 5, page * 5).map((borrow, index) => {
+
+                        let investors = 0;
+
+                        if (borrow.investors && borrow.investors.length) {
+                          investors = borrow.investors.length;
+                        }
+
                         return (
                         
-                        <tr key={index} onClick={() => navigate(`/borrows/${borrow.id}`)}>
+                        <tr key={index} onClick={() => navigate(`/borrows/${Number(borrow.borrowId)}`)}>
 
                             <td>
                                 <div className='userDetails'>
@@ -63,8 +73,10 @@ return (
                                 </div>
                             </td>
                             <td className='userBirth f-weight'><Status status={borrow.status}/></td>
-                            <td className='userPhone'>{borrow.totalBorrowed} из {borrow.goal} tBNB</td>
-                            <td className='interestRate'>{borrow.interestRate}%</td>
+                            <td className='userPhone'>{borrow.totalBorrowed ? Number(ethers.utils.formatEther(borrow.totalBorrowed)) : 0} из {borrow.borrowingGoal ? Number(ethers.utils.formatEther(borrow.borrowingGoal)) : 0} tBNB</td>
+                            <td className='userPhone'>{Number(borrow.borrowingPeriod) / 86400}</td>
+                            <td className='userPhone'>{Number(investors)}</td>
+                            <td className='interestRate'>{Number(borrow.interestRate)}%</td>
                         </tr>
                         )
                     })

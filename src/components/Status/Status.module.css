@@ -18,3 +18,14 @@
   text-align: center;
   color: gray;
 }
+
+.canceled {
+  border: 1px solid;
+  border-radius: 8px;
+  text-align: center;
+  color: orangered;
+}
+
+.text {
+  padding: 2px 2px 2px 2px;
+}

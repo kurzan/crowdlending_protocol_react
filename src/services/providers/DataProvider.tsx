@@ -2,14 +2,13 @@ import { addDoc, getDocs, collection } from "@firebase/firestore";
 import { createContext, FC, useCallback, useEffect, useMemo, useState } from "react";
 import { db } from '../firebase';
 import { TBorrow } from "../types";
-import { useContractRead,useProvider, useContract } from "wagmi";
+import { useContractRead,useProvider, useContract, useContractEvent } from "wagmi";
 import { contract } from "../web3config";
 
 interface IContext {
   borrows: TBorrow[] | null,
   isLoading: boolean,
   isError: boolean,
-  borrowsContracts: any
 }
 
 export const DataContext = createContext<IContext>({} as IContext);
@@ -18,9 +17,7 @@ export const DataProvider = ({children}: {children: any}) => {
   const [borrows, setBorrows] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-
   const [borrowsIds, setBorrowsIds] = useState<number[]>();
-  const [borrowsContracts, setBorrowsContract] = useState<any>();
 
   const provider = useProvider();
 
@@ -46,42 +43,94 @@ export const DataProvider = ({children}: {children: any}) => {
     },
   });
 
-  const getBorrows = async () => {
+  const getBorrows = useCallback(async () => {
     setIsLoading(true);
 
     try {
+
+      if (!borrowsIds) {
+        return
+      }
+
+      let borrowsFromFirebase: any[] = [];
+      let borrowsFromContract = [];
+
       await getDocs(collection(db, "borrows"))
       .then((querySnapshot)=>{               
           const newData = querySnapshot.docs
-              .map((doc) => ({...doc.data(), id:doc.id }));
-              setBorrows(newData);                
+              .map((doc) => ({...doc.data(), borrowId:doc.id }));
+              borrowsFromFirebase = newData;                
       })
+
+      for (let i = 0; i < borrowsIds.length; i++) {
+          const borrow = await contractBorrow?.getBorrow(i);
+          borrowsFromContract.push(borrow);
+      }
+
+      const mergeByProperty = (arrays: any, property = "borrowId") => {
+        const arr = arrays.flatMap((item: any) => item);
+      
+        const obj = arr.reduce((acc: any, item: any) => {
+          return {
+            ...acc,
+            [item[property]]: { ...acc[item[property]], ...item }
+          };
+        }, {});
+      
+        return Object.values(obj);
+      };
+
+      const mergedBorrows = mergeByProperty([borrowsFromFirebase, borrowsFromContract]);
+
+      console.log(mergedBorrows)
+
+
+      setBorrows(mergedBorrows);
+
     } catch (error) {
       setIsError(true);
+    } finally {
+      setIsLoading(false);
     }
-  }
+  }, [borrowsIds, contractBorrow]);
 
-  const fetchBorrowsFromContract = useCallback(async () => {
-    let borrowsArr = [];
 
-    if (borrowsIds) {
-      for (let i = 0; i < borrowsIds.length; i++) {
-        const borrow = await contractBorrow?.getBorrow(i);
-        borrowsArr.push(borrow);
-      }
-    }
+  useContractEvent({
+    address: contract.address,
+    abi: contract.abi,
+    eventName: 'borrowActivated',
+    listener(node, label, owner) {
+      getBorrows();
+    },
+  });
 
-    setBorrowsContract(borrowsArr);
-  }, [contractBorrow, borrowsIds]);
+  useContractEvent({
+    address: contract.address,
+    abi: contract.abi,
+    eventName: 'borrowClosed',
+    listener(node, label, owner) {
+      getBorrows();
+    },
+  });
+
+  useContractEvent({
+    address: contract.address,
+    abi: contract.abi,
+    eventName: 'investmentAdd',
+    listener(node, label, owner) {
+      getBorrows();
+    },
+  });
+
 
   useEffect(() => {
     getBorrows();
-    fetchBorrowsFromContract();
-  }, [fetchBorrowsFromContract])
+    
+  }, [getBorrows])
 
   const value = useMemo(() => ({
-    borrows, isLoading, isError, borrowsContracts
-  }), [borrows, isLoading, isError, borrowsContracts])
+    borrows, isLoading, isError
+  }), [borrows, isLoading, isError])
 
   return <DataContext.Provider value={value}>
     {children}

@@ -25,3 +25,24 @@
   gap: 8px;
   margin-bottom: 18px;
 }
+
+.details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.details_item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.details_text {
+  color: gray;
+  font-size: 14px;
+}
+
+.details_amount {
+  font-weight: 700;
+}

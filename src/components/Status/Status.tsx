@@ -1,32 +1,40 @@
 import { useEffect, useState } from "react";
 import styles from './Status.module.css';
 
-const Status = ({status} : {status: string}) => {
+const Status = ({status} : {status: string | undefined}) => {
 
-  const [style, setStyle] = useState<any>();
+  const getStyle = (status: string | number | undefined) => {
 
-  const getStyle = (status: string) => {
 
     switch (status) {
-      case "Открыт":
-        return styles.open
+      case 0:
+        return {
+          style: styles.open,
+          text: "Открыт" 
+        }
 
-      case "Активен":
-        return styles.active
+      case 1:
+        return {
+          style: styles.active,
+          text: "Активный" 
+        }
 
-      case "Закрыт":
-        return styles.closed
+      case 2:
+        return {
+          style: styles.closed,
+          text: "Закрыт" 
+        }
+      case 3:
+        return {
+            style: styles.canceled,
+            text: "Не состоялся" 
+          }  
     }
   };
 
-  useEffect(() => {
-    setStyle(getStyle(status));
-  }, [status])
-
-
   return(
-    <div className={style}>
-      <p>{status}</p>
+    <div className={getStyle(status)?.style}>
+      <p className={styles.text}>{getStyle(status)?.text}</p>
     </div>
   )
 };
