@@ -3,11 +3,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgb(55 65 81);
+  background-color: white;
   border-radius: 24px;
   padding: 16px;
   text-align: center;
-  color: white;
+  min-width:320px;
 }
 
 .overlay {
@@ -21,4 +21,5 @@
 
 .title {
   font-size: 24px;
+  font-weight: 600;
 }

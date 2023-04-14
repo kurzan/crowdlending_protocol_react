@@ -9,8 +9,7 @@ import Modal from "../../components/Modal/Modal";
 import InvestField from "../../components/InvestField/InvestField";
 import { useData } from "../../hooks/useData";
 import { useParams } from "react-router-dom";
-import { usePrepareContractWrite, useContractWrite, useAccount } from 'wagmi';
-import { contract } from "../../services/web3config";
+import { useAccount } from 'wagmi';
 import { ethers } from "ethers";
 import Status from "../../components/Status/Status";
 
@@ -57,21 +56,9 @@ const Borrow = () => {
     
   }, [days, hours, mins, secs])
 
-  const { config, error, isLoading: prepareLoading } = usePrepareContractWrite({
-    address: contract.address,
-    abi: contract.abi,
-    functionName: 'invest',
-    args: [id],
-    overrides: {
-      from: address,
-      value: ethers.utils.parseEther("0.01")
-    }
-  });
-
-  const { data: mintData, isLoading: isLoadingMintData, isSuccess, write, reset } = useContractWrite(config);
 
   const modalHandler = () => {
-    setModalIsOpen(true);
+    setModalIsOpen(!modalIsOpen);
   };
 
 
@@ -89,7 +76,7 @@ const Borrow = () => {
             <Status status={currentBorrow?.status}/>
             { Number(currentBorrow?.status) === 1 && <p>Выплата через: {`${days} дней, ${hours} часов, ${mins} минут, ${secs} секунд`}</p>}
           </div>
-          <Button disabled={error ? true : false} onClick={modalHandler} title="Инвестировать" />
+          <Button disabled={Number(currentBorrow?.status) !== 0 ? true : false} onClick={modalHandler} title="Инвестировать" />
         </div>
 
         <Box title="Детали займа">
@@ -123,8 +110,8 @@ const Borrow = () => {
           <p>{currentBorrow?.info}</p>
         </Box>  
 
-        {modalIsOpen && <Modal title="Инвестирование">
-          <InvestField />
+        {modalIsOpen && <Modal onClose={modalHandler} title="Введите сумму">
+          <InvestField id={id} currentBorrow={currentBorrow} />
         </Modal>}
 
       </main>

@@ -1,25 +1,56 @@
-import { useAccount, useConnect } from 'wagmi';
 import Button from '../Button/Button';
-import { useState } from 'react';
+import { FC, useState } from 'react';
+import { usePrepareContractWrite, useContractWrite, useAccount, useConnect} from 'wagmi';
+import { contract } from "../../services/web3config";
+import { ethers } from "ethers";
+import styles from "./InvestField.module.css";
+import Box from '../Box/Box';
+import { TBorrow } from '../../services/types';
 
-const InvestField = () => {
+type TInvestFieldProps = {
+  id: any;
+  currentBorrow?: TBorrow
+};
+
+
+const InvestField: FC<TInvestFieldProps> = ({id, currentBorrow}) => {
 
   const { address, isConnected } = useAccount();
+  const [inputValue, setInputValue] = useState(0.01);
 
-  const [choiceState, setChoice] = useState(0);
-
-  const setBet = (userBet: number) => {
-    setChoice(userBet);
+  const inputHandler = (userBet: number) => {
+    setInputValue(userBet);
   };
 
+  const { config, error, isLoading: prepareLoading } = usePrepareContractWrite({
+    address: contract.address,
+    abi: contract.abi,
+    functionName: 'invest',
+    args: [id],
+    overrides: {
+      from: address,
+      value: ethers.utils.parseEther(inputValue.toString())
+    }
+  });
+
+  const { data: mintData, isLoading: isLoadingMintData, isSuccess, write, reset } = useContractWrite(config);
+
+    const maxInvestValue = Number(currentBorrow?.borrowingGoal) - Number(currentBorrow?.totalBorrowed);
+
   return (
-    <form action="" className="mx-auto flex flex-col justify-items-center">
-      <label className="mt-2" htmlFor="bet" >Введите сумму: </label>
-      <input onChange={e => setBet(Number(e.target.value))}  id="bet" className="mx-auto p-2 rounded-lg border-solid border-2 border-gray-600" type="number" placeholder="0.0001" min="0.0001" step="0.0001"  />
-      {/* {isConnected ? <Button onClick={write} disabled={isLoading || error} title={isLoading ? "Подтвердите действие" : "Начать игру"} /> : <Button onClick={() => connect({ connector: connectors[2] })} title="Подключить MetaMask" />}
-      {error && (
-        <div>An error occurred preparing the transaction: {error.message}</div>
-      )} */}
+    <form action="" className={styles.form}>
+      <input onChange={e => inputHandler(Number(e.target.value))}  id="bet" className={styles.input} type="number" placeholder="0.01" min="0.01" step="0.01"  />
+      {isConnected && <Button onClick={write} disabled={prepareLoading || error ? true : false} title={"Инвестировать"} />}
+      {error ? (
+        <Box margin="0" >
+          <p>An error occurred preparing the transaction</p>
+        </Box>
+      ) : (
+        <Box margin="0">
+          <p>Мин. сумма 0,01 tBNB, макс. {Number(ethers.utils.formatEther(maxInvestValue.toString()))} tBNB</p>
+        </Box>
+      )
+    }
     </form>
   )
 };
