@@ -17,6 +17,8 @@ import Status from "../../components/Status/Status";
 
 const Borrow = () => {
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const [days, setdays] = useState(0);
   const [hours, sethours] = useState(0);
   const [mins, setmins] = useState(0);
@@ -68,6 +70,10 @@ const Borrow = () => {
 
   const { data: mintData, isLoading: isLoadingMintData, isSuccess, write, reset } = useContractWrite(config);
 
+  const modalHandler = () => {
+    setModalIsOpen(true);
+  };
+
 
   return (
     <>
@@ -83,7 +89,7 @@ const Borrow = () => {
             <Status status={currentBorrow?.status}/>
             { Number(currentBorrow?.status) === 1 && <p>Выплата через: {`${days} дней, ${hours} часов, ${mins} минут, ${secs} секунд`}</p>}
           </div>
-          <Button disabled={error ? true : false}  onClick={() => write?.()} title="Инвестировать" />
+          <Button disabled={error ? true : false} onClick={modalHandler} title="Инвестировать" />
         </div>
 
         <Box title="Детали займа">
@@ -117,9 +123,9 @@ const Borrow = () => {
           <p>{currentBorrow?.info}</p>
         </Box>  
 
-        <Modal title="Инвестирование">
+        {modalIsOpen && <Modal title="Инвестирование">
           <InvestField />
-        </Modal>
+        </Modal>}
 
       </main>
       <Footer/>
