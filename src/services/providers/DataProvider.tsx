@@ -28,7 +28,7 @@ export const DataProvider = ({children}: {children: any}) => {
   });
 
 
-  const getBorrowIds = useContractRead({
+  useContractRead({
     address: contract.address,
     abi: contract.abi,
     functionName: 'getBorrowIds',
@@ -101,6 +101,7 @@ export const DataProvider = ({children}: {children: any}) => {
     eventName: 'borrowActivated',
     listener(node, label, owner) {
       getBorrows();
+      console.log(node, label, owner)
     },
   });
 
@@ -110,6 +111,7 @@ export const DataProvider = ({children}: {children: any}) => {
     eventName: 'borrowClosed',
     listener(node, label, owner) {
       getBorrows();
+      console.log(node, label, owner)
     },
   });
 
@@ -118,6 +120,7 @@ export const DataProvider = ({children}: {children: any}) => {
     abi: contract.abi,
     eventName: 'investmentAdd',
     listener(node, label, owner) {
+      console.log(node, label, owner)
       getBorrows();
     },
   });

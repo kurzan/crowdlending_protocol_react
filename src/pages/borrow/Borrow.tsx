@@ -5,13 +5,14 @@ import Header from "../../components/Header/Header";
 import styles from "./Borrow.module.css";
 import Button from "../../components/Button/Button";
 import Box from "../../components/Box/Box";
+import Modal from "../../components/Modal/Modal";
+import InvestField from "../../components/InvestField/InvestField";
 import { useData } from "../../hooks/useData";
 import { useParams } from "react-router-dom";
-import { useContractRead, usePrepareContractWrite, useContractWrite, useAccount } from 'wagmi';
+import { usePrepareContractWrite, useContractWrite, useAccount } from 'wagmi';
 import { contract } from "../../services/web3config";
 import { ethers } from "ethers";
 import Status from "../../components/Status/Status";
-import { useTimer } from "../../hooks/useTimer";
 
 
 const Borrow = () => {
@@ -115,6 +116,10 @@ const Borrow = () => {
         <Box title="О компании">
           <p>{currentBorrow?.info}</p>
         </Box>  
+
+        <Modal title="Инвестирование">
+          <InvestField />
+        </Modal>
 
       </main>
       <Footer/>
