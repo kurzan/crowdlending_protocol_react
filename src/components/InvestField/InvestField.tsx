@@ -33,9 +33,9 @@ const InvestField: FC<TInvestFieldProps> = ({id, currentBorrow}) => {
     }
   });
 
-  const { data: mintData, isLoading: isLoadingMintData, isSuccess, write, reset } = useContractWrite(config);
+  const { data: investData, isLoading: isLoadingInvestData, isSuccess, write, reset } = useContractWrite(config);
 
-    const maxInvestValue = Number(currentBorrow?.borrowingGoal) - Number(currentBorrow?.totalBorrowed);
+  const maxInvestValue = Number(currentBorrow?.borrowingGoal) - Number(currentBorrow?.totalBorrowed);
 
   return (
     <form action="" className={styles.form}>

@@ -7,7 +7,6 @@ import { contract } from "../web3config";
 
 interface IContext {
   borrows: TBorrow[] | null,
-  isLoading: boolean,
   isError: boolean,
 }
 
@@ -15,7 +14,6 @@ export const DataContext = createContext<IContext>({} as IContext);
 
 export const DataProvider = ({children}: {children: any}) => {
   const [borrows, setBorrows] = useState<any | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [borrowsIds, setBorrowsIds] = useState<number[]>();
 
@@ -44,7 +42,6 @@ export const DataProvider = ({children}: {children: any}) => {
   });
 
   const getBorrows = useCallback(async () => {
-    setIsLoading(true);
 
     try {
 
@@ -81,16 +78,10 @@ export const DataProvider = ({children}: {children: any}) => {
       };
 
       const mergedBorrows = mergeByProperty([borrowsFromFirebase, borrowsFromContract]);
-
-      console.log(mergedBorrows)
-
-
       setBorrows(mergedBorrows);
 
     } catch (error) {
       setIsError(true);
-    } finally {
-      setIsLoading(false);
     }
   }, [borrowsIds, contractBorrow]);
 
@@ -101,7 +92,6 @@ export const DataProvider = ({children}: {children: any}) => {
     eventName: 'borrowActivated',
     listener(node, label, owner) {
       getBorrows();
-      console.log(node, label, owner)
     },
   });
 
@@ -111,7 +101,6 @@ export const DataProvider = ({children}: {children: any}) => {
     eventName: 'borrowClosed',
     listener(node, label, owner) {
       getBorrows();
-      console.log(node, label, owner)
     },
   });
 
@@ -132,8 +121,8 @@ export const DataProvider = ({children}: {children: any}) => {
   }, [getBorrows])
 
   const value = useMemo(() => ({
-    borrows, isLoading, isError
-  }), [borrows, isLoading, isError])
+    borrows, isError
+  }), [borrows, isError])
 
   return <DataContext.Provider value={value}>
     {children}

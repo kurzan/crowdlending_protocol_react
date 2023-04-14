@@ -1,6 +1,7 @@
 import styles from "./Modal.module.css";
 import React, {useCallback, FC, useEffect} from "react";
 import ReactDOM from "react-dom";
+import { MdClose } from 'react-icons/md';
 
 type TModalProps = {
   title?: string;
@@ -33,7 +34,12 @@ const Modal:FC<TModalProps> = ({children, title, onClose}) => {
     <>
       <div onClick={close} className={styles.overlay}></div>
       <div className={styles.modal}>
-        <p className={styles.title}>{title}</p>
+        <div className={styles.head}>
+          <p className={styles.title}>{title}</p>
+          <div onClick={onClose} className={styles.close}>
+            <MdClose size={25} />
+          </div>
+        </div>
         {children}
       </div>
     </>,

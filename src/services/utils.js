@@ -10,7 +10,3 @@ export const getImage = (url) => {
       return Promise.reject(res.status)
     })
 };
-
-export const toEth = (amount) => {
-  return ethers.utils.formatEther(amount);
-}

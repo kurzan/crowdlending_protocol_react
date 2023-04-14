@@ -12,7 +12,8 @@ import { useParams } from "react-router-dom";
 import { useAccount } from 'wagmi';
 import { ethers } from "ethers";
 import Status from "../../components/Status/Status";
-
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const Borrow = () => {
 
@@ -25,7 +26,7 @@ const Borrow = () => {
   const [timeRemaining, setTimeRemaining] = useState(0);
 
   const { id } = useParams(); 
-  const {borrows, isLoading} = useData();
+  const {borrows} = useData();
   const { address, isConnected } = useAccount();
 
   const currentBorrow = borrows?.find(borrow => Number(borrow.borrowId) === Number(id));
@@ -51,10 +52,6 @@ const Borrow = () => {
     
   }, [currentBorrow, timeRemaining])
 
-  useEffect(() => {
-    console.log(days, hours, mins, secs)
-    
-  }, [days, hours, mins, secs])
 
 
   const modalHandler = () => {
@@ -70,13 +67,13 @@ const Borrow = () => {
 
           <div className={styles.companyInfo}>
             <div className={styles.companyLogo}>
-              <CompanyLogo src={currentBorrow?.image} alt={currentBorrow?.companyName} />
+              {!currentBorrow? <Skeleton width={48} height={48} /> : <CompanyLogo src={currentBorrow?.image} alt={currentBorrow?.companyName} />}
             </div>
             <p>{currentBorrow?.companyName}</p>
             <Status status={currentBorrow?.status}/>
             { Number(currentBorrow?.status) === 1 && <p>Выплата через: {`${days} дней, ${hours} часов, ${mins} минут, ${secs} секунд`}</p>}
           </div>
-          <Button disabled={Number(currentBorrow?.status) !== 0 ? true : false} onClick={modalHandler} title="Инвестировать" />
+          <Button disabled={Number(currentBorrow?.status) !== 0 || !isConnected ? true : false} onClick={modalHandler} title="Инвестировать" />
         </div>
 
         <Box title="Детали займа">

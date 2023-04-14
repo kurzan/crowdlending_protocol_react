@@ -32,11 +32,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-        <DataProvider>
-          <RouterProvider router={router} />
-        </DataProvider>
-      </RainbowKitProvider>
+        <RainbowKitProvider chains={chains}>
+          <DataProvider>
+            <RouterProvider router={router} />
+          </DataProvider>
+        </RainbowKitProvider>
     </WagmiConfig>  
   </React.StrictMode>
 );

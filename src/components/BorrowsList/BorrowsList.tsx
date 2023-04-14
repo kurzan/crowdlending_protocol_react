@@ -5,19 +5,14 @@ import CompanyLogo from '../CompanyLogo/CompanyLogo';
 import { useNavigate } from "react-router-dom";
 import { useData } from '../../hooks/useData';
 import Status from '../Status/Status';
-import { toEth } from '../../services/utils';
-import { ethers } from 'ethers';
+import {ethers} from "ethers";
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 
 const BorrowsList = () => {
     const [page, setPage] = useState(1);
-    
-    const {isLoading, isError, borrows} = useData();
-
-    useEffect(() => {
-      console.log(isLoading);
-
-    }, [isLoading])
+    const {isError, borrows} = useData();
 
     const navigate = useNavigate();
 
@@ -28,8 +23,6 @@ const BorrowsList = () => {
             setPage(selectedPage)
         }
     };
-
-
 
 return (
         <div className='userTable'>
@@ -47,43 +40,46 @@ return (
                     <th className='userAddress'>Ставка</th>
                 </tr>
               </thead> 
-              <tbody>
-                {
-                   borrows && borrows.slice(page * 5 - 5, page * 5).map((borrow, index) => {
 
-                        let investors = 0;
+              {!borrows ? <Skeleton count={5} height={80} enableAnimation={true} highlightColor="red"  borderRadius={"0.5rem"}/> : (
+                              <tbody>
+                              {
+                                 borrows && borrows.slice(page * 5 - 5, page * 5).map((borrow, index) => {
+              
+                                      let investors = 0;
+              
+                                      if (borrow.investors && borrow.investors.length) {
+                                        investors = borrow.investors.length;
+                                      }
+              
+                                      return (
+                                      
+                                      <tr key={index} onClick={() => navigate(`/borrows/${Number(borrow.borrowId)}`)}>
+              
+                                          <td>
+                                              <div className='userDetails'>
+                                                  <div className='userPic'>
+                                                      <CompanyLogo src={borrow.image} alt={borrow.companyName} />
+                                                  </div>
+                                                  <div className='userHandles'>
+                                                      <p className='userName'>{borrow.companyName}</p>
+                                                      <div className='userEmail'>{borrow.description}</div>
+                                                  </div>
+                                              </div>
+                                          </td>
+                                          <td className='userBirth f-weight'><Status status={borrow.status}/></td>
+                                          <td className='userPhone'>{borrow.totalBorrowed ? Number(ethers.utils.formatEther(borrow.totalBorrowed)) : 0} из {borrow.borrowingGoal ? Number(ethers.utils.formatEther(borrow.borrowingGoal)) : 0} tBNB</td>
+                                          <td className='userPhone'>{Number(borrow.borrowingPeriod) / 86400}</td>
+                                          <td className='userPhone'>{Number(investors)}</td>
+                                          <td className='interestRate'>{Number(borrow.interestRate)}%</td>
+                                      </tr>
+                                      )
+                                  })
+                              }
+                             </tbody> 
+              )}
 
-                        if (borrow.investors && borrow.investors.length) {
-                          investors = borrow.investors.length;
-                        }
-
-                        return (
-                        
-                        <tr key={index} onClick={() => navigate(`/borrows/${Number(borrow.borrowId)}`)}>
-
-                            <td>
-                                <div className='userDetails'>
-                                    <div className='userPic'>
-                                        <CompanyLogo src={borrow.image} alt={borrow.companyName} />
-                                    </div>
-                                    <div className='userHandles'>
-                                        <p className='userName'>{borrow.companyName}</p>
-                                        <div className='userEmail'>{borrow.description}</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td className='userBirth f-weight'><Status status={borrow.status}/></td>
-                            <td className='userPhone'>{borrow.totalBorrowed ? Number(ethers.utils.formatEther(borrow.totalBorrowed)) : 0} из {borrow.borrowingGoal ? Number(ethers.utils.formatEther(borrow.borrowingGoal)) : 0} tBNB</td>
-                            <td className='userPhone'>{Number(borrow.borrowingPeriod) / 86400}</td>
-                            <td className='userPhone'>{Number(investors)}</td>
-                            <td className='interestRate'>{Number(borrow.interestRate)}%</td>
-                        </tr>
-                        )
-                    })
-                }
-               </tbody> 
             </table>
-
 
             {
                 borrows && borrows.length > 0 && <div className='pagination'>
@@ -106,6 +102,7 @@ return (
                 </div>
             }
         </div>
+
     )
 }
 
