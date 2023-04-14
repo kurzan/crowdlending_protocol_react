@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 import { useAccount } from 'wagmi';
 import { ethers } from "ethers";
 import Status from "../../components/Status/Status";
+//@ts-ignore
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 

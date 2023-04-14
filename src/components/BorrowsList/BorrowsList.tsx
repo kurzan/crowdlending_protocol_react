@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useData } from '../../hooks/useData';
 import Status from '../Status/Status';
 import {ethers} from "ethers";
+//@ts-ignore
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -41,7 +42,7 @@ return (
                 </tr>
               </thead> 
 
-              {!borrows ? <Skeleton count={5} height={80} enableAnimation={true} highlightColor="red"  borderRadius={"0.5rem"}/> : (
+              {!borrows ? <Skeleton count={5} height={80} borderRadius={"0.5rem"}/> : (
                               <tbody>
                               {
                                  borrows && borrows.slice(page * 5 - 5, page * 5).map((borrow, index) => {

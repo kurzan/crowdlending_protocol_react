@@ -40,7 +40,7 @@ const InvestField: FC<TInvestFieldProps> = ({id, currentBorrow}) => {
   return (
     <form action="" className={styles.form}>
       <input onChange={e => inputHandler(Number(e.target.value))}  id="bet" className={styles.input} type="number" placeholder="0.01" min="0.01" step="0.01"  />
-      {isConnected && <Button onClick={write} disabled={prepareLoading || error ? true : false} title={"Инвестировать"} />}
+      {isConnected && <Button onClick={() => write?.()} disabled={prepareLoading || error ? true : false} title={"Инвестировать"} />}
       {error ? (
         <Box margin="0" >
           <p>An error occurred preparing the transaction</p>

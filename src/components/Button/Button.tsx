@@ -20,7 +20,7 @@ const Button: FC<TButtonProps> = ({title, onClick, disabled}) => {
   }, [isConnected])
 
   return(
-      <button disabled={disabled} onClick={onClick} className={styles.button}>
+      <button type="button" disabled={disabled} onClick={onClick} className={styles.button}>
         <p className={styles.text}>{isCon ? title : "Подключите кошелек"}</p>
       </button>
   )
