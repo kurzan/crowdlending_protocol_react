@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import styles from "./CompanyLogo.module.css";
 import { getImage } from "../../services/utils";
 
+
 type TCompanyLogoProps = {
   src?: string,
   alt?: string

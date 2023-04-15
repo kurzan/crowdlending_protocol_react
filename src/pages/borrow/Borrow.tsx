@@ -16,8 +16,6 @@ import Status from "../../components/Status/Status";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css';
 
-import { Store } from 'react-notifications-component';
-
 const Borrow = () => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -53,29 +51,11 @@ const Borrow = () => {
 
     }
     
-  }, [currentBorrow, timeRemaining])
-
-
+  }, [currentBorrow, timeRemaining]);
 
   const modalHandler = () => {
     setModalIsOpen(!modalIsOpen);
   };
-
-  useEffect(() => {
-    Store.addNotification({
-      title: "Wonderful!",
-      message: "teodosii@react-notifications-component",
-      type: "success",
-      insert: "top",
-      container: "top-right",
-      animationIn: ["animate__animated", "animate__fadeIn"],
-      animationOut: ["animate__animated", "animate__fadeOut"],
-      dismiss: {
-        duration: 5000,
-        onScreen: true
-      }
-    });
-  }, [])
 
   return (
     <>

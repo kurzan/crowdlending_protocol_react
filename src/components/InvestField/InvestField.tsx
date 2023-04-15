@@ -1,15 +1,16 @@
 import Button from '../Button/Button';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { usePrepareContractWrite, useContractWrite, useAccount, useConnect} from 'wagmi';
 import { contract } from "../../services/web3config";
 import { ethers } from "ethers";
 import styles from "./InvestField.module.css";
 import Box from '../Box/Box';
 import { TBorrow } from '../../services/types';
+import { Store } from 'react-notifications-component';
 
 type TInvestFieldProps = {
   id: any;
-  currentBorrow?: TBorrow
+  currentBorrow?: TBorrow;
 };
 
 
@@ -36,6 +37,24 @@ const InvestField: FC<TInvestFieldProps> = ({id, currentBorrow}) => {
   const { data: investData, isLoading: isLoadingInvestData, isSuccess, write, reset } = useContractWrite(config);
 
   const maxInvestValue = Number(currentBorrow?.borrowingGoal) - Number(currentBorrow?.totalBorrowed);
+
+  useEffect(() => {
+    if (!isSuccess) return;
+
+    Store.addNotification({
+      title: "Поздравляем!",
+      message: `Транзакция успешно отправлена`,
+      type: "success",
+      insert: "top",
+      container: "top-right",
+      animationIn: ["animate__animated", "animate__fadeIn"],
+      animationOut: ["animate__animated", "animate__fadeOut"],
+      dismiss: {
+        duration: 5000,
+        onScreen: true
+      }
+    });
+  }, [isSuccess])
 
   return (
     <form action="" className={styles.form}>
