@@ -14,7 +14,9 @@ import { ethers } from "ethers";
 import Status from "../../components/Status/Status";
 //@ts-ignore
 import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import 'react-loading-skeleton/dist/skeleton.css';
+
+import { Store } from 'react-notifications-component';
 
 const Borrow = () => {
 
@@ -59,6 +61,21 @@ const Borrow = () => {
     setModalIsOpen(!modalIsOpen);
   };
 
+  useEffect(() => {
+    Store.addNotification({
+      title: "Wonderful!",
+      message: "teodosii@react-notifications-component",
+      type: "success",
+      insert: "top",
+      container: "top-right",
+      animationIn: ["animate__animated", "animate__fadeIn"],
+      animationOut: ["animate__animated", "animate__fadeOut"],
+      dismiss: {
+        duration: 5000,
+        onScreen: true
+      }
+    });
+  }, [])
 
   return (
     <>

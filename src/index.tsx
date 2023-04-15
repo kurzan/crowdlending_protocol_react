@@ -15,6 +15,9 @@ import Home from './pages/home/Home';
 import Borrow from './pages/borrow/Borrow';
 import { DataProvider } from './services/providers/DataProvider';
 
+import { ReactNotifications } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+
 const router = createHashRouter([
   {
     path: "/",
@@ -30,15 +33,16 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+
     <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
           <DataProvider>
+            <ReactNotifications />
             <RouterProvider router={router} />
           </DataProvider>
         </RainbowKitProvider>
     </WagmiConfig>  
-  </React.StrictMode>
+
 );
 
 // If you want to start measuring performance in your app, pass a function
