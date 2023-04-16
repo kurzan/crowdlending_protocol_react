@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './BorrowsList.css';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import CompanyLogo from '../CompanyLogo/CompanyLogo';
@@ -7,15 +7,16 @@ import { useData } from '../../hooks/useData';
 import Status from '../Status/Status';
 import {ethers} from "ethers";
 //@ts-ignore
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'
 
 
 const BorrowsList = () => {
     const [page, setPage] = useState(1);
     const {isError, borrows} = useData();
-
     const navigate = useNavigate();
+
+    const [portfolios, setPortfolios] =useState<any>();
 
     const selectPageHandle = (selectedPage: any) => { // Pagination Logic
         if (borrows && selectedPage >= 1 &&
@@ -24,6 +25,27 @@ const BorrowsList = () => {
             setPage(selectedPage)
         }
     };
+
+    const getPortfolio = useCallback(() => {
+      if (!borrows) return;
+
+      const ports: any = [];
+
+      borrows.forEach(borrow => {
+        ports.push({
+          borrowId: borrow.borrowId,
+          investorts: borrow.investors
+        })
+      })
+
+      setPortfolios(ports)
+
+      console.log(portfolios)
+    }, [borrows]);
+
+    useEffect(() => {
+      getPortfolio()
+    }, [getPortfolio])
 
 return (
         <div className='userTable'>
