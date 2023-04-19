@@ -1,4 +1,8 @@
 .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   padding: 12px 31px 12px 31px;
   border: none;
   color: white;
@@ -25,5 +29,5 @@
 
 .text {
   margin: 0;
-  font-size: 14px;
+  font-size: 18px;
 }
