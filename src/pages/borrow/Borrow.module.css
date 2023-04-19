@@ -6,7 +6,8 @@
 }
 
 .header {
-  margin-top: 24px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,11 +24,11 @@
   justify-content: space-between;
   align-items: center;
   gap: 8px;
-  margin-bottom: 18px;
 }
 
 .details {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -45,4 +46,15 @@
 
 .details_amount {
   font-weight: 700;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+}
+
+.back_text {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
 }

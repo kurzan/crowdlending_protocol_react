@@ -62,17 +62,10 @@ const InvestField: FC<TInvestFieldProps> = ({id, currentBorrow}) => {
         <input onChange={e => inputHandler(Number(e.target.value))} value={inputValue} id="bet" className={styles.input} type="number" placeholder="0.01" min="0.01" step="0.01"  />
         <button onClick={() => setInputValue(Number(ethers.utils.formatEther(maxInvestValue.toString())))} className={styles.max} type='button'>max</button>
       </div>
-      {isConnected && <Button onClick={write} isLoading={isLoadingInvestData} disabled={prepareLoading || isLoadingInvestData || error ? true : false} title={!isLoadingInvestData ? "Инвестировать" : "Подвтердите действие..."} />}
-      {error ? (
-        <Box margin="0" >
-          <p>An error occurred preparing the transaction</p>
+      {isConnected && <Button onClick={write} isLoading={isLoadingInvestData} disabled={prepareLoading || isLoadingInvestData || error ? true : false} title={!isLoadingInvestData ? "Инвестировать" : "Подтвердите действие..."} />}
+        <Box margin="0" bg={"rgb(249, 249, 249)"} >
+          {error ? <p>An error occurred preparing the transaction</p> : <p>Мин. сумма 0,01 tBNB, макс. {Number(ethers.utils.formatEther(maxInvestValue.toString()))} tBNB</p>}
         </Box>
-      ) : (
-        <Box margin="0">
-          <p>Мин. сумма 0,01 tBNB, макс. {Number(ethers.utils.formatEther(maxInvestValue.toString()))} tBNB</p>
-        </Box>
-      )
-    }
     </form>
   )
 };

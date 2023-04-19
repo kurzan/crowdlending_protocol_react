@@ -8,13 +8,15 @@ import Box from "../../components/Box/Box";
 import Modal from "../../components/Modal/Modal";
 import InvestField from "../../components/InvestField/InvestField";
 import { useData } from "../../hooks/useData";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAccount } from 'wagmi';
 import { ethers } from "ethers";
 import Status from "../../components/Status/Status";
 //@ts-ignore
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css';
+import { MdKeyboardArrowLeft } from 'react-icons/md';
+
 
 const Borrow = () => {
 
@@ -61,6 +63,11 @@ const Borrow = () => {
     <>
       <Header/>
       <main className={styles.container}>
+        <div className={styles.back}>
+          <MdKeyboardArrowLeft size={25} />
+          <Link className={styles.back_text} to={"/"}>Назад</Link>
+        </div>
+
         <div className={styles.header}>
 
           <div className={styles.companyInfo}>
