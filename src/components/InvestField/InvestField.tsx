@@ -6,6 +6,7 @@ import { ethers } from "ethers";
 import styles from "./InvestField.module.css";
 import Box from '../Box/Box';
 import { TBorrow } from '../../services/types';
+//@ts-ignore
 import { Store } from 'react-notifications-component';
 
 type TInvestFieldProps = {
@@ -42,8 +43,8 @@ const InvestField: FC<TInvestFieldProps> = ({id, currentBorrow}) => {
     if (!isSuccess) return;
 
     Store.addNotification({
-      title: "Поздравляем!",
-      message: `Транзакция успешно отправлена`,
+      title: "Success!",
+      message: `Transaction success`,
       type: "success",
       insert: "top",
       container: "top-right",
@@ -62,9 +63,9 @@ const InvestField: FC<TInvestFieldProps> = ({id, currentBorrow}) => {
         <input onChange={e => inputHandler(Number(e.target.value))} value={inputValue} id="bet" className={styles.input} type="number" placeholder="0.01" min="0.01" step="0.01"  />
         <button onClick={() => setInputValue(Number(ethers.utils.formatEther(maxInvestValue.toString())))} className={styles.max} type='button'>max</button>
       </div>
-      {isConnected && <Button onClick={write} isLoading={isLoadingInvestData} disabled={prepareLoading || isLoadingInvestData || error ? true : false} title={!isLoadingInvestData ? "Инвестировать" : "Подтвердите действие..."} />}
+      {isConnected && <Button onClick={write} isLoading={isLoadingInvestData} disabled={prepareLoading || isLoadingInvestData || error ? true : false} title={!isLoadingInvestData ? "Invest" : "Prepare transaction..."} />}
         <Box margin="0" bg={"rgb(249, 249, 249)"} >
-          {error ? <p>An error occurred preparing the transaction</p> : <p>Мин. сумма 0,01 tBNB, макс. {Number(ethers.utils.formatEther(maxInvestValue.toString()))} tBNB</p>}
+          {error ? <p>An error occurred preparing the transaction</p> : <p>min 0,01 tBNB, max {Number(ethers.utils.formatEther(maxInvestValue.toString()))} tBNB</p>}
         </Box>
     </form>
   )

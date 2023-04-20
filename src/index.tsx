@@ -14,7 +14,7 @@ import { wagmiClient, chains } from './services/web3config';
 import Home from './pages/home/Home';
 import Borrow from './pages/borrow/Borrow';
 import { DataProvider } from './services/providers/DataProvider';
-
+//@ts-ignore
 import { ReactNotifications } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 

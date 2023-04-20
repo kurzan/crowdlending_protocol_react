@@ -1,0 +1,16 @@
+.total_bar {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.total_amount {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-end;
+}
+
+.slash {
+  font-size: 12px;
+}

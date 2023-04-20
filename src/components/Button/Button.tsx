@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./Button.module.css";
 import { useAccount, useConnect } from 'wagmi';
+//@ts-ignore
 import { Oval } from 'react-loader-spinner';
 
 type TButtonProps = {
@@ -35,7 +36,7 @@ const Button: FC<TButtonProps> = ({title, onClick, disabled, isLoading}) => {
           strokeWidth={4}
           strokeWidthSecondary={2}
         />}
-        <p className={styles.text}>{isCon ? title : "Подключите кошелек"}</p>
+        <p className={styles.text}>{isCon ? title : "Connect wallet"}</p>
       </button>
   )
 };

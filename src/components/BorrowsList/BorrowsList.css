@@ -1,5 +1,5 @@
 .userTable {
-  max-width: 1152px;
+  max-width: 900px;
   padding: 12px;
 }
 
@@ -27,10 +27,14 @@ tbody {
 }
 
 tr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: white;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 8px;
-  transition: all 100ms ease
+  transition: all 100ms ease;
+  gap: 18px;
 }
 
 tr:hover {
@@ -48,12 +52,10 @@ thead tr:nth-child(1) {
 
 td, th {
   /* border: 1px solid #dddddd; */
-  text-align: left;
   padding: 8px;
 }
 th{
   font-size: 0.9rem;
-  margin: 2rem;
 }
 .userPic>img {
   width: 3rem;
@@ -64,12 +66,16 @@ th{
 .userDetails {
   display: flex;
   align-items: center;
+  width: 200px;
   grid-gap: 10px;
-  width: 250px;
 }
+
+.statusBorr {
+  width: 100px;
+}
+
 .userHeading{
-  width: 250px;
-  margin-left: 20px;
+  width: 200px;
 }
 .userName {
   margin: 0;
@@ -87,11 +93,16 @@ th{
   color: #a2a1a1;
 }
 
-.userBirth,
-.userPhone,
-.userAddress,
-.contact {
-  width: 150px;
+
+.totalBorr {
+  width: 180px;
+}
+
+.borrPeriod,
+.investors,
+.interestRate {
+  text-align: right;
+  width: 60px;
 }
 .userAction{
   width: 30px;

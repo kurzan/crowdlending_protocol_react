@@ -1,31 +1,24 @@
-.open {
+.p  {
+  padding-left: 6px;
+  padding-right: 6px;
   border: 1px solid;
   border-radius: 8px;
   text-align: center;
+}
+
+
+.open {
   color: green;
 }
 
 .active {
-  border: 1px solid;
-  border-radius: 8px;
-  text-align: center;
   color: blue;
 }
 
 .closed {
-  border: 1px solid;
-  border-radius: 8px;
-  text-align: center;
   color: gray;
 }
 
 .canceled {
-  border: 1px solid;
-  border-radius: 8px;
-  text-align: center;
   color: orangered;
-}
-
-.text {
-  padding: 2px 2px 2px 2px;
 }

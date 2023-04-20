@@ -8,7 +8,9 @@ import Status from '../Status/Status';
 import {ethers} from "ethers";
 //@ts-ignore
 import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css'
+import 'react-loading-skeleton/dist/skeleton.css';
+import CoinIcon from '../CoinIcon/CoinIcon';
+import TotalBar from '../TotalBar/TotalBar';
 
 
 const BorrowsList = () => {
@@ -50,17 +52,17 @@ const BorrowsList = () => {
 return (
         <div className='userTable'>
             <h1 className='heading'>
-                Займы
+                Borrows
             </h1>
             <table>
               <thead>
                 <tr>
-                    <th className='userHeading'>Компания</th>
-                    <th className='userBirth'>Статус</th>
-                    <th className='userPhone'>Собрано</th>
-                    <th className='userPhone'>Срок / дней</th>
-                    <th className='userPhone'>Инвесторы</th>
-                    <th className='userAddress'>Ставка</th>
+                    <th className='userHeading'>Company</th>
+                    <th className='statusBorr'>Status</th>
+                    <th className='totalBorr'>Total borrowed</th>
+                    <th className='borrPeriod'>Period, days</th>
+                    <th className='investors'>Investors</th>
+                    <th className='interestRate'>Rate</th>
                 </tr>
               </thead> 
 
@@ -90,10 +92,10 @@ return (
                                                   </div>
                                               </div>
                                           </td>
-                                          <td className='userBirth f-weight'><Status status={borrow.status}/></td>
-                                          <td className='userPhone'>{borrow.totalBorrowed ? Number(ethers.utils.formatEther(borrow.totalBorrowed)) : 0} из {borrow.borrowingGoal ? Number(ethers.utils.formatEther(borrow.borrowingGoal)) : 0} tBNB</td>
-                                          <td className='userPhone'>{Number(borrow.borrowingPeriod) / 86400}</td>
-                                          <td className='userPhone'>{Number(investors)}</td>
+                                          <td className='statusBorr f-weight'><Status status={borrow.status}/></td>
+                                          <td className='totalBorr'><TotalBar from={Number(ethers.utils.formatEther(borrow.totalBorrowed))} to={Number(ethers.utils.formatEther(borrow.borrowingGoal))} /></td>
+                                          <td className='borrPeriod'>{Number(borrow.borrowingPeriod) / 86400}</td>
+                                          <td className='investors'>{Number(investors)}</td>
                                           <td className='interestRate'>{Number(borrow.interestRate)}%</td>
                                       </tr>
                                       )

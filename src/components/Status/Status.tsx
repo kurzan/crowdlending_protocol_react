@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from './Status.module.css';
+import { style } from "@vanilla-extract/css";
 
 const Status = ({status} : {status: string | undefined}) => {
 
@@ -10,32 +11,30 @@ const Status = ({status} : {status: string | undefined}) => {
       case 0:
         return {
           style: styles.open,
-          text: "Открыт" 
+          text: "Open" 
         }
 
       case 1:
         return {
           style: styles.active,
-          text: "Активный" 
+          text: "Active" 
         }
 
       case 2:
         return {
           style: styles.closed,
-          text: "Закрыт" 
+          text: "Closed" 
         }
       case 3:
         return {
             style: styles.canceled,
-            text: "Не состоялся" 
+            text: "Canceled" 
           }  
     }
   };
 
   return(
-    <div className={getStyle(status)?.style}>
-      <p className={styles.text}>{getStyle(status)?.text}</p>
-    </div>
+      <p className={styles.p + " " + getStyle(status)?.style}>{getStyle(status)?.text}</p>
   )
 };
 

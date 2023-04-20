@@ -16,6 +16,7 @@ import Status from "../../components/Status/Status";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
+import CoinIcon from "../../components/CoinIcon/CoinIcon";
 
 
 const Borrow = () => {
@@ -63,10 +64,12 @@ const Borrow = () => {
     <>
       <Header/>
       <main className={styles.container}>
-        <div className={styles.back}>
-          <MdKeyboardArrowLeft size={25} />
-          <Link className={styles.back_text} to={"/"}>Назад</Link>
-        </div>
+        <Link to={"/"} className={styles.back}>
+          <>
+            <MdKeyboardArrowLeft size={25} />
+            <p>Back</p>
+          </>
+        </Link>
 
         <div className={styles.header}>
 
@@ -76,43 +79,50 @@ const Borrow = () => {
             </div>
             <p>{currentBorrow?.companyName}</p>
             <Status status={currentBorrow?.status}/>
-            { Number(currentBorrow?.status) === 1 && <p>Выплата через: {`${days} дней, ${hours} часов, ${mins} минут, ${secs} секунд`}</p>}
+            { Number(currentBorrow?.status) === 1 && <p className={styles.timer}>Closed in: {`${days}d, ${hours}h, ${mins}m, ${secs}s`}</p>}
           </div>
-          <Button disabled={Number(currentBorrow?.status) !== 0 || !isConnected ? true : false} onClick={modalHandler} title="Инвестировать" />
+          <Button disabled={Number(currentBorrow?.status) !== 0 || !isConnected ? true : false} onClick={modalHandler} title="Invest" />
         </div>
 
-        <Box title="Детали займа">
+        <Box title="Details">
           <div className={styles.details}>
 
             <div className={styles.details_item}>
               <p className={styles.details_amount}>{Number(currentBorrow?.borrowingPeriod) / 86400}</p>
-              <p className={styles.details_text}>Срок займа, дней</p>
+              <p className={styles.details_text}>Period, days</p>
             </div>
 
             <div className={styles.details_item}>
-              <p className={styles.details_amount}>{currentBorrow?.totalBorrowed ? Number(ethers.utils.formatEther(currentBorrow.totalBorrowed)) : 0} tBNB</p>
-              <p className={styles.details_text}>Собрано средств</p>
+              <div className={styles.coins_amount}>
+                <p className={styles.details_amount}>{currentBorrow?.totalBorrowed ? Number(ethers.utils.formatEther(currentBorrow.totalBorrowed)) : 0}</p>
+                <CoinIcon/>
+              </div>
+              
+              <p className={styles.details_text}>Total borrowed</p>
             </div>
 
             <div className={styles.details_item}>
-              <p className={styles.details_amount}>{currentBorrow?.borrowingGoal ? Number(ethers.utils.formatEther(currentBorrow.borrowingGoal)) : 0} tBNB</p>
-              <p className={styles.details_text}>Необходимо собрать</p>
+              <div className={styles.coins_amount}>
+               <p className={styles.details_amount}>{currentBorrow?.borrowingGoal ? Number(ethers.utils.formatEther(currentBorrow.borrowingGoal)) : 0}</p>
+               <CoinIcon/>
+              </div> 
+              <p className={styles.details_text}>Borrow goal</p>
             </div>
 
             <div className={styles.details_item}>
               <p className={styles.details_amount}>{Number(currentBorrow?.interestRate)}%</p>
-              <p className={styles.details_text}>Ставка, годовых</p>
+              <p className={styles.details_text}>Interest rate</p>
             </div>
             
           </div>
   
         </Box>  
 
-        <Box title="О компании">
+        <Box title="About company">
           <p>{currentBorrow?.info}</p>
         </Box>  
 
-        {modalIsOpen && <Modal onClose={modalHandler} title="Введите сумму">
+        {modalIsOpen && <Modal onClose={modalHandler} title="Enter amount">
           <InvestField id={id} currentBorrow={currentBorrow} />
         </Modal>}
 

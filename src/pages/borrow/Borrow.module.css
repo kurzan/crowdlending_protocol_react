@@ -45,16 +45,25 @@
 }
 
 .details_amount {
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.coins_amount {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 8px
 }
 
 .back {
   display: flex;
   align-items: center;
-}
-
-.back_text {
   text-decoration: none;
   color: black;
+  font-weight: 600;
+}
+
+.timer {
   font-weight: 600;
 }
