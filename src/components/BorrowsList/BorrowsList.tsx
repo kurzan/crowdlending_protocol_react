@@ -58,9 +58,8 @@ return (
               <thead>
                 <tr>
                     <th className='userHeading'>Company</th>
-                    <th className='statusBorr'>Status</th>
                     <th className='totalBorr'>Total borrowed</th>
-                    <th className='borrPeriod'>Period, days</th>
+                    <th className='borrPeriod'>Period</th>
                     <th className='investors'>Investors</th>
                     <th className='interestRate'>Rate</th>
                 </tr>
@@ -92,8 +91,7 @@ return (
                                                   </div>
                                               </div>
                                           </td>
-                                          <td className='statusBorr f-weight'><Status status={borrow.status}/></td>
-                                          <td className='totalBorr'><TotalBar from={Number(ethers.utils.formatEther(borrow.totalBorrowed))} to={Number(ethers.utils.formatEther(borrow.borrowingGoal))} /></td>
+                                          <td className='totalBorr'><TotalBar status={borrow.status} from={Number(ethers.utils.formatEther(borrow.totalBorrowed))} to={Number(ethers.utils.formatEther(borrow.borrowingGoal))} /></td>
                                           <td className='borrPeriod'>{Number(borrow.borrowingPeriod) / 86400}</td>
                                           <td className='investors'>{Number(investors)}</td>
                                           <td className='interestRate'>{Number(borrow.interestRate)}%</td>

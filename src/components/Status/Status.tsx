@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from './Status.module.css';
 import { style } from "@vanilla-extract/css";
 
-const Status = ({status} : {status: string | undefined}) => {
+const Status = ({status, isBorder = false} : {status: string | undefined, isBorder?: boolean}) => {
 
   const getStyle = (status: string | number | undefined) => {
 
@@ -34,7 +34,7 @@ const Status = ({status} : {status: string | undefined}) => {
   };
 
   return(
-      <p className={styles.p + " " + getStyle(status)?.style}>{getStyle(status)?.text}</p>
+      <p className={!isBorder ? styles.p + " " + getStyle(status)?.style : styles.border + " " + getStyle(status)?.style}>{getStyle(status)?.text}</p>
   )
 };
 

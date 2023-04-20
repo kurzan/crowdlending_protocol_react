@@ -78,7 +78,7 @@ const Borrow = () => {
               {!currentBorrow? <Skeleton width={48} height={48} /> : <CompanyLogo src={currentBorrow?.image} alt={currentBorrow?.companyName} />}
             </div>
             <p>{currentBorrow?.companyName}</p>
-            <Status status={currentBorrow?.status}/>
+            <Status isBorder={true} status={currentBorrow?.status}/>
             { Number(currentBorrow?.status) === 1 && <p className={styles.timer}>Closed in: {`${days}d, ${hours}h, ${mins}m, ${secs}s`}</p>}
           </div>
           <Button disabled={Number(currentBorrow?.status) !== 0 || !isConnected ? true : false} onClick={modalHandler} title="Invest" />

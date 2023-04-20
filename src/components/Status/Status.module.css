@@ -1,14 +1,20 @@
 .p  {
-  padding-left: 6px;
-  padding-right: 6px;
-  border: 1px solid;
-  border-radius: 8px;
+  opacity: 0.9;
+}
+
+.border {
+  height: 26px;
+  vertical-align: middle;
+  padding: 0 12px;
+  border-radius: 14px;
+  line-height: 24px;
   text-align: center;
+  border: 1px solid;
 }
 
 
 .open {
-  color: green;
+  color: rgb(33 182 111);
 }
 
 .active {
@@ -16,7 +22,7 @@
 }
 
 .closed {
-  color: gray;
+  color: rgb(124 58 237);
 }
 
 .canceled {
