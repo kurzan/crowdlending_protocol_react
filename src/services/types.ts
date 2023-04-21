@@ -5,7 +5,7 @@ export type TBorrow = {
     image: string,
     companyName: string,
     description: string,
-    status: string,
+    status: number,
     totalBorrowed: BigNumberish,
     interestRate: number,
     info: string;
@@ -13,21 +13,4 @@ export type TBorrow = {
     investors: any[];
     borrowingPeriod: number;
     startTime: number;
-};
-
-type TInvestors = {
-
-};
-
-export type TBorrowFromContract = {
-  borrowId: BigInt;
-  borrower: string;
-  borrowingGoal: BigInt;
-  borrowingPeriod: BigInt;
-  closeTime: BigInt;
-  interestRate: BigInt;
-  investors: any[];
-  startTime: BigInt;
-  status: BigInt;
-  totalBorrowed: BigInt;
 };

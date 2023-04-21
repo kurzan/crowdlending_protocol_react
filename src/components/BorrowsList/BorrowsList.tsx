@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './BorrowsList.css';
+import styles from './BorrowList.module.css';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import CompanyLogo from '../CompanyLogo/CompanyLogo';
 import { useNavigate } from "react-router-dom";
@@ -9,20 +10,19 @@ import {ethers} from "ethers";
 //@ts-ignore
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import CoinIcon from '../CoinIcon/CoinIcon';
-import TotalBar from '../TotalBar/TotalBar';
+import BorrowCard from '../BorrowCard/BorrowCard';
 
 
 const BorrowsList = () => {
     const [page, setPage] = useState(1);
     const {isError, borrows} = useData();
-    const navigate = useNavigate();
+
 
     const [portfolios, setPortfolios] =useState<any>();
 
     const selectPageHandle = (selectedPage: any) => { // Pagination Logic
         if (borrows && selectedPage >= 1 &&
-            selectedPage <= Math.ceil(borrows.length / 5) &&
+            selectedPage <= Math.ceil(borrows.length / 6) &&
             selectedPage !== page) {
             setPage(selectedPage)
         }
@@ -54,55 +54,14 @@ return (
             <h1 className='heading'>
                 Borrows
             </h1>
-            <table>
-              <thead>
-                <tr>
-                    <th className='userHeading'>Company</th>
-                    <th className='totalBorr'>Total borrowed</th>
-                    <th className='borrPeriod'>Period</th>
-                    <th className='investors'>Investors</th>
-                    <th className='interestRate'>Rate</th>
-                </tr>
-              </thead> 
 
-              {!borrows ? <Skeleton count={5} height={80} borderRadius={"0.5rem"}/> : (
-                              <tbody>
-                              {
-                                 borrows && borrows.slice(page * 5 - 5, page * 5).map((borrow, index) => {
-              
-                                      let investors = 0;
-              
-                                      if (borrow.investors && borrow.investors.length) {
-                                        investors = borrow.investors.length;
-                                      }
-              
-                                      return (
-                                      
-                                      <tr key={index} onClick={() => navigate(`/borrows/${Number(borrow.borrowId)}`)}>
-              
-                                          <td>
-                                              <div className='userDetails'>
-                                                  <div className='userPic'>
-                                                      <CompanyLogo src={borrow.image} alt={borrow.companyName} />
-                                                  </div>
-                                                  <div className='userHandles'>
-                                                      <p className='userName'>{borrow.companyName}</p>
-                                                      <div className='userEmail'>{borrow.description}</div>
-                                                  </div>
-                                              </div>
-                                          </td>
-                                          <td className='totalBorr'><TotalBar status={borrow.status} from={Number(ethers.utils.formatEther(borrow.totalBorrowed))} to={Number(ethers.utils.formatEther(borrow.borrowingGoal))} /></td>
-                                          <td className='borrPeriod'>{Number(borrow.borrowingPeriod) / 86400}</td>
-                                          <td className='investors'>{Number(investors)}</td>
-                                          <td className='interestRate'>{Number(borrow.interestRate)}%</td>
-                                      </tr>
-                                      )
-                                  })
-                              }
-                             </tbody> 
-              )}
-
-            </table>
+            <div className={styles.list}>
+              {!borrows ? 
+              <Skeleton count={5} height={80} borderRadius={"0.5rem"}/> 
+              :
+              <>{borrows && borrows.slice(page * 6 - 6, page * 6).map((borrow, index) => <BorrowCard borrow={borrow} />)}</>         
+              }
+            </div>
 
             {
                 borrows && borrows.length > 0 && <div className='pagination'>
@@ -111,7 +70,7 @@ return (
                     </div>
                     <div className='pageNumbers'>
                         {
-                            [...Array(Math.ceil(borrows.length / 5))].map((n, i) => {
+                            [...Array(Math.ceil(borrows.length / 6))].map((n, i) => {
                                 return <div
                                 key={i} 
                                 className={`num ${page === i + 1 ? `numActive` : ''}`} 

@@ -10,16 +10,9 @@ type TCompanyLogoProps = {
 
 const CompanyLogo: FC<TCompanyLogoProps> = ({src, alt}) => {
 
-  // const [isImage, setIsImage] = useState(false);
-
-  // useEffect(() => {
-  //   getImage(src)
-  //     .then(() => setIsImage(true))
-  //     .catch(() => setIsImage(false))
-  // }, [src, isImage])
-
   return(
-    <img src={src} alt={alt} />
+      <img style={{borderRadius: "8px"}} height="40px" width="40px" src={src} alt={alt} />
+
   )
 };
 

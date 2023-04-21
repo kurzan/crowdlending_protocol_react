@@ -24,6 +24,6 @@
 .progress {
   width: 100%;
   background-color: green;
-  height: 3px;
+  height: 6px;
   border-radius: 8px;
 }

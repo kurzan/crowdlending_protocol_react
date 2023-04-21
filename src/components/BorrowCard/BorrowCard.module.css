@@ -1,0 +1,64 @@
+.card {
+  padding: 24px;
+  border-radius: 24px;
+  border: solid 1px #e5e7eb;
+  background-color: white;
+  width: 300px;
+  height: 260px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card_unactive {
+  opacity: 0.5;
+}
+
+.card:hover {
+  opacity: 1;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.company {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.desc {
+  color:  #808190;
+  font-size: 14px;
+}
+
+.details {
+  display: flex;
+  gap: 30px;
+}
+
+.details_item {
+  display: flex;
+  flex-direction: column;
+}
+
+.details_text {
+  color:  #808190;
+  font-size: 12px;
+}
+
+.details_amount {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.rate {
+  color: #5dbc12;
+}

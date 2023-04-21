@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from './Status.module.css';
 import { style } from "@vanilla-extract/css";
 
-const Status = ({status, isBorder = false} : {status: string | undefined, isBorder?: boolean}) => {
+const Status = ({status, isBorder = false} : {status: string | number | undefined, isBorder?: boolean}) => {
 
   const getStyle = (status: string | number | undefined) => {
 
