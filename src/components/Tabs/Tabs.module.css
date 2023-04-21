@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  background-color: #a9bad4;
+  border-radius: 24px;
+  margin: 8px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.tab_element {
+  display: flex;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 9px 16px 9px 16px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 6px 4px 6px 4px;
+  height: 38px;
+  cursor: pointer;
+  text-align: center;
+  align-items: center;
+  max-width: 140px;
+  min-width: 90px;
+  vertical-align: middle;
+}
+
+.tab_element:nth-child(1) {
+  background-color: white;
+}
+
+.active {
+  background-color: white;
+}
+
+.tab_element:hover {
+  background-color: #e5e7eb;
+}

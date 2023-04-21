@@ -50,11 +50,7 @@ const BorrowsList = () => {
     }, [getPortfolio])
 
 return (
-        <div className='userTable'>
-            <h1 className='heading'>
-                Borrows
-            </h1>
-
+        <div className={styles.container}>
             <div className={styles.list}>
               {!borrows ? 
               <Skeleton count={5} height={80} borderRadius={"0.5rem"}/> 
