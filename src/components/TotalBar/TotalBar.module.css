@@ -16,9 +16,20 @@
   font-size: 12px;
 }
 
+.from {
+  font-weight: 600;
+  color: gray;
+  font-size: 26px;
+}
+
+.to {
+  font-size: 26px;
+}
+
 .total_head {
   display: flex;
   justify-content: space-between;
+  align-items:end;
 }
 
 .progress {

@@ -17,11 +17,20 @@ import { DataProvider } from './services/providers/DataProvider';
 //@ts-ignore
 import { ReactNotifications } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
+import Portfolio from './pages/portfolio/Portfolio';
 
 const router = createHashRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/borrows",
+    element: <Home />,
+  },
+  {
+    path: "/portfolio",
+    element: <Portfolio />,
   },
   {
     path: "/borrows/:id",

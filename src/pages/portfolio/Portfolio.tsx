@@ -1,20 +1,18 @@
-import { useEffect } from "react";
 import BorrowsList from "../../components/BorrowsList/BorrowsList";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
-import styles from "./Home.module.css";
+import styles from "./Portfolio.module.css";
 
-const Home = () => {
- 
+const Portfolio = () => {
   return(
     <>
-      <Header nav/>
+      <Header nav />
       <main className={styles.container}>
-        <BorrowsList />
+
       </main>
       <Footer />
     </>
   )
 };
 
-export default Home;
+export default Portfolio;

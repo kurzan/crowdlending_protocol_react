@@ -1,22 +1,36 @@
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './Tabs.module.css';
+import { useEffect, useState } from 'react';
 
 const tabs = [
   {
     id: 0,
     title: 'Borows',
+    path: '/borrows',
+    path2: '/'
   },
   {
     id: 1,
-    title: 'Portfolio'
+    title: 'Portfolio',
+    path: '/portfolio'
   }
 ];
 
 
 const Tabs = () => {
+
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState(0);
+
+  const { pathname } = useLocation();
+
   return (
     <div className={styles.container}>
-      {tabs && tabs.map(tab => (
-        <div className={styles.tab_element}>
+      {tabs && tabs.map((tab, index) => (
+        <div key={index} onClick={() => {
+          setActiveTab(index);
+          navigate(tab.path);
+        }} className={pathname === tab.path || pathname === tab.path2 ? styles.active + " " +  styles.tab_element : styles.tab_element}>
           <p className={styles.tab_title}>{tab.title}</p>
         </div>
       ))}

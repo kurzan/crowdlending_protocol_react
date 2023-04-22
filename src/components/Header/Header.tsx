@@ -3,14 +3,14 @@ import logo from '../../images/logo.png';
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Tabs from "../Tabs/Tabs";
 
-const Header = () => {
+const Header = ({nav} : {nav?: boolean}) => {
   return(
     <header className={styles.header}>
         <div className={styles.logobox}>
           <img src={logo} alt="" />
         </div>
         <div className={styles.tabs} >
-          <Tabs />
+          {nav && <Tabs />}
         </div>
         <ConnectButton/>
     </header>

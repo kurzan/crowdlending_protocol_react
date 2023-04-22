@@ -10,13 +10,25 @@
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .companyLogo>img {
   width: 3rem;
   height: 3rem;
   border-radius: 12px;
+}
+
+.companyTexts {
+  display: flex;
+  flex-direction: column;
+}
+
+.borrowId {
+  color: #6860CC;
+}
+
+.companyName {
+
 }
 
 .companyInfo {
@@ -57,6 +69,7 @@
 }
 
 .back {
+  margin-top: 22px;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -65,5 +78,18 @@
 }
 
 .timer {
-  font-weight: 600;
+  font-weight: 400;
+}
+
+.timerBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: rgb(249, 249, 249);
+}
+
+.button {
+  display: flex;
+  justify-content: center;
 }

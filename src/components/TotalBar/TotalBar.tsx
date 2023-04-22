@@ -16,7 +16,7 @@ const TotalBar: FC<TTotalBarProps> = ({from = 0, to = 0}) => {
       <div className={styles.total_head}>
         <p>{percent}%</p>
         <div className={styles.total_amount}>        
-          <p>{from}<span className={styles.slash}> / </span>{to}</p>
+          <p className={styles.from}>{from}</p><span className={styles.slash}> / </span><p className={styles.to}>{to}</p>
           <CoinIcon />
         </div>
       </div>

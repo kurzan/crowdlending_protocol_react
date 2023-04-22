@@ -29,8 +29,8 @@ const Borrow = () => {
   const [secs, setsecs] = useState(0);
   const [timeRemaining, setTimeRemaining] = useState(0);
 
-  const { id } = useParams(); 
-  const {borrows} = useData();
+  const { id } = useParams();
+  const { borrows } = useData();
   const { address, isConnected } = useAccount();
 
   const currentBorrow = borrows?.find(borrow => Number(borrow.borrowId) === Number(id));
@@ -45,15 +45,15 @@ const Borrow = () => {
         setTimeRemaining(timeRemaining - 1);
 
 
-          setsecs(Math.floor((timeRemaining) % 60));
-          setmins(Math.floor((timeRemaining / 60) % 60));
-          sethours(Math.floor((timeRemaining / 60 / 60) % 24));
-          setdays(Math.floor((timeRemaining / 60 / 60 / 24)));
+        setsecs(Math.floor((timeRemaining) % 60));
+        setmins(Math.floor((timeRemaining / 60) % 60));
+        sethours(Math.floor((timeRemaining / 60 / 60) % 24));
+        setdays(Math.floor((timeRemaining / 60 / 60 / 24)));
       }, 1000);
       return () => clearInterval(intervalId);
 
     }
-    
+
   }, [currentBorrow, timeRemaining]);
 
   const modalHandler = () => {
@@ -62,7 +62,10 @@ const Borrow = () => {
 
   return (
     <>
-      <Header/>
+      <Header />
+      <div className={styles.timerBox}>
+        {Number(currentBorrow?.status) === 1 && <p className={styles.timer}>Ends in: {`${days}d, ${hours}h, ${mins}m, ${secs}s`}</p>}
+      </div>
       <main className={styles.container}>
         <Link to={"/"} className={styles.back}>
           <>
@@ -75,59 +78,64 @@ const Borrow = () => {
 
           <div className={styles.companyInfo}>
             <div className={styles.companyLogo}>
-              {!currentBorrow? <Skeleton width={48} height={48} /> : <CompanyLogo src={currentBorrow?.image} alt={currentBorrow?.companyName} />}
+              {!currentBorrow ? <Skeleton width={48} height={48} /> : <CompanyLogo src={currentBorrow?.image} alt={currentBorrow?.companyName} />}
             </div>
-            <p>{currentBorrow?.companyName}</p>
-            <Status isBorder={true} status={currentBorrow?.status}/>
-            { Number(currentBorrow?.status) === 1 && <p className={styles.timer}>Closed in: {`${days}d, ${hours}h, ${mins}m, ${secs}s`}</p>}
+            <div className={styles.companyTexts}>
+              <p className={styles.borrowId}>№ {Number(currentBorrow?.borrowId)}</p>
+              <p className={styles.companyName}>{currentBorrow?.companyName}</p>
+            </div>
+
           </div>
-          <Button disabled={Number(currentBorrow?.status) !== 0 || !isConnected ? true : false} onClick={modalHandler} title="Invest" />
+          <Status isBorder={true} status={currentBorrow?.status} />
         </div>
 
-        <Box title="Details">
+        <Box >
+
           <div className={styles.details}>
 
             <div className={styles.details_item}>
-              <p className={styles.details_amount}>{Number(currentBorrow?.borrowingPeriod) / 86400}</p>
               <p className={styles.details_text}>Period, days</p>
+              <p className={styles.details_amount}>{Number(currentBorrow?.borrowingPeriod) / 86400}</p>
             </div>
 
+
             <div className={styles.details_item}>
-              <div className={styles.coins_amount}>
-                <p className={styles.details_amount}>{currentBorrow?.totalBorrowed ? Number(ethers.utils.formatEther(currentBorrow.totalBorrowed)) : 0}</p>
-                <CoinIcon/>
-              </div>
-              
               <p className={styles.details_text}>Total borrowed</p>
-            </div>
-
-            <div className={styles.details_item}>
               <div className={styles.coins_amount}>
-               <p className={styles.details_amount}>{currentBorrow?.borrowingGoal ? Number(ethers.utils.formatEther(currentBorrow.borrowingGoal)) : 0}</p>
-               <CoinIcon/>
-              </div> 
-              <p className={styles.details_text}>Borrow goal</p>
+                <p className={styles.details_amount}>
+                  {currentBorrow?.totalBorrowed ? Number(ethers.utils.formatEther(currentBorrow.totalBorrowed)) : 0}/ 
+                  {currentBorrow?.totalBorrowed ? Number(ethers.utils.formatEther(currentBorrow.borrowingGoal)) : 0}
+                </p>
+                <CoinIcon />
+              </div>
             </div>
 
+
             <div className={styles.details_item}>
-              <p className={styles.details_amount}>{Number(currentBorrow?.interestRate)}%</p>
               <p className={styles.details_text}>Interest rate</p>
+              <p className={styles.details_amount}>{Number(currentBorrow?.interestRate)}%</p>
             </div>
-            
+
           </div>
-  
-        </Box>  
+
+          
+
+        </Box>
+
+        {currentBorrow?.status === 0 && <div className={styles.button}>
+          <Button disabled={Number(currentBorrow?.status) !== 0 || !isConnected ? true : false} onClick={modalHandler} title="Invest" />         
+        </div>}
 
         <Box title="About company">
           <p>{currentBorrow?.info}</p>
-        </Box>  
+        </Box>
 
         {modalIsOpen && <Modal onClose={modalHandler} title="Enter amount">
           <InvestField id={id} currentBorrow={currentBorrow} />
         </Modal>}
 
       </main>
-      <Footer/>
+      <Footer />
     </>
   )
 };

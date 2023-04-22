@@ -10,6 +10,7 @@
   margin-bottom: 3px;
   z-index: 1;
   backdrop-filter: blur(5px);
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .tabs {

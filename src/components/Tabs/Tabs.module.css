@@ -25,10 +25,6 @@
   vertical-align: middle;
 }
 
-.tab_element:nth-child(1) {
-  background-color: white;
-}
-
 .active {
   background-color: white;
 }
