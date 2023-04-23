@@ -10,7 +10,6 @@
   background-color: black;
   opacity: 0.9;
   border-radius: 40px;
-  filter: drop-shadow(0 0 12px rgba(4, 48, 89, 0.4));
 }
 
 .button:hover {

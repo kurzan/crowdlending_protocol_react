@@ -64,7 +64,7 @@ const Borrow = () => {
     <>
       <Header />
       <div className={styles.timerBox}>
-        {Number(currentBorrow?.status) === 1 && <p className={styles.timer}>Ends in: {`${days}d, ${hours}h, ${mins}m, ${secs}s`}</p>}
+        {Number(currentBorrow?.status) === 1 && <p className={styles.timer}>Ends in: {`${days}d ${hours}h ${mins}m ${secs}s`}</p>}
       </div>
       <main className={styles.container}>
         <Link to={"/"} className={styles.back}>

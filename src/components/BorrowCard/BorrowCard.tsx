@@ -92,13 +92,13 @@ const BorrowCard= ({borrow} : {borrow: TBorrow}) => {
         {borrow.status === 1 && 
         <div className={styles.details_item}>
           <p className={styles.details_text}>Ends in</p>
-          <p className={styles.details_amount}>{`${days}d, ${hours}h`}</p>
+          <p className={styles.details_amount}>{`${days}d ${hours}h`}</p>
         </div>}
 
         {borrow.status === 3 && 
         <div className={styles.details_item}>
           <p className={styles.details_text}>Closed at</p>
-          <p className={styles.details_amount}>{`${days}d, ${hours}h`}</p>
+          <p className={styles.details_amount}>{`${days}d ${hours}h`}</p>
         </div>}
 
       </div>

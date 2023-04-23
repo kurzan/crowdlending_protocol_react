@@ -17,13 +17,13 @@
 }
 
 .from {
-  font-weight: 600;
-  color: gray;
-  font-size: 26px;
+  /* font-weight: 600;
+  color: gray; */
+  font-size: 18px;
 }
 
 .to {
-  font-size: 26px;
+  font-size: 18px;
 }
 
 .total_head {

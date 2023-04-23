@@ -8,6 +8,7 @@ import Box from '../Box/Box';
 import { TBorrow } from '../../services/types';
 //@ts-ignore
 import { Store } from 'react-notifications-component';
+import { useFeeData } from 'wagmi'
 
 type TInvestFieldProps = {
   id: any;
@@ -57,15 +58,49 @@ const InvestField: FC<TInvestFieldProps> = ({id, currentBorrow}) => {
     });
   }, [isSuccess])
 
+  const feeData = useFeeData({
+    onSuccess(data) {
+      console.log('Success', Number(data.gasPrice))
+    },
+  })
+
+
   return (
     <form action="" className={styles.form}>
       <div className={styles.input_box}>
         <input onChange={e => inputHandler(Number(e.target.value))} value={inputValue} id="bet" className={styles.input} type="number" placeholder="0.01" min="0.01" step="0.01"  />
-        <button onClick={() => setInputValue(Number(ethers.utils.formatEther(maxInvestValue.toString())))} className={styles.max} type='button'>max</button>
+        <button onClick={() => setInputValue(Number(ethers.utils.formatEther(maxInvestValue.toString())))} className={styles.max} type='button'>MAX</button>
       </div>
       {isConnected && <Button onClick={write} isLoading={isLoadingInvestData} disabled={prepareLoading || isLoadingInvestData || error ? true : false} title={!isLoadingInvestData ? "Invest" : "Prepare transaction..."} />}
         <Box margin="0" bg={"rgb(249, 249, 249)"} >
-          {error ? <p>An error occurred preparing the transaction</p> : <p>min 0,01 tBNB, max {Number(ethers.utils.formatEther(maxInvestValue.toString()))} tBNB</p>}
+          {error ? <p>An error occurred preparing the transaction</p>
+           : 
+          (
+            <>
+              <div className={styles.trans_info}>
+                <p className={styles.trans_text}>Minimum</p>
+                <p className={styles.trans_amount}>0,01 tBNB</p>
+              </div>
+
+              <div className={styles.trans_info}>
+                <p className={styles.trans_text}>Maximum</p>
+                <p className={styles.trans_amount}>{Number(ethers.utils.formatEther(maxInvestValue.toString()))} tBNB</p>
+              </div>
+
+              <div className={styles.trans_info}>
+                <p className={styles.trans_text}>Fee</p>
+                <p className={styles.trans_amount}>0%</p>
+              </div>
+
+              <div className={styles.trans_info}>
+                <p className={styles.trans_text}>Gas cost</p>
+                <p className={styles.trans_amount}>-</p>
+              </div>
+
+
+            </>
+          )
+        }
         </Box>
     </form>
   )

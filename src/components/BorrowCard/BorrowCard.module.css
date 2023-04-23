@@ -2,13 +2,18 @@
   padding: 24px;
   border-radius: 24px;
   border: solid 1px #e5e7eb;
-  background-color: white;
-  width: 330px;
+  background-color: rgb(249, 249, 249);
+  width: 260px;
   height: 260px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  gap: 8px;
   justify-content: space-between;
+}
+
+.card:hover {
+  background-color:white;
 }
 
 .card_unactive {
@@ -56,9 +61,8 @@
 
 .details_amount {
   font-size: 18px;
-  font-weight: 600;
 }
 
 .rate {
-  color: #5dbc12;
+  color:green;
 }

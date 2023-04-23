@@ -6,20 +6,43 @@
   gap: 16px;
 }
 
+.input_box {
+  position: relative;
+}
+
 .input {
   width: 100%;
+  height: 50px;
   padding: 6px;
-  border-radius: 16px;
+  padding-left: 20px;
+  border-radius: 40px;
   font-size: 18px;
   box-sizing: border-box;
+  border: solid 1px #e5e7eb;
 }
 
 .max {
+  top: 50%;
+  right: 4%;
   padding: 4px;
   padding-inline: 8px;
   position: absolute;
-  top: .4em;
-  right: .4em;
-  border-radius: 16px;
+  height: 60%;
+  border-radius: 36px;
   border: 0;
+  transform: translate(0, -50%);
+  border: solid 1px #e5e7eb;
+  font-size: 12px;
+}
+
+.max:hover {
+  background-color: gray;
+  color: white;
+}
+
+.trans_info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
