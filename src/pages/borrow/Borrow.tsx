@@ -86,7 +86,7 @@ const Borrow = () => {
             </div>
 
           </div>
-          <Status isBorder={true} status={currentBorrow?.status} />
+          <Status status={currentBorrow?.status} />
         </div>
 
         <Box >

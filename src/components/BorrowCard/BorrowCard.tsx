@@ -61,7 +61,7 @@ const BorrowCard= ({borrow} : {borrow: TBorrow}) => {
     <div className={borrow.status !== 5 ? styles.card : styles.card + ' ' + styles.card_unactive } onClick={() => navigate(`/borrows/${Number(borrow.borrowId)}`)}>
       <div className={styles.head}>
         <CompanyLogo src={borrow.image} alt={borrow.companyName} />
-        <Status isBorder status={borrow.status} />
+        <Status status={borrow.status} />
       </div>
       
       <div className={styles.company}>

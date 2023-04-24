@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import styles from './Status.module.css';
-import { style } from "@vanilla-extract/css";
 
-const Status = ({status, isBorder = false} : {status: string | number | undefined, isBorder?: boolean}) => {
+const Status = ({status} : {status: string | number | undefined}) => {
 
   const getStyle = (status: string | number | undefined) => {
 
@@ -34,7 +32,7 @@ const Status = ({status, isBorder = false} : {status: string | number | undefine
   };
 
   return(
-      <p className={!isBorder ? styles.p + " " + getStyle(status)?.style : styles.border + " " + getStyle(status)?.style}>{getStyle(status)?.text}</p>
+      <p className={styles.p + " " + getStyle(status)?.style + " " + styles.border}>{getStyle(status)?.text}</p>
   )
 };
 
