@@ -58,15 +58,16 @@ const BorrowCard= ({borrow} : {borrow: TBorrow}) => {
   }, [borrow, timeRemaining]);
 
   return (
-    <div className={borrow.status !== 5 ? styles.card : styles.card + ' ' + styles.card_unactive } onClick={() => navigate(`/borrows/${Number(borrow.borrowId)}`)}>
+    <div className={borrow.status === 0 ? styles.card : styles.card + ' ' + styles.card_unactive } onClick={() => navigate(`/borrows/${Number(borrow.borrowId)}`)}>
       <div className={styles.head}>
         <CompanyLogo src={borrow.image} alt={borrow.companyName} />
         <Status status={borrow.status} />
       </div>
       
       <div className={styles.company}>
-        <p className={styles.name}>{borrow.companyName}</p>
         <p className={styles.desc}>{borrow.description}</p>
+        <p className={styles.name}>{borrow.companyName}</p>
+        
       </div>
 
       <TotalBar from={Number(ethers.utils.formatEther(borrow.totalBorrowed))} to={Number(ethers.utils.formatEther(borrow.borrowingGoal))} />
