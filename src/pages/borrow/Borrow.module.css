@@ -2,7 +2,6 @@
   margin: 0 auto;
   max-width: 1152px;
   padding: 12px;
-  background-color: rgb(249, 249, 249);
 }
 
 .header {
@@ -88,7 +87,8 @@
   display: flex;
   justify-content: center;
   border-bottom: 1px solid #e5e7eb;
-  background-color: rgb(249, 249, 249);
+  background-color: #F5F5F5;
+  backdrop-filter: blur(5px);
 }
 
 .button {
