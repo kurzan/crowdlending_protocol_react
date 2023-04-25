@@ -11,6 +11,14 @@ import {ethers} from "ethers";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import BorrowCard from '../BorrowCard/BorrowCard';
+import { TBorrow } from '../../services/types';
+import { Search } from '../Search/Search';
+
+type TSortedBorrow = {
+  statusSort: number;
+  idSort: number;
+  item: TBorrow;
+}
 
 
 const BorrowsList = () => {
@@ -18,6 +26,8 @@ const BorrowsList = () => {
     const {isError, borrows} = useData();
 
     const [portfolios, setPortfolios] =useState<any>();
+    const [sortedBorrows, setSortedBorrows] = useState<TBorrow[] | undefined>();
+    const [searchValue, setSearchValue] = useState();
 
     const selectPageHandle = (selectedPage: any) => { // Pagination Logic
         if (borrows && selectedPage >= 1 &&
@@ -26,6 +36,26 @@ const BorrowsList = () => {
             setPage(selectedPage)
         }
     };
+
+    useEffect(() => {
+      const sortedStatuses = [0];
+
+      const sortedData = borrows?.reduce(
+        (acc: TSortedBorrow[], item) => {
+          acc.push({
+            statusSort: sortedStatuses.indexOf(item.status),
+            idSort: item.borrowId,
+            item
+          });
+          return acc;
+        },
+        []
+      )
+      .sort((a, b) => (b.statusSort - a.statusSort) || (a.idSort - b.idSort))
+      .map(({ item }) => item);
+
+      setSortedBorrows(sortedData);
+    }, [borrows])
 
     const getPortfolio = useCallback(() => {
       if (!borrows) return;
@@ -48,13 +78,24 @@ const BorrowsList = () => {
       getPortfolio()
     }, [getPortfolio])
 
+    const searchBorrows = useMemo(
+      () => {
+        const search = searchValue || '';
+        return sortedBorrows?.filter(
+          item => item.companyName.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1
+        );
+      },
+      [sortedBorrows, searchValue]
+    );
+
 return (
         <div className={styles.container}>
+            <Search placeholder="Search" setSearch={setSearchValue} />
             <div className={styles.list}>
               {!borrows ? 
               <Skeleton count={6} height={80} width={80} borderRadius={"0.5rem"}/> 
               :
-              <>{borrows && borrows?.slice(page * 6 - 6, page * 6).map((borrow, index) => <BorrowCard borrow={borrow} />)}</>         
+              <>{borrows && searchBorrows?.slice(page * 6 - 6, page * 6).map((borrow, index) => <BorrowCard borrow={borrow} />)}</>         
               }
             </div>
 

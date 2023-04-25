@@ -1,13 +1,13 @@
 .list {
-  margin: 0 auto;
+  margin: 24px auto;
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 860px;
   padding: 12px;
   margin: 0 auto;
 }

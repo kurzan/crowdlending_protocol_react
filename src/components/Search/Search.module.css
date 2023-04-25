@@ -1,0 +1,56 @@
+.inputBox {
+  display: inline-flex;
+  height: 48px;
+  width: 300px;
+  align-items: center;
+  border: 0;
+  border-radius: 12px;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid rgb(227, 227, 227);
+}
+
+.input {
+  border: 0;
+  outline: none;
+  width: 100%;
+  color: #BCC5CD;
+  font-weight: 400;
+  font-size: 16px;
+  border: 0; 
+  background-color: rgb(249, 249, 249);
+}
+
+.inputBox >img {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+/* 
+const SearchInput = styled.input<TSearch>`
+  border: 0;
+  outline: none;
+  width: 100%;
+  color: #BCC5CD;
+  background-color: #484E53;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 38px;
+  border: 0; 
+
+  &::placeholder {
+    color: #BCC5CD;
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const SearchIcon = styled.img`
+  width: 36px;
+  height: 36px;
+  margin-right: 10px;
+  order: -1;
+`; */
