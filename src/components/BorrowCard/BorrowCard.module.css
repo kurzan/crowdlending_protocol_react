@@ -2,7 +2,7 @@
   padding: 18px;
   border-radius: 20px;
   border: solid 1px #e5e7eb;
-  background-color: rgb(249, 249, 249);
+  background-color:white;
   width: 260px;
   cursor: pointer;
   display: flex;
@@ -15,6 +15,7 @@
 }
 
 .card_unactive {
+  background-color: rgb(249, 249, 249);
   opacity: 0.5;
 }
 
@@ -34,7 +35,7 @@
 
 .name {
   line-height: 1;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -59,7 +60,7 @@
 }
 
 .details_amount {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.2;
 }
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import './BorrowsList.css';
 import styles from './BorrowList.module.css';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
@@ -16,7 +16,6 @@ import BorrowCard from '../BorrowCard/BorrowCard';
 const BorrowsList = () => {
     const [page, setPage] = useState(1);
     const {isError, borrows} = useData();
-
 
     const [portfolios, setPortfolios] =useState<any>();
 
@@ -53,9 +52,9 @@ return (
         <div className={styles.container}>
             <div className={styles.list}>
               {!borrows ? 
-              <Skeleton count={5} height={80} borderRadius={"0.5rem"}/> 
+              <Skeleton count={6} height={80} width={80} borderRadius={"0.5rem"}/> 
               :
-              <>{borrows && borrows.slice(page * 6 - 6, page * 6).map((borrow, index) => <BorrowCard borrow={borrow} />)}</>         
+              <>{borrows && borrows?.slice(page * 6 - 6, page * 6).map((borrow, index) => <BorrowCard borrow={borrow} />)}</>         
               }
             </div>
 
