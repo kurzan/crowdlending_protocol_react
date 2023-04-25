@@ -15,8 +15,7 @@
 }
 
 .card_unactive {
-  background-color: rgb(249, 249, 249);
-  opacity: 0.5;
+  background-color: #EDEDED;
 }
 
 .card:hover {
