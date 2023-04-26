@@ -6,11 +6,13 @@ import { ethers } from "ethers";
 import Status from "../Status/Status";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
+import { getDate } from "../../services/utils";
 
 const BorrowCard= ({borrow} : {borrow: TBorrow}) => {
   const navigate = useNavigate();
 
-  const [startDate, setStartDate] = useState<any>();
+  const [startDate, setStartDate] = useState<string>();
+  const [closetDate, setClosedDate] = useState<string>();
 
   const [days, setdays] = useState(0);
   const [hours, sethours] = useState(0);
@@ -28,11 +30,8 @@ const BorrowCard= ({borrow} : {borrow: TBorrow}) => {
   useEffect(() => {
     if (!borrow) return;
 
-    let date = new Date(Number(borrow.startTime) * 1000);
-    let month = date.getMonth();
-    let day = date.getDate();
-    let year = date.getFullYear();
-    setStartDate(`${month}/${day}/${year}`)
+    setStartDate(getDate(borrow.createTime));
+    setClosedDate(getDate(borrow.closeTime));
 
   }, [borrow]);
 
@@ -96,10 +95,16 @@ const BorrowCard= ({borrow} : {borrow: TBorrow}) => {
           <p className={styles.details_amount}>{`${days}d ${hours}h`}</p>
         </div>}
 
+        {borrow.status === 2 && 
+        <div className={styles.details_item}>
+          <p className={styles.details_text}>Closed at</p>
+          <p className={styles.details_amount}>{closetDate}</p>
+        </div>}
+
         {borrow.status === 3 && 
         <div className={styles.details_item}>
           <p className={styles.details_text}>Closed at</p>
-          <p className={styles.details_amount}>{`${days}d ${hours}h`}</p>
+          <p className={styles.details_amount}>{closetDate}</p>
         </div>}
 
       </div>

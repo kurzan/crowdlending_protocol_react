@@ -8,6 +8,7 @@ import { contract } from "../web3config";
 interface IContext {
   borrows: TBorrow[] | null,
   isError: boolean,
+  borrowsIds: number[] | undefined;
 }
 
 export const DataContext = createContext<IContext>({} as IContext);
@@ -80,6 +81,8 @@ export const DataProvider = ({children}: {children: any}) => {
       const mergedBorrows = mergeByProperty([borrowsFromFirebase, borrowsFromContract]);
       setBorrows(mergedBorrows);
 
+      
+
     } catch (error) {
       setIsError(true);
     }
@@ -121,8 +124,8 @@ export const DataProvider = ({children}: {children: any}) => {
   }, [getBorrows])
 
   const value = useMemo(() => ({
-    borrows, isError
-  }), [borrows, isError])
+    borrows, isError,borrowsIds
+  }), [borrows, isError, borrowsIds])
 
   return <DataContext.Provider value={value}>
     {children}

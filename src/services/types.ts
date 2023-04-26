@@ -13,4 +13,6 @@ export type TBorrow = {
     investors: any[];
     borrowingPeriod: number;
     startTime: number;
+    closeTime: number;
+    createTime: BigNumberish;
 };
