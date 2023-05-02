@@ -17,6 +17,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
 import CoinIcon from "../../components/CoinIcon/CoinIcon";
+import { getDate } from "../../services/utils";
 
 
 const Borrow = () => {
@@ -34,6 +35,7 @@ const Borrow = () => {
   const { address, isConnected } = useAccount();
 
   const currentBorrow = borrows?.find(borrow => Number(borrow.borrowId) === Number(id));
+  const investors = currentBorrow?.investors.length;
 
   useEffect(() => {
     if (currentBorrow) {
@@ -59,6 +61,10 @@ const Borrow = () => {
   const modalHandler = () => {
     setModalIsOpen(!modalIsOpen);
   };
+
+  useEffect(() => {
+    console.log(currentBorrow)
+  }, [currentBorrow])
 
   return (
     <>
@@ -89,16 +95,16 @@ const Borrow = () => {
           <Status status={currentBorrow?.status} />
         </div>
 
-        <Box >
-
+        {!currentBorrow ? <Skeleton height={100} /> : <Box >
           <div className={styles.details}>
-
+            <div className={styles.details_item}>
+              <p className={styles.details_text}>Created at</p>
+              <p className={styles.details_amount}>{getDate(currentBorrow?.createTime)}</p>
+            </div>
             <div className={styles.details_item}>
               <p className={styles.details_text}>Period, days</p>
               <p className={styles.details_amount}>{Number(currentBorrow?.borrowingPeriod) / 86400}</p>
             </div>
-
-
             <div className={styles.details_item}>
               <p className={styles.details_text}>Total borrowed</p>
               <div className={styles.coins_amount}>
@@ -109,18 +115,12 @@ const Borrow = () => {
                 <CoinIcon />
               </div>
             </div>
-
-
             <div className={styles.details_item}>
               <p className={styles.details_text}>Interest rate</p>
               <p className={styles.details_amount}>{Number(currentBorrow?.interestRate)}%</p>
             </div>
-
           </div>
-
-          
-
-        </Box>
+        </Box>}
 
         {currentBorrow?.status === 0 && <div className={styles.button}>
           <Button disabled={Number(currentBorrow?.status) !== 0 || !isConnected ? true : false} onClick={modalHandler} title="Invest" />         
@@ -129,6 +129,19 @@ const Borrow = () => {
         <Box title="About company">
           <p>{currentBorrow?.info}</p>
         </Box>
+
+        {investors ? <Box title="Investors">
+          {currentBorrow?.investors.map((item, index) => (
+            <div key={index} className={styles.investorItem}>
+              <p className={styles.investorAddress}>{item.investor}</p>
+              <div className={styles.investorAmount}>
+                <p className={styles.investorAmountText}>{Number(item.amount) / 10 ** 18}</p>
+                <CoinIcon />
+              </div>
+              
+            </div>
+          ))}
+        </Box> : null}
 
         {modalIsOpen && <Modal onClose={modalHandler} title="Enter amount">
           <InvestField id={id} currentBorrow={currentBorrow} />

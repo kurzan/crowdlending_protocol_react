@@ -2,11 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import './BorrowsList.css';
 import styles from './BorrowList.module.css';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-import CompanyLogo from '../CompanyLogo/CompanyLogo';
-import { useNavigate } from "react-router-dom";
 import { useData } from '../../hooks/useData';
-import Status from '../Status/Status';
-import {ethers} from "ethers";
 //@ts-ignore
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -89,11 +85,13 @@ const BorrowsList = () => {
 
 return (
         <div className={styles.container}>
-            <Search placeholder="Search" setSearch={setSearchValue} />
+          <div className={styles.heading}>
+            {!borrows ? <Skeleton height={30} /> : <Search placeholder="Search" setSearch={setSearchValue} />}
             <Stats />
+          </div>
             <div className={styles.list}>
               {!borrows ? 
-              <Skeleton count={6} height={80} width={80} borderRadius={"0.5rem"}/> 
+              <Skeleton count={6} height={260} width={260} borderRadius={"0.5rem"}/> 
               :
               <>{borrows && searchBorrows?.slice(page * 6 - 6, page * 6).map((borrow, index) => <BorrowCard key={index} borrow={borrow} />)}</>         
               }

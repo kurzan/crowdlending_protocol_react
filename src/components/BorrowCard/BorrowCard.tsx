@@ -57,7 +57,7 @@ const BorrowCard= ({borrow} : {borrow: TBorrow}) => {
   }, [borrow, timeRemaining]);
 
   return (
-    <div className={borrow.status === 0 ? styles.card : styles.card + ' ' + styles.card_unactive } onClick={() => navigate(`/borrows/${Number(borrow.borrowId)}`)}>
+        <div className={borrow.status === 0 ? styles.card : styles.card + ' ' + styles.card_unactive } onClick={() => navigate(`/borrows/${Number(borrow.borrowId)}`)}>
       <div className={styles.head}>
         <CompanyLogo src={borrow.image} alt={borrow.companyName} />
         <Status status={borrow.status} />

@@ -27,7 +27,7 @@
 }
 
 .companyName {
-
+  font-weight: 600;
 }
 
 .companyInfo {
@@ -40,6 +40,8 @@
 .details {
   display: flex;
   align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
@@ -92,6 +94,28 @@
 }
 
 .button {
+  margin-bottom: 28px;
   display: flex;
   justify-content: center;
+}
+
+.investors {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.investorItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.investorAmount {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.investorAmountText {
+
 }

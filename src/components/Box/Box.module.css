@@ -1,3 +1,8 @@
+.box {
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
   margin-top: 14px;
   margin-bottom: 38px;
@@ -10,5 +15,5 @@
 
 .title {
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 600;
 }

@@ -11,3 +11,10 @@
   padding: 12px;
   margin: 0 auto;
 }
+
+.heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+}

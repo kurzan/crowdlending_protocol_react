@@ -1,6 +1,7 @@
 import BorrowsList from "../../components/BorrowsList/BorrowsList";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
+import Stats from "../../components/Stats/Stats";
 import styles from "./Portfolio.module.css";
 
 const Portfolio = () => {
@@ -8,7 +9,7 @@ const Portfolio = () => {
     <>
       <Header nav />
       <main className={styles.container}>
-
+        <Stats />
       </main>
       <Footer />
     </>

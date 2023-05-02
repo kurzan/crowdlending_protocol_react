@@ -1,4 +1,3 @@
-import { ethers } from 'ethers';
 import { useData } from '../../hooks/useData';
 import styles from './Stats.module.css';
 import CoinIcon from '../CoinIcon/CoinIcon';
@@ -26,7 +25,7 @@ const Stats = () => {
 
       <div className={styles.item}>
         <p className={styles.text}>Avg rate</p>
-        <p className={styles.amount}>~{avgRate?.toFixed(2)}</p>
+        <p className={styles.amount + " " + styles.rate}>~{avgRate?.toFixed(2)}</p>
       </div>
 
     </div>
