@@ -15,7 +15,7 @@ import Status from "../../components/Status/Status";
 //@ts-ignore
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css';
-import { MdKeyboardArrowLeft } from 'react-icons/md';
+import { MdKeyboardArrowLeft, MdQueryBuilder } from 'react-icons/md';
 import CoinIcon from "../../components/CoinIcon/CoinIcon";
 import { getDate } from "../../services/utils";
 import Investors from "../../components/Investors/Investors";
@@ -72,6 +72,7 @@ const Borrow = () => {
     <>
       <Header />
       {Number(currentBorrow?.status) === 1 && <div className={styles.timerBox}>
+        <MdQueryBuilder />
         <p className={styles.timer}>Ends in: {`${days}d ${hours}h ${mins}m ${secs}s`}</p>
       </div>}
       <main className={styles.container}>

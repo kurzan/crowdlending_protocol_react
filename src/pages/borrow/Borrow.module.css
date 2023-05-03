@@ -80,7 +80,6 @@
 
 .timer {
   font-weight: 400;
-  color: rgb(47, 70, 244);
 }
 
 .timerBox {
@@ -88,8 +87,9 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 4px;
   border-bottom: 1px solid #e5e7eb;
-  background-color: #F5F5F5;
   backdrop-filter: blur(5px);
 }
 
