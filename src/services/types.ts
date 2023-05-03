@@ -1,5 +1,11 @@
 import { BigNumberish } from "ethers";
 
+
+export type TInvestors = {
+    investor: string,
+    amount: number
+};
+
 export type TBorrow = {
     borrowId: number,
     image: string,
@@ -10,7 +16,7 @@ export type TBorrow = {
     interestRate: number,
     info: string;
     borrowingGoal: BigNumberish;
-    investors: any[];
+    investors: TInvestors[];
     borrowingPeriod: number;
     startTime: number;
     closeTime: number;

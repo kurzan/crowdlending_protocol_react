@@ -100,6 +100,19 @@ export const contractAbi = [
 				"internalType": "string",
 				"name": "message",
 				"type": "string"
+			}
+		],
+		"name": "borrowCreated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "message",
+				"type": "string"
 			},
 			{
 				"indexed": false,
@@ -129,25 +142,6 @@ export const contractAbi = [
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "_Id",
-				"type": "uint256"
-			}
-		],
-		"name": "borrowMade",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "message",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
 				"name": "number",
 				"type": "uint256"
 			},
@@ -162,35 +156,17 @@ export const contractAbi = [
 		"type": "event"
 	},
 	{
-		"anonymous": false,
 		"inputs": [
 			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "message",
-				"type": "string"
-			},
-			{
-				"indexed": false,
 				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "_message",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "_Id",
+				"name": "_borrowId",
 				"type": "uint256"
 			}
 		],
-		"name": "investmentAdd",
-		"type": "event"
+		"name": "cancelInvest",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -254,6 +230,79 @@ export const contractAbi = [
 				"type": "uint256"
 			}
 		],
+		"name": "invest",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "message",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "_message",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "_Id",
+				"type": "uint256"
+			}
+		],
+		"name": "investmentAdd",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "withdraw",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_borrowId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "percent",
+				"type": "uint256"
+			}
+		],
+		"name": "withdrawMoney",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_borrowId",
+				"type": "uint256"
+			}
+		],
 		"name": "getBorrow",
 		"outputs": [
 			{
@@ -264,7 +313,7 @@ export const contractAbi = [
 						"type": "uint256"
 					},
 					{
-						"internalType": "enum CrowdlendingProtocol.BorrowStatus",
+						"internalType": "enum EarlyBirdProtocol.BorrowStatus",
 						"name": "status",
 						"type": "uint8"
 					},
@@ -311,7 +360,7 @@ export const contractAbi = [
 								"type": "uint256"
 							}
 						],
-						"internalType": "struct CrowdlendingProtocol.Investment[]",
+						"internalType": "struct EarlyBirdProtocol.Investment[]",
 						"name": "investors",
 						"type": "tuple[]"
 					},
@@ -331,7 +380,7 @@ export const contractAbi = [
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct CrowdlendingProtocol.Borrow",
+				"internalType": "struct EarlyBirdProtocol.Borrow",
 				"name": "",
 				"type": "tuple"
 			}
@@ -372,38 +421,16 @@ export const contractAbi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
 			{
-				"internalType": "uint256",
-				"name": "_borrowId",
-				"type": "uint256"
+				"internalType": "address",
+				"name": "",
+				"type": "address"
 			}
 		],
-		"name": "invest",
-		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_borrowId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "percent",
-				"type": "uint256"
-			}
-		],
-		"name": "withdrawMoney",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"stateMutability": "payable",
-		"type": "receive"
 	}
 ]

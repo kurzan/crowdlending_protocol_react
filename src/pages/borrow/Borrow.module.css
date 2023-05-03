@@ -99,23 +99,3 @@
   justify-content: center;
 }
 
-.investors {
-    display: flex;
-    justify-content: space-between;
-    gap: 24px;
-}
-
-.investorItem {
-  display: flex;
-  justify-content: space-between;
-}
-
-.investorAmount {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-
-.investorAmountText {
-
-}

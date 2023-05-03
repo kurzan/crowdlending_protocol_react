@@ -36,5 +36,9 @@
   width: 100%;
   background-color: green;
   height: 6px;
-  border-radius: 8px;
+  border-radius: 18px;
+}
+
+.progress[value]::-webkit-progress-bar {
+  background-color: #eee;
 }

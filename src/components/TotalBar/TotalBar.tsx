@@ -9,7 +9,7 @@ type TTotalBarProps = {
 
 const TotalBar: FC<TTotalBarProps> = ({from = 0, to = 0}) => {
 
-  const percent = (from / to * 100).toFixed(1);
+  const percent = (from / to * 100).toFixed(0);
 
   return (
     <div className={styles.total_bar}>

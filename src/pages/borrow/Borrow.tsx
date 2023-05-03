@@ -18,6 +18,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
 import CoinIcon from "../../components/CoinIcon/CoinIcon";
 import { getDate } from "../../services/utils";
+import Investors from "../../components/Investors/Investors";
 
 
 const Borrow = () => {
@@ -35,7 +36,8 @@ const Borrow = () => {
   const { address, isConnected } = useAccount();
 
   const currentBorrow = borrows?.find(borrow => Number(borrow.borrowId) === Number(id));
-  const investors = currentBorrow?.investors.length;
+  const alreadyInvest = currentBorrow?.investors.find(item => item.investor === address);
+  const investors = currentBorrow?.investors.filter(item => Number(item.amount) > 0).length;
 
   useEffect(() => {
     if (currentBorrow) {
@@ -122,7 +124,7 @@ const Borrow = () => {
           </div>
         </Box>}
 
-        {currentBorrow?.status === 0 && <div className={styles.button}>
+        {(currentBorrow?.status === 0 && !alreadyInvest) && <div className={styles.button}>
           <Button disabled={Number(currentBorrow?.status) !== 0 || !isConnected ? true : false} onClick={modalHandler} title="Invest" />         
         </div>}
 
@@ -130,18 +132,7 @@ const Borrow = () => {
           <p>{currentBorrow?.info}</p>
         </Box>
 
-        {investors ? <Box title="Investors">
-          {currentBorrow?.investors.map((item, index) => (
-            <div key={index} className={styles.investorItem}>
-              <p className={styles.investorAddress}>{item.investor}</p>
-              <div className={styles.investorAmount}>
-                <p className={styles.investorAmountText}>{Number(item.amount) / 10 ** 18}</p>
-                <CoinIcon />
-              </div>
-              
-            </div>
-          ))}
-        </Box> : null}
+        {investors ? <Investors title={`Investors (${investors})`} currentBorrow={currentBorrow} />: null}
 
         {modalIsOpen && <Modal onClose={modalHandler} title="Enter amount">
           <InvestField id={id} currentBorrow={currentBorrow} />

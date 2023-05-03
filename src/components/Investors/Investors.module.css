@@ -1,0 +1,41 @@
+.investors {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.investorItem {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.investorAmount {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.investorAmountText {
+
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    width: 80px;
+    height: 25px;
+    border-radius: 20px;
+    align-items: center;
+    border: none;
+}
+
+.button:hover {
+    background-color: rgb(163, 163, 163);
+}
+
+.buttonText {
+    padding-left: 8px;
+    padding-right: 8px;
+}

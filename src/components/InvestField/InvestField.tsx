@@ -1,6 +1,6 @@
 import Button from '../Button/Button';
 import { FC, useEffect, useState } from 'react';
-import { usePrepareContractWrite, useContractWrite, useAccount, useConnect} from 'wagmi';
+import { usePrepareContractWrite, useContractWrite, useAccount, useWaitForTransaction} from 'wagmi';
 import { contract } from "../../services/web3config";
 import { ethers } from "ethers";
 import styles from "./InvestField.module.css";
@@ -8,7 +8,6 @@ import Box from '../Box/Box';
 import { TBorrow } from '../../services/types';
 //@ts-ignore
 import { Store } from 'react-notifications-component';
-import { useFeeData } from 'wagmi'
 
 type TInvestFieldProps = {
   id: any;
@@ -38,31 +37,31 @@ const InvestField: FC<TInvestFieldProps> = ({id, currentBorrow}) => {
 
   const { data: investData, isLoading: isLoadingInvestData, isSuccess, write, reset } = useContractWrite(config);
 
+  const { data: dataWaitInvest, isError: errorWaitInvest, isLoading: loadingWaitInvest } = useWaitForTransaction({
+    hash: investData?.hash,
+  })
+
   const maxInvestValue = Number(currentBorrow?.borrowingGoal) - Number(currentBorrow?.totalBorrowed);
 
   useEffect(() => {
-    if (!isSuccess) return;
+    if (!dataWaitInvest) return;
 
     Store.addNotification({
       title: "Success!",
-      message: `Transaction success`,
+      message: `You successfully invested ${inputValue} in ${currentBorrow?.companyName}`,
       type: "success",
       insert: "top",
       container: "top-right",
       animationIn: ["animate__animated", "animate__fadeIn"],
       animationOut: ["animate__animated", "animate__fadeOut"],
       dismiss: {
-        duration: 5000,
+        duration: 10000,
         onScreen: true
       }
     });
-  }, [isSuccess])
+    
+  }, [dataWaitInvest])
 
-  const feeData = useFeeData({
-    onSuccess(data) {
-      console.log('Success', Number(data.gasPrice))
-    },
-  })
 
 
   return (
@@ -71,7 +70,7 @@ const InvestField: FC<TInvestFieldProps> = ({id, currentBorrow}) => {
         <input onChange={e => inputHandler(Number(e.target.value))} value={inputValue} id="bet" className={styles.input} type="number" placeholder="0.01" min="0.01" step="0.01"  />
         <button onClick={() => setInputValue(Number(ethers.utils.formatEther(maxInvestValue.toString())))} className={styles.max} type='button'>MAX</button>
       </div>
-      {isConnected && <Button onClick={write} isLoading={isLoadingInvestData} disabled={prepareLoading || isLoadingInvestData || error ? true : false} title={!isLoadingInvestData ? "Invest" : "Prepare transaction..."} />}
+      {isConnected && <Button onClick={write} isLoading={isLoadingInvestData || loadingWaitInvest} disabled={prepareLoading || isLoadingInvestData || error || loadingWaitInvest ? true : false} title={!isLoadingInvestData ? "Invest" : "Pending..."} />}
         <Box margin="0" bg={"rgb(249, 249, 249)"} >
           {error ? <p>An error occurred preparing the transaction</p>
            : 
