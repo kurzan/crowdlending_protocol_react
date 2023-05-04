@@ -1,5 +1,15 @@
 .container {
     height: 100%;
     display: flex;
+    margin: 0 auto;
+    flex-direction: column;
     justify-content: center;
+    max-width: 860px;
+  }
+
+  .heading {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: end;
   }

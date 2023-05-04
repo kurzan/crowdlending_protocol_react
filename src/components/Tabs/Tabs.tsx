@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 const tabs = [
   {
     id: 0,
-    title: 'Borows',
+    title: 'Borrows',
     path: '/borrows',
     path2: '/'
   },

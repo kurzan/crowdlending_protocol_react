@@ -23,6 +23,7 @@
 }
 
 .logobox>img {
-  max-width: 35%;
+  width: 70px;
+  height: 70px;
   padding: 8px;
 }

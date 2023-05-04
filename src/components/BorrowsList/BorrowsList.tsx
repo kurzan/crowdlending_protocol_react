@@ -19,107 +19,87 @@ type TSortedBorrow = {
 
 
 const BorrowsList = () => {
-    const [page, setPage] = useState(1);
-    const {isError, borrows} = useData();
+  const [page, setPage] = useState(1);
+  const { isError, borrows } = useData();
 
-    const [portfolios, setPortfolios] = useState<any>();
-    const [sortedBorrows, setSortedBorrows] = useState<TBorrow[] | undefined>();
-    const [searchValue, setSearchValue] = useState();
+  const [sortedBorrows, setSortedBorrows] = useState<TBorrow[] | undefined>();
+  const [searchValue, setSearchValue] = useState();
 
-    const selectPageHandle = (selectedPage: any) => { // Pagination Logic
-        if (borrows && selectedPage >= 1 &&
-            selectedPage <= Math.ceil(borrows.length / 6) &&
-            selectedPage !== page) {
-            setPage(selectedPage)
-        }
-    };
+  const selectPageHandle = (selectedPage: any) => { 
+    if (borrows && selectedPage >= 1 &&
+      selectedPage <= Math.ceil(borrows.length / 6) &&
+      selectedPage !== page) {
+      setPage(selectedPage)
+    }
+  };
 
-    useEffect(() => {
-      const sortedStatuses = [0];
+  useEffect(() => {
+    const sortedStatuses = [0];
 
-      const sortedData = borrows?.reduce(
-        (acc: TSortedBorrow[], item) => {
-          acc.push({
-            statusSort: sortedStatuses.indexOf(item.status),
-            idSort: Number(item.borrowId),
-            item
-          });
-          return acc;
-        },
-        []
-      )
+    const sortedData = borrows?.reduce(
+      (acc: TSortedBorrow[], item) => {
+        acc.push({
+          statusSort: sortedStatuses.indexOf(item.status),
+          idSort: Number(item.borrowId),
+          item
+        });
+        return acc;
+      },
+      []
+    )
       .sort((a, b) => (b.statusSort - a.statusSort) || (a.idSort - b.idSort))
       .map(({ item }) => item);
 
-      setSortedBorrows(sortedData);
-    }, [borrows])
+    setSortedBorrows(sortedData);
+  }, [borrows])
 
-    const getPortfolio = useCallback(() => {
-      if (!borrows) return;
+  const searchBorrows = useMemo(
+    () => {
+      const search = searchValue || '';
+      return sortedBorrows?.filter(
+        item => item.companyName.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1
+      );
+    },
+    [sortedBorrows, searchValue]
+  );
 
-      const ports: any = [];
+  return (
+    <div className={styles.container}>
+      {borrows ? <div className={styles.heading}>
+        <Search placeholder="Search" setSearch={setSearchValue} />
+        <Stats />
+      </div> : <Skeleton containerClassName={styles.skeletonHeading} count={1} height={50} width={"100%"} borderRadius={"0.5rem"} />}
+      <div className={styles.list}>
+        {!borrows ?
+          <Skeleton containerClassName={styles.skeletonList} count={6} height={260} width={260} borderRadius={"0.5rem"} />
+          :
+          <>{borrows && searchBorrows?.slice(page * 6 - 6, page * 6).map((borrow, index) => <BorrowCard key={index} borrow={borrow} />)}</>
+        }
+      </div>
 
-      borrows.forEach(borrow => {
-        ports.push({
-          borrowId: Number(borrow.borrowId),
-          investorts: borrow.investors
-        })
-      })
-
-      setPortfolios(ports)
-    }, [borrows]);
-
-    useEffect(() => {
-      getPortfolio()
-    }, [getPortfolio])
-
-    const searchBorrows = useMemo(
-      () => {
-        const search = searchValue || '';
-        return sortedBorrows?.filter(
-          item => item.companyName.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1
-        );
-      },
-      [sortedBorrows, searchValue]
-    );
-
-return (
-        <div className={styles.container}>
-          <div className={styles.heading}>
-            {!borrows ? <Skeleton height={30} /> : <Search placeholder="Search" setSearch={setSearchValue} />}
-            <Stats />
+      {
+        borrows && borrows.length > 0 && <div className='pagination'>
+          <div className='arrows' onClick={() => selectPageHandle(page - 1)}>
+            <MdKeyboardArrowLeft size={25} />
           </div>
-            <div className={styles.list}>
-              {!borrows ? 
-              <Skeleton count={6} height={260} width={260} borderRadius={"0.5rem"}/> 
-              :
-              <>{borrows && searchBorrows?.slice(page * 6 - 6, page * 6).map((borrow, index) => <BorrowCard key={index} borrow={borrow} />)}</>         
-              }
-            </div>
-
+          <div className='pageNumbers'>
             {
-                borrows && borrows.length > 0 && <div className='pagination'>
-                    <div className='arrows' onClick={() => selectPageHandle(page - 1)}>
-                        <MdKeyboardArrowLeft size={25} />
-                    </div>
-                    <div className='pageNumbers'>
-                        {
-                            [...Array(Math.ceil(borrows.length / 6))].map((n, i) => {
-                                return <div
-                                key={i} 
-                                className={`num ${page === i + 1 ? `numActive` : ''}`} 
-                                onClick={() => selectPageHandle(i + 1)}>{i + 1}</div>
-                            })
-                        }
-                    </div>
-                    <div className='arrows' onClick={() => selectPageHandle(page + 1)}>
-                        <MdKeyboardArrowRight size={25} />
-                    </div>
-                </div>
+              [...Array(Math.ceil(borrows.length / 6))].map((n, i) => {
+                return <div
+                  key={i}
+                  className={`num ${page === i + 1 ? `numActive` : ''}`}
+                  onClick={() => selectPageHandle(i + 1)}>{i + 1}</div>
+              })
             }
+          </div>
+          <div className='arrows' onClick={() => selectPageHandle(page + 1)}>
+            <MdKeyboardArrowRight size={25} />
+          </div>
         </div>
+      }
+    </div>
 
-    )
+  )
 }
 
 export default BorrowsList;

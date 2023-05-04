@@ -1,5 +1,5 @@
 import styles from "./Header.module.css";
-import logo from '../../images/logo.png';
+import logo from '../../images/logo2.png';
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Tabs from "../Tabs/Tabs";
 

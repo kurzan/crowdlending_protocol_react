@@ -76,7 +76,7 @@ const Borrow = () => {
         <p className={styles.timer}>Ends in: {`${days}d ${hours}h ${mins}m ${secs}s`}</p>
       </div>}
       <main className={styles.container}>
-        <Link to={"/"} className={styles.back}>
+        <Link to={-1 as any} className={styles.back}>
           <>
             <MdKeyboardArrowLeft size={25} />
             <p>Back</p>
