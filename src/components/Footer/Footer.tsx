@@ -5,9 +5,20 @@ import { contract } from "../../services/web3config";
 const Footer = () => {
   return(
     <footer className={styles.footer}>
-      <p>Powered by <a href={`https://github.com/kurzan`} target="_blank" rel="noreferrer">Kurzan</a></p>
-      <img src={binanceImg} alt={"BNB Chain"} width="32px" height="32px" />
-      <a href={`https://testnet.bscscan.com/address/${contract.address}`} target="_blank" rel="noreferrer">Contract address</a>
+      <div className={styles.info}>
+        <div className={styles.copyrights}>
+          <p>© 2023 Early Bird </p>
+        </div>
+        
+        <p>Supported Chains</p>
+        <img src={binanceImg} alt={"BNB Chain"} width="22px" height="22px" />
+      </div>
+
+      <div className={styles.socials}>
+        <p>Twitter</p>
+        <p>Telegram</p>
+      </div>
+
     </footer>
   )
 };

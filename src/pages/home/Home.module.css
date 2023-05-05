@@ -1,1 +1,48 @@
+.mainInfo {
+    padding: 48px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-between;
+}
 
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 800px;
+    width: 48%;
+}
+
+.info > h1 {
+    font-weight: 600;
+    font-size: 48px;
+}
+
+.fut {
+    background: -webkit-linear-gradient(#eeeeee, #e73b10);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.buttonsBox {
+    margin-top: 24px;
+    display: flex;
+    gap: 8px;
+}
+
+.description {
+    margin-top: 88px;
+}
+
+.bigLogo {
+    width: 49%;
+    position: relative;
+}
+
+.bigLogo>img{
+    position: absolute;
+    top: 50%;      
+    left: 50%;
+   transform: translate(-50%, -50%)
+}

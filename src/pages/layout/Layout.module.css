@@ -3,13 +3,18 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    width: 860px;
+    max-width: 1150px;
     margin: 0 auto;
 }
 
 .page {
+    margin: 0 auto;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
+}
+
+.page > footer {
+    max-width: 1150px;
+}

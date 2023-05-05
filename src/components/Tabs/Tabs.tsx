@@ -5,9 +5,14 @@ import { useEffect, useState } from 'react';
 const tabs = [
   {
     id: 0,
+    title: 'Home',
+    path: '/',
+  },
+  {
+    id: 0,
     title: 'Borrows',
     path: '/borrows',
-    path2: '/'
+    path2: '/borrows'
   },
   {
     id: 1,

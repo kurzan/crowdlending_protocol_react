@@ -13,6 +13,7 @@ import { wagmiClient, chains } from './services/web3config';
 
 import Home from './pages/home/Home';
 import Borrow from './pages/borrow/Borrow';
+import Borrows from './pages/borrows/Borrows';
 import { DataProvider } from './services/providers/DataProvider';
 //@ts-ignore
 import { ReactNotifications } from 'react-notifications-component';
@@ -26,7 +27,7 @@ const router = createHashRouter([
   },
   {
     path: "/borrows",
-    element: <Home />,
+    element: <Borrows />,
   },
   {
     path: "/portfolio",

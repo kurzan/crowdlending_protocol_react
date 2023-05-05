@@ -1,63 +1,83 @@
 .container {
     display: flex;
     flex-direction: column;
+    background-color: white;
+    border-radius: 24px;
+}
+
+.headingText {
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 8px;
 }
 
 .headTable {
+    padding-left: 18px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-right: 18px;
     display: flex;
     gap: 6px;
     align-items: center;
-    margin-top: 6px;
-    margin-bottom: 6px;
+    border-bottom: 0.0635rem solid #F5F5F5;
 }
 
 .portfolioItem {
+    padding-left: 18px;
+    padding-right: 18px;
     display: flex;
     height: 60px;
     align-items: center;
+    border-bottom: 0.0635rem solid #F5F5F5;
 }
 
 .portfolioItem:hover {
-    background-color: white;
+    background-color: #F5F5F5;
     cursor: pointer;
+}
+
+.tableCell:nth-child(1) {
+    display: flex;
+    gap: 8px;
+    width: 220px;
+    text-align: start;
 }
 
 .tableCell {
     padding: 5px;
-    width: 140px;
+    width: 150px;
     text-align: center;
 }
 
 .tableHeadText {
-    color:  #808190;
+    color: #808190;
     font-weight: 600;
     font-size: 14px;
     text-align: center;
 }
 
 .tableText {
- text-align: center;
+    text-align: center;
 }
 
-.tableCell:nth-child(1) {
-    display: flex;
-    gap: 8px;
-    width: 240px;
-    text-align: start;
+
+
+.rate {
+    color: green;
 }
 
 .company {
     display: flex;
     flex-direction: column;
-  }
-  
-  .name {
+}
+
+.name {
     line-height: 1;
     font-size: 18px;
     font-weight: 600;
-  }
-  
-  .desc {
-    color:  #808190;
+}
+
+.desc {
+    color: #808190;
     font-size: 14px;
-  }
+}

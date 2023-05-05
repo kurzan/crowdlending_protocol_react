@@ -1,13 +1,30 @@
 .footer {
+  margin: 0 auto;
+  width: 100%;
   padding: 24px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 12px;
   color: #a2a1a1;
-  align-self: self-end;
+  align-self: self-start;
 }
 
 .footer>a {
   color: #a2a1a1;
+}
+
+.info {
+  display: flex;
+  gap: 12px;
+}
+
+.copyrights {
+  padding-right: 12px;
+  border-right: 1px solid #d9d9d9;
+}
+
+.socials {
+  display: flex;
+  gap: 32px;
 }

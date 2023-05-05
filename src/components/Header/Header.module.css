@@ -26,6 +26,7 @@
   display: flex;
   gap: 86x;
   align-items: center;
+  cursor: pointer;
 }
 
 .logobox>p {

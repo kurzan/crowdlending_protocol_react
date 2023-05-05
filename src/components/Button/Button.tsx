@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { CSSProperties, FC, useEffect, useState } from "react";
 import styles from "./Button.module.css";
 import { useAccount, useConnect } from 'wagmi';
 //@ts-ignore
@@ -9,9 +9,10 @@ type TButtonProps = {
   onClick?: any;
   disabled?: boolean;
   isLoading?: boolean;
+  style?: CSSProperties;
 };
 
-const Button: FC<TButtonProps> = ({title, onClick, disabled, isLoading}) => {
+const Button: FC<TButtonProps> = ({title, onClick, disabled, isLoading, style}) => {
 
   const { connector: activeConnector, isConnected } = useAccount();
   const { connect, connectors, error, pendingConnector } = useConnect();
@@ -23,7 +24,7 @@ const Button: FC<TButtonProps> = ({title, onClick, disabled, isLoading}) => {
   }, [isConnected])
 
   return(
-      <button type="button" disabled={disabled} onClick={onClick} className={styles.button}>
+      <button type="button" style={style} disabled={disabled} onClick={onClick} className={styles.button}>
         {isLoading && <Oval
           height={20}
           width={20}

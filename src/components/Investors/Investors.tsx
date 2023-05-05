@@ -7,6 +7,7 @@ import styles from "./Investors.module.css";
 import { contract } from "../../services/web3config";
 import { ethers } from "ethers";
 import { Oval } from 'react-loader-spinner';
+import CancelButton from '../CancelButton/CancelButton';
 
 const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: string }) => {
 
@@ -30,21 +31,7 @@ const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: st
                         <p className={styles.investorAddress}>{address === item.investor ? 'You' : item.investor}</p>
                         <div className={styles.investorAmount}>
                             {address === item.investor && currentBorrow.status === 0 ? (
-                                <button disabled={isLoadingCancelInvest} className={styles.button} onClick={write}>
-                                    {isLoadingCancelInvest ? <Oval
-                                        height={20}
-                                        width={20}
-                                        color="#4fa94d"
-                                        wrapperStyle={{}}
-                                        wrapperClass=""
-                                        visible={true}
-                                        ariaLabel='oval-loading'
-                                        secondaryColor="#4fa94d"
-                                        strokeWidth={4}
-                                        strokeWidthSecondary={2}
-                                    /> :
-                                    <p className={styles.buttonText}>Cancel</p>}
-                                </button>
+                                <CancelButton disabled={isLoadingCancelInvest} onClick={write}/>
                             ) : null}
                             <p className={styles.investorAmountText}>{Number(item.amount) / 10 ** 18}</p>
                             <CoinIcon />
