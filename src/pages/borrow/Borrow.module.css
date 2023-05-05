@@ -78,19 +78,23 @@
   font-weight: 600;
 }
 
+.statusBox {
+  align-self: self-start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
 .timer {
   font-weight: 400;
 }
 
 .timerBox {
-  position: fixed;
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 4px;
-  border-bottom: 1px solid #e5e7eb;
-  backdrop-filter: blur(5px);
 }
 
 .button {

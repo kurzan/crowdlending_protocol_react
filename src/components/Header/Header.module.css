@@ -22,8 +22,19 @@
   font-weight: 700;
 }
 
+.logobox {
+  display: flex;
+  gap: 86x;
+  align-items: center;
+}
+
+.logobox>p {
+  font-size: 18px;
+  font-weight: 600;
+}
+
 .logobox>img {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   padding: 8px;
 }

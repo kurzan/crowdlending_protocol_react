@@ -5,6 +5,7 @@
   justify-content: center;
   gap: 12px;
   color: #a2a1a1;
+  align-self: self-end;
 }
 
 .footer>a {

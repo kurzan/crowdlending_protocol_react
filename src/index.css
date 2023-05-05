@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
 
 body {
+  min-height: 100vh;
   margin: 0 auto;
   background-color: #F5F5F5;
   font-family: 'Nunito', sans-serif;
@@ -33,4 +34,8 @@ input[type="number"]:hover,
 input[type="number"]:focus {
     appearance: none;
     -moz-appearance: textfield;
+}
+
+#root {
+  min-height: 100vh;
 }
