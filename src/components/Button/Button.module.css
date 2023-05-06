@@ -9,7 +9,7 @@
   cursor: pointer;
   background-color: black;
   opacity: 0.9;
-  border-radius: 40px;
+  border-radius: 12px;
 }
 
 .button:hover {

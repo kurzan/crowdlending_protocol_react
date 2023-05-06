@@ -8,7 +8,6 @@
   justify-content: space-between;
   align-items: center;
   backdrop-filter: blur(5px);
-  border-bottom: 1px solid #e5e7eb;
 }
 
 .tabs {

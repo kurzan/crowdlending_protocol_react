@@ -79,6 +79,9 @@ const PortfolioList = () => {
                     <div className={styles.tableCell}>
                         <p className={styles.tableHeadText}>Status</p>
                     </div>
+                    <div className={styles.tableCell}>
+                        
+                    </div>
                 </div>
                 {portfolio && portfolio?.map(portfolio => (
                     <div  className={styles.portfolioItem}>

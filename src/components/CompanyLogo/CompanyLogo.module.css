@@ -1,0 +1,13 @@
+.logoBox {
+  display: flex;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  align-items:center;
+  text-align: center;
+  background-color: #e5e7eb;
+  border-radius: 8px;
+  background: url(../../images//logo2.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}

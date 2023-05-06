@@ -15,7 +15,7 @@
   height: 50px;
   padding: 6px;
   padding-left: 20px;
-  border-radius: 40px;
+  border-radius: 12px;
   font-size: 18px;
   box-sizing: border-box;
   border: solid 1px #e5e7eb;
@@ -28,7 +28,7 @@
   padding-inline: 8px;
   position: absolute;
   height: 60%;
-  border-radius: 36px;
+  border-radius: 8px;
   border: 0;
   transform: translate(0, -50%);
   border: solid 1px #e5e7eb;

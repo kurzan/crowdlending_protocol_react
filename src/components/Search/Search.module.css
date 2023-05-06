@@ -7,7 +7,7 @@
   border-radius: 12px;
   padding: 8px;
   box-sizing: border-box;
-  border: 1px solid rgb(227, 227, 227);
+  background-color: white;
 }
 
 .input {
@@ -18,7 +18,7 @@
   font-weight: 400;
   font-size: 16px;
   border: 0; 
-  background-color: #F5F5F5;
+  background-color: none;
 }
 
 .inputBox >img {
