@@ -8,6 +8,8 @@ import { contract } from "../../services/web3config";
 import { ethers } from "ethers";
 import { Oval } from 'react-loader-spinner';
 import CancelButton from '../CancelButton/CancelButton';
+import { MdAccountCircle } from 'react-icons/md';
+import { getShortAddress } from '../../services/utils';
 
 const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: string }) => {
 
@@ -28,7 +30,10 @@ const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: st
             <Box title={title}>
                 {currentBorrow?.investors.filter(item => Number(item.amount) > 0).map((item, index) => (
                     <div key={index} className={styles.investorItem}>
-                        <p className={styles.investorAddress}>{address === item.investor ? 'You' : item.investor}</p>
+                        <div className={styles.investorBox}>
+                          <MdAccountCircle/>
+                          <p className={styles.investorAddress}>{address === item.investor ? 'You' : getShortAddress(item.investor)}</p>
+                        </div>
                         <div className={styles.investorAmount}>
                             {address === item.investor && currentBorrow.status === 0 ? (
                                 <CancelButton disabled={isLoadingCancelInvest} onClick={write}/>

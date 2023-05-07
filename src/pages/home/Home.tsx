@@ -2,7 +2,7 @@ import styles from "./Home.module.css";
 import LayoutPage from "../layout/Layout";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
-import logo from '../../images/logo.png'
+import logo from '../../images/mainlogo.png'
 
 const Home = () => {
 
@@ -10,9 +10,10 @@ const Home = () => {
  
   return(
       <LayoutPage>
+        <div className={styles.bg}>
         <div className={styles.mainInfo}>
           <div className={styles.info}>
-            <h1>BLOCKCHAIN <span className={styles.fut}>FUNDING</span> IS THE FUTURE</h1>
+            <h1>BLOCKCHAIN <span className={styles.fut}>FUNDING</span> <br></br>IS THE FUTURE</h1>
 
             <div className={styles.buttonsBox}>
               <Button onClick={() => navigate('/borrows')}  title={"GO TO INVEST"} />
@@ -32,6 +33,8 @@ const Home = () => {
           </div>  
 
         </div>
+        </div>
+
       </LayoutPage>
   )
 };

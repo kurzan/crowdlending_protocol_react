@@ -27,3 +27,6 @@ export const getDate = (timestamp) => {
 
   return `${month}/${day}/${year}`
 };
+
+
+export const getShortAddress = (address) => `${address.slice(0, 6)}...${address.slice(-4)}`;

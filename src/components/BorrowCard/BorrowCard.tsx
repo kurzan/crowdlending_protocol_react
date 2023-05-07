@@ -64,9 +64,8 @@ const BorrowCard = ({ borrow }: { borrow: TBorrow }) => {
       </div>
 
       <div className={styles.company}>
-        <p className={styles.desc}>{borrow.description}</p>
         <p className={styles.name}>{borrow.companyName}</p>
-
+        <p className={styles.desc}>{borrow.description}</p>
       </div>
 
       <TotalBar from={Number(ethers.utils.formatEther(borrow.totalBorrowed))} to={Number(ethers.utils.formatEther(borrow.borrowingGoal))} />

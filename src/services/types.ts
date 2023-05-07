@@ -8,6 +8,7 @@ export type TInvestors = {
 
 export type TBorrow = {
     borrowId: number,
+    borrower: string,
     image: string,
     companyName: string,
     description: string,

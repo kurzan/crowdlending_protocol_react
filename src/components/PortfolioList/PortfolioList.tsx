@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, FC } from 'react';
 import { useData } from "../../hooks/useData";
 import { useAccount, useContractWrite, usePrepareContractWrite } from 'wagmi';
 import styles from './PortfolioList.module.css';
@@ -8,13 +8,13 @@ import Status from '../Status/Status';
 import { useNavigate } from 'react-router-dom';
 import { contract } from '../../services/web3config';
 import CancelButton from '../CancelButton/CancelButton';
+import { TPortfolio } from '../../pages/portfolio/Portfolio';
 
-type TPortfolio = Partial<TBorrow> & { amount: number }
+type TPortfolioListProps = {
+ portfolio: TPortfolio[] | undefined;
+}
 
-const PortfolioList = () => {
-
-    const { borrows } = useData();
-    const { address } = useAccount();
+const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
 
     const [choosenBorrow, setChoosenBorrow] = useState<undefined | number>(undefined);
 
@@ -29,31 +29,9 @@ const PortfolioList = () => {
 
     const navigate = useNavigate();
 
-    const portfolio = borrows?.reduce((acc: TPortfolio[], borrow) => {
-        const investor = borrow.investors.find((x) => x.investor === address);
-        if (investor) {
-            acc.push({
-                borrowId: Number(borrow.borrowId),
-                amount: Number(investor.amount),
-                companyName: borrow.companyName,
-                description: borrow.description,
-                interestRate: borrow.interestRate,
-                borrowingPeriod: borrow.borrowingPeriod,
-                status: borrow.status,
-                image: borrow.image
-            });
-        }
-        return acc;
-    }, []);
-
-
-    useEffect(() => {
-        console.log(portfolio)
-    }, [portfolio])
-
     return (
         <>  
-            <p className={styles.headingText}>Your invesment</p>
+            <p className={styles.headingText}>Portfolio</p>
             <div className={styles.container}>
                 <div className={styles.headTable}>
                     <div className={styles.tableCell}>
@@ -84,7 +62,7 @@ const PortfolioList = () => {
                     </div>
                 </div>
                 {portfolio && portfolio?.map(portfolio => (
-                    <div  className={styles.portfolioItem}>
+                    <div className={styles.portfolioItem}>
 
                         <div className={styles.tableCell}>
                             <CompanyLogo src={portfolio.image} alt={portfolio.companyName} />

@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import CompanyLogo from "../../components/CompanyLogo/CompanyLogo";
-import Footer from "../../components/Footer/Footer";
-import Header from "../../components/Header/Header";
 import styles from "./Borrow.module.css";
 import Button from "../../components/Button/Button";
 import Box from "../../components/Box/Box";
@@ -20,6 +18,7 @@ import CoinIcon from "../../components/CoinIcon/CoinIcon";
 import { getDate } from "../../services/utils";
 import Investors from "../../components/Investors/Investors";
 import LayoutPage from "../layout/Layout";
+import ShortAddress from "../../components/ShortAddress/ShortAddress";
 
 
 const Borrow = () => {
@@ -70,7 +69,7 @@ const Borrow = () => {
   }, [currentBorrow])
 
   return (
-    <LayoutPage nav={false}>
+    <LayoutPage nav>
 
       <Link to={-1 as any} className={styles.back}>
         <>
@@ -132,9 +131,9 @@ const Borrow = () => {
       {(currentBorrow?.status === 0 && !alreadyInvest) && <div className={styles.button}>
         <Button disabled={Number(currentBorrow?.status) !== 0 || !isConnected ? true : false} onClick={modalHandler} title="Invest" />
       </div>}
-
-      <Box title="About company">
-        <p>{currentBorrow?.info}</p>
+      <Box title="About borrower">
+        <p className={styles.aboutBorrower}>{currentBorrow?.info}</p>
+        <ShortAddress address={currentBorrow?.borrower} />
       </Box>
 
       {investors ? <Investors title={`Investors (${investors})`} currentBorrow={currentBorrow} /> : null}

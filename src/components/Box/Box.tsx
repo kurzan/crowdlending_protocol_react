@@ -7,13 +7,14 @@ type TBoxProps = {
   margin?: string | number;
   bg?: string;
   pd?: string | number;
+  width?: string;
 };
 
-const Box: FC<TBoxProps> = ({children, title, margin, bg, pd = 22}) => {
+const Box: FC<TBoxProps> = ({children, title, margin, bg, width, pd = 22}) => {
   return (
     <div className={styles.box}>
       <p className={styles.title}>{title}</p>
-      <div style={{margin: `${margin}`, backgroundColor: `${bg}`, padding: `${pd}` }} className={styles.container}>
+      <div style={{width: `${width}`, margin: `${margin}`, backgroundColor: `${bg}`, padding: `${pd}` }} className={styles.container}>
         {children}
       </div>
     </div>

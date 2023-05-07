@@ -11,5 +11,14 @@
     margin-top: 24px;
     margin-bottom: 24px;
     display: flex;
-    justify-content: end;
+    justify-content: center;
+  }
+
+  .heading > p {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .assets {
+    color:#50BEAF;
   }

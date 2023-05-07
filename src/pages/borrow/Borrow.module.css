@@ -1,7 +1,7 @@
 .container {
   margin: 0 auto;
   max-width: 1152px;
-  padding: 12px;
+  padding: 24px;
 }
 
 .header {
@@ -58,7 +58,7 @@
 }
 
 .details_amount {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
 }
 
@@ -70,7 +70,6 @@
 }
 
 .back {
-  margin-top: 22px;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -103,3 +102,6 @@
   justify-content: center;
 }
 
+.aboutBorrower {
+  margin-bottom: 12px;
+}

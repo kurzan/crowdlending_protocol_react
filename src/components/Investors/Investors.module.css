@@ -11,6 +11,12 @@
   padding-bottom: 4px;
 }
 
+.investorBox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .investorAmount {
   display: flex;
   gap: 6px;

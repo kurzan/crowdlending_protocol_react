@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 2px 2px 2px 2px;
+  border: 1px solid gray;
+  border-radius: 8px;
+  width: 120px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.container>p {
+  color: gray;
+  font-weight: 600;
+  font-size: 12px;
+}
