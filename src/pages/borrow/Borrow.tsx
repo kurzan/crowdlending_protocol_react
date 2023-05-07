@@ -19,7 +19,9 @@ import { getDate } from "../../services/utils";
 import Investors from "../../components/Investors/Investors";
 import LayoutPage from "../layout/Layout";
 import ShortAddress from "../../components/ShortAddress/ShortAddress";
-
+import tgIcon from '../../images/socials/tg.svg';
+import twIcon from '../../images/socials/icons8-twitter.svg';
+import disIcon from '../../images/socials/icons8-discord.svg';
 
 const Borrow = () => {
 
@@ -133,7 +135,12 @@ const Borrow = () => {
       </div>}
       <Box title="About borrower">
         <p className={styles.aboutBorrower}>{currentBorrow?.info}</p>
-        <ShortAddress address={currentBorrow?.borrower} />
+        <div className={styles.socials}>
+          <ShortAddress address={currentBorrow?.borrower} />
+          <img src={tgIcon} width={24} height={24} alt="" />
+          <img src={twIcon} width={24} height={24} alt="" />
+          <img src={disIcon} width={24} height={24} alt="" />
+        </div>
       </Box>
 
       {investors ? <Investors title={`Investors (${investors})`} currentBorrow={currentBorrow} /> : null}
