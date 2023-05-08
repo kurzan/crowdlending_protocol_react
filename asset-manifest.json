@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/crowdlending_protocol_react/static/css/main.5969682c.css",
-    "main.js": "/crowdlending_protocol_react/static/js/main.424ea5a2.js",
+    "main.css": "/crowdlending_protocol_react/static/css/main.9e778b32.css",
+    "main.js": "/crowdlending_protocol_react/static/js/main.21a10c62.js",
     "static/js/689.9077b57d.chunk.js": "/crowdlending_protocol_react/static/js/689.9077b57d.chunk.js",
     "static/js/820.77d11255.chunk.js": "/crowdlending_protocol_react/static/js/820.77d11255.chunk.js",
     "static/js/589.b40d24d2.chunk.js": "/crowdlending_protocol_react/static/js/589.b40d24d2.chunk.js",
@@ -33,13 +33,17 @@
     "static/js/787.b0b3b341.chunk.js": "/crowdlending_protocol_react/static/js/787.b0b3b341.chunk.js",
     "static/js/401.04ac9d9e.chunk.js": "/crowdlending_protocol_react/static/js/401.04ac9d9e.chunk.js",
     "static/js/419.39e628da.chunk.js": "/crowdlending_protocol_react/static/js/419.39e628da.chunk.js",
-    "static/media/logo.png": "/crowdlending_protocol_react/static/media/logo.f10fc0f602378e21cb98.png",
+    "static/media/mainlogo.png": "/crowdlending_protocol_react/static/media/mainlogo.979e05a81792b707373e.png",
     "static/media/binance.svg": "/crowdlending_protocol_react/static/media/binance.83fc7a6fdd7ff6cc0f9746c7772db99c.svg",
+    "static/media/tg.svg": "/crowdlending_protocol_react/static/media/tg.cf9a41434191f7143e51d98076140b5c.svg",
+    "static/media/icons8-discord.svg": "/crowdlending_protocol_react/static/media/icons8-discord.72f90c75087e763871bf77eac743d8a2.svg",
+    "static/media/share.svg": "/crowdlending_protocol_react/static/media/share.9244b0e2cb69e6c16d0e2a9de32bef83.svg",
+    "static/media/icons8-twitter.svg": "/crowdlending_protocol_react/static/media/icons8-twitter.ae60c407dbf0cb9c03ed906d25bc9c17.svg",
     "index.html": "/crowdlending_protocol_react/index.html",
     "static/media/Binancefooter.svg": "/crowdlending_protocol_react/static/media/Binancefooter.a4bdb9647a5a02b2bd49f4ac5d665b08.svg",
     "static/media/search.svg": "/crowdlending_protocol_react/static/media/search.3c1bdfa9952ea4a6deb1d2ee5ab01dbe.svg",
-    "main.5969682c.css.map": "/crowdlending_protocol_react/static/css/main.5969682c.css.map",
-    "main.424ea5a2.js.map": "/crowdlending_protocol_react/static/js/main.424ea5a2.js.map",
+    "main.9e778b32.css.map": "/crowdlending_protocol_react/static/css/main.9e778b32.css.map",
+    "main.21a10c62.js.map": "/crowdlending_protocol_react/static/js/main.21a10c62.js.map",
     "689.9077b57d.chunk.js.map": "/crowdlending_protocol_react/static/js/689.9077b57d.chunk.js.map",
     "820.77d11255.chunk.js.map": "/crowdlending_protocol_react/static/js/820.77d11255.chunk.js.map",
     "589.b40d24d2.chunk.js.map": "/crowdlending_protocol_react/static/js/589.b40d24d2.chunk.js.map",
@@ -72,7 +76,7 @@
     "419.39e628da.chunk.js.map": "/crowdlending_protocol_react/static/js/419.39e628da.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5969682c.css",
-    "static/js/main.424ea5a2.js"
+    "static/css/main.9e778b32.css",
+    "static/js/main.21a10c62.js"
   ]
 }
