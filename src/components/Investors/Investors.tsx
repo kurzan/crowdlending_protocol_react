@@ -13,40 +13,71 @@ import { getShortAddress } from '../../services/utils';
 
 const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: string }) => {
 
-    const { address } = useAccount();
+  const { address } = useAccount();
 
-    const { config, error, isLoading } = usePrepareContractWrite({
-        address: contract.address,
-        abi: contract.abi,
-        functionName: 'cancelInvest',
-        args: [currentBorrow.borrowId],
-    });
+  const { config, error, isLoading } = usePrepareContractWrite({
+    address: contract.address,
+    abi: contract.abi,
+    functionName: 'cancelInvest',
+    args: [currentBorrow.borrowId],
+  });
 
-    const { data: investData, isLoading: isLoadingCancelInvest, isSuccess, write, reset, status } = useContractWrite(config);
+  const { data: investData, isLoading: isLoadingCancelInvest, isSuccess, write, reset, status } = useContractWrite(config);
 
 
-    return (
-        <>
-            <Box title={title}>
-                {currentBorrow?.investors.filter(item => Number(item.amount) > 0).map((item, index) => (
-                    <div key={index} className={styles.investorItem}>
-                        <div className={styles.investorBox}>
-                          <MdAccountCircle/>
-                          <p className={styles.investorAddress}>{address === item.investor ? 'You' : getShortAddress(item.investor)}</p>
-                        </div>
-                        <div className={styles.investorAmount}>
-                            {address === item.investor && currentBorrow.status === 0 ? (
-                                <CancelButton disabled={isLoadingCancelInvest} onClick={write}/>
-                            ) : null}
-                            <p className={styles.investorAmountText}>{Number(item.amount) / 10 ** 18}</p>
-                            <CoinIcon />
-                        </div>
+  const getPercents = (investAmoutn: number) => {
+    return (investAmoutn / Number(ethers.utils.formatEther(currentBorrow.borrowingGoal)) * 100);
+  };
 
-                    </div>
-                ))}
-            </Box>
-        </>
-    )
+  return (
+    <>
+      <Box title={title}>
+        <div className={styles.investorItem}>
+
+          <div className={styles.investorBox}>
+            <p className={styles.investorAddress + " " + styles.tableHeadText}>Address</p>
+          </div>
+
+          <div className={styles.rightPart}>
+                <div className={styles.investorPerecent}>
+                  <p className={styles.tableHeadText}>Percentage</p>
+                </div>
+
+                <div className={styles.investorAmount}>
+                  <p className={styles.investorAmountText + " " + styles.tableHeadText}>Value</p>
+                </div>
+              </div>
+
+
+        </div>
+
+
+          {currentBorrow?.investors.filter(item => Number(item.amount) > 0).map((item, index) => (
+            <div key={index} className={styles.investorItem}>
+              <div className={styles.investorBox}>
+                <MdAccountCircle />
+                <p className={styles.investorAddress}>{address === item.investor ? 'You' : getShortAddress(item.investor)}</p>
+              </div>
+
+              <div className={styles.rightPart}>
+                <div className={styles.investorPerecent}>
+                  {address === item.investor && currentBorrow.status === 0 ? (
+                    <CancelButton disabled={isLoadingCancelInvest} onClick={write} />
+                  ) : null}
+                  <p>{getPercents(Number(ethers.utils.formatEther(item.amount)))}%</p>
+                </div>
+
+                <div className={styles.investorAmount}>
+                  <p className={styles.investorAmountText}>{ethers.utils.formatEther(item.amount)}</p>
+                  <CoinIcon />
+                </div>
+              </div>
+
+            </div>
+          ))}
+      </Box>
+    </>
+  )
 };
 
 export default Investors;

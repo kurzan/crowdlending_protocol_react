@@ -4,6 +4,12 @@
     gap: 24px;
 }
 
+.tableHeadText{
+  color: #808190;
+  font-weight: 600;
+  font-size: 14px;
+}
+
 .investorItem {
   display: flex;
   justify-content: space-between;
@@ -19,8 +25,23 @@
 
 .investorAmount {
   display: flex;
-  gap: 6px;
+  gap: 12px;
+  width: 120px;
   align-items: center;
+  justify-content: end;
+}
+
+.investorPerecent {
+  display: flex;
+  gap: 24px;
+  width: 120px;
+  align-items: center;
+  justify-content: end;
+}
+
+.rightPart {
+  display: flex;
+  gap: 18px;
 }
 
 .investorAmountText {

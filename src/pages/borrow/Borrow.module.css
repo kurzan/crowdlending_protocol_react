@@ -3,6 +3,22 @@
   max-width: 1152px;
   padding: 24px;
 }
+.preheader {
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+}
+
+.share {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.share>p {
+  font-weight: 600;
+}
 
 .header {
   margin-top: 20px;
@@ -108,5 +124,5 @@
 
 .socials {
   display: flex;
-  gap: 8px;
+  gap: 12px;
 }

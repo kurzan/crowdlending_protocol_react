@@ -22,6 +22,7 @@ import ShortAddress from "../../components/ShortAddress/ShortAddress";
 import tgIcon from '../../images/socials/tg.svg';
 import twIcon from '../../images/socials/icons8-twitter.svg';
 import disIcon from '../../images/socials/icons8-discord.svg';
+import ShareLinks from "../../components/ShareLinks/ShareLinks";
 
 const Borrow = () => {
 
@@ -73,12 +74,18 @@ const Borrow = () => {
   return (
     <LayoutPage nav>
 
-      <Link to={-1 as any} className={styles.back}>
-        <>
-          <MdKeyboardArrowLeft size={25} />
-          <p>Back</p>
-        </>
-      </Link>
+      <div className={styles.preheader}>
+        <Link to={-1 as any} className={styles.back}>
+          <>
+            <MdKeyboardArrowLeft size={25} />
+            <p>Back</p>
+          </>
+        </Link>
+
+        <div className={styles.share}>
+          <ShareLinks />
+        </div>
+      </div>
 
       <div className={styles.header}>
 
@@ -136,7 +143,7 @@ const Borrow = () => {
       <Box title="About borrower">
         <p className={styles.aboutBorrower}>{currentBorrow?.info}</p>
         <div className={styles.socials}>
-          <ShortAddress address={currentBorrow?.borrower} />
+          {borrows && <ShortAddress address={currentBorrow?.borrower} />}
           <img src={tgIcon} width={24} height={24} alt="" />
           <img src={twIcon} width={24} height={24} alt="" />
           <img src={disIcon} width={24} height={24} alt="" />
