@@ -4,8 +4,8 @@ import { checkIsImage } from "../../services/utils";
 
 
 type TCompanyLogoProps = {
-  src?: string,
-  alt?: string
+  src?: string;
+  alt?: string;
 };
 
 const CompanyLogo: FC<TCompanyLogoProps> = ({src, alt}) => {

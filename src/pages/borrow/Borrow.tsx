@@ -23,6 +23,7 @@ import tgIcon from '../../images/socials/tg.svg';
 import twIcon from '../../images/socials/icons8-twitter.svg';
 import disIcon from '../../images/socials/icons8-discord.svg';
 import ShareLinks from "../../components/ShareLinks/ShareLinks";
+import CompanyStatus from "../../components/CompanyStatus/CompanyStatus";
 
 const Borrow = () => {
 
@@ -95,9 +96,12 @@ const Borrow = () => {
           </div>
           <div className={styles.companyTexts}>
             <p className={styles.borrowId}>№ {Number(currentBorrow?.borrowId)}</p>
-            <p className={styles.companyName}>{currentBorrow?.companyName}</p>
+            <div className={styles.companyNameBox}>
+              <p className={styles.companyName}>{currentBorrow?.companyName}</p>
+              <CompanyStatus verified={true}/>
+            </div>
+            
           </div>
-
         </div>
 
         <div className={styles.statusBox}>
