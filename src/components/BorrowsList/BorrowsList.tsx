@@ -73,7 +73,8 @@ const BorrowsList = () => {
         {!borrows ?
           <Skeleton containerClassName={styles.skeletonList} count={6} height={260} width={260} borderRadius={"0.5rem"} />
           :
-          <>{borrows && searchBorrows?.slice(page * 6 - 6, page * 6).map((borrow, index) => <BorrowCard key={index} borrow={borrow} />)}</>
+          <>{borrows && searchBorrows?.slice(page * 6 - 6, page * 6).map((borrow, index) =>
+             <BorrowCard borrow={borrow} />)}</>
         }
       </div>
 

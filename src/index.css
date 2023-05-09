@@ -3,10 +3,13 @@
 body {
   min-height: 100vh;
   margin: 0 auto;
-  background-color: #F5F5F5;
+  
   font-family: 'Nunito', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background: url('../src/images/bg.png');
+  background-color: #F5F5F5; */
+background: linear-gradient(180deg, rgba(62, 181, 241, 0.39) 0%, rgba(255, 255, 255, 0) 100%);
 }
 
 p {

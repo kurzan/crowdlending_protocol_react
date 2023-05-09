@@ -2,7 +2,7 @@
   padding: 18px;
   border-radius: 12px;
   background-color:white;
-  width: 254px;
+  width: 100%;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,7 @@
 }
 
 .card_unactive {
-  background-color: #EDEDED;
+  opacity: 0.5;
 }
 
 .card:hover {
