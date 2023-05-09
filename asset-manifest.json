@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/crowdlending_protocol_react/static/css/main.71efacef.css",
-    "main.js": "/crowdlending_protocol_react/static/js/main.1021ecb6.js",
+    "main.css": "/crowdlending_protocol_react/static/css/main.c96e7159.css",
+    "main.js": "/crowdlending_protocol_react/static/js/main.4568adc3.js",
     "static/js/689.9077b57d.chunk.js": "/crowdlending_protocol_react/static/js/689.9077b57d.chunk.js",
     "static/js/820.77d11255.chunk.js": "/crowdlending_protocol_react/static/js/820.77d11255.chunk.js",
     "static/js/589.b40d24d2.chunk.js": "/crowdlending_protocol_react/static/js/589.b40d24d2.chunk.js",
@@ -44,8 +44,8 @@
     "static/media/accepted.svg": "/crowdlending_protocol_react/static/media/accepted.c6a2eb7255ad0ab844c659ef9d625022.svg",
     "static/media/Binancefooter.svg": "/crowdlending_protocol_react/static/media/Binancefooter.a4bdb9647a5a02b2bd49f4ac5d665b08.svg",
     "static/media/search.svg": "/crowdlending_protocol_react/static/media/search.3c1bdfa9952ea4a6deb1d2ee5ab01dbe.svg",
-    "main.71efacef.css.map": "/crowdlending_protocol_react/static/css/main.71efacef.css.map",
-    "main.1021ecb6.js.map": "/crowdlending_protocol_react/static/js/main.1021ecb6.js.map",
+    "main.c96e7159.css.map": "/crowdlending_protocol_react/static/css/main.c96e7159.css.map",
+    "main.4568adc3.js.map": "/crowdlending_protocol_react/static/js/main.4568adc3.js.map",
     "689.9077b57d.chunk.js.map": "/crowdlending_protocol_react/static/js/689.9077b57d.chunk.js.map",
     "820.77d11255.chunk.js.map": "/crowdlending_protocol_react/static/js/820.77d11255.chunk.js.map",
     "589.b40d24d2.chunk.js.map": "/crowdlending_protocol_react/static/js/589.b40d24d2.chunk.js.map",
@@ -78,7 +78,7 @@
     "419.39e628da.chunk.js.map": "/crowdlending_protocol_react/static/js/419.39e628da.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.71efacef.css",
-    "static/js/main.1021ecb6.js"
+    "static/css/main.c96e7159.css",
+    "static/js/main.4568adc3.js"
   ]
 }
