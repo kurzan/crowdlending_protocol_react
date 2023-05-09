@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/crowdlending_protocol_react/static/css/main.93246cba.css",
-    "main.js": "/crowdlending_protocol_react/static/js/main.0a56d2ec.js",
+    "main.css": "/crowdlending_protocol_react/static/css/main.5dfa33b8.css",
+    "main.js": "/crowdlending_protocol_react/static/js/main.cdf10c60.js",
     "static/js/689.9077b57d.chunk.js": "/crowdlending_protocol_react/static/js/689.9077b57d.chunk.js",
     "static/js/820.77d11255.chunk.js": "/crowdlending_protocol_react/static/js/820.77d11255.chunk.js",
     "static/js/589.b40d24d2.chunk.js": "/crowdlending_protocol_react/static/js/589.b40d24d2.chunk.js",
@@ -34,6 +34,7 @@
     "static/js/401.04ac9d9e.chunk.js": "/crowdlending_protocol_react/static/js/401.04ac9d9e.chunk.js",
     "static/js/419.39e628da.chunk.js": "/crowdlending_protocol_react/static/js/419.39e628da.chunk.js",
     "static/media/mainlogo.png": "/crowdlending_protocol_react/static/media/mainlogo.979e05a81792b707373e.png",
+    "static/media/Frame3.jpg": "/crowdlending_protocol_react/static/media/Frame3.d1efc8a2373f9380b1de.jpg",
     "static/media/binance.svg": "/crowdlending_protocol_react/static/media/binance.83fc7a6fdd7ff6cc0f9746c7772db99c.svg",
     "static/media/tg.svg": "/crowdlending_protocol_react/static/media/tg.cf9a41434191f7143e51d98076140b5c.svg",
     "static/media/icons8-discord.svg": "/crowdlending_protocol_react/static/media/icons8-discord.72f90c75087e763871bf77eac743d8a2.svg",
@@ -44,8 +45,8 @@
     "static/media/accepted.svg": "/crowdlending_protocol_react/static/media/accepted.c6a2eb7255ad0ab844c659ef9d625022.svg",
     "static/media/Binancefooter.svg": "/crowdlending_protocol_react/static/media/Binancefooter.a4bdb9647a5a02b2bd49f4ac5d665b08.svg",
     "static/media/search.svg": "/crowdlending_protocol_react/static/media/search.3c1bdfa9952ea4a6deb1d2ee5ab01dbe.svg",
-    "main.93246cba.css.map": "/crowdlending_protocol_react/static/css/main.93246cba.css.map",
-    "main.0a56d2ec.js.map": "/crowdlending_protocol_react/static/js/main.0a56d2ec.js.map",
+    "main.5dfa33b8.css.map": "/crowdlending_protocol_react/static/css/main.5dfa33b8.css.map",
+    "main.cdf10c60.js.map": "/crowdlending_protocol_react/static/js/main.cdf10c60.js.map",
     "689.9077b57d.chunk.js.map": "/crowdlending_protocol_react/static/js/689.9077b57d.chunk.js.map",
     "820.77d11255.chunk.js.map": "/crowdlending_protocol_react/static/js/820.77d11255.chunk.js.map",
     "589.b40d24d2.chunk.js.map": "/crowdlending_protocol_react/static/js/589.b40d24d2.chunk.js.map",
@@ -78,7 +79,7 @@
     "419.39e628da.chunk.js.map": "/crowdlending_protocol_react/static/js/419.39e628da.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.93246cba.css",
-    "static/js/main.0a56d2ec.js"
+    "static/css/main.5dfa33b8.css",
+    "static/js/main.cdf10c60.js"
   ]
 }
