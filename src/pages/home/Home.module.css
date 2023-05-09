@@ -27,6 +27,7 @@
 
 .buttonsBox {
     margin-top: 24px;
+    flex-wrap: wrap;
     display: flex;
     gap: 8px;
 }

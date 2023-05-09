@@ -82,3 +82,9 @@
     color: #808190;
     font-size: 14px;
 }
+
+.cancel {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+}

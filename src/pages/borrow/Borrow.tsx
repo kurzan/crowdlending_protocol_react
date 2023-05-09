@@ -136,7 +136,7 @@ const Borrow = () => {
           </div>
           <div className={styles.details_item}>
             <p className={styles.details_text}>Interest rate</p>
-            <p className={styles.details_amount}>{Number(currentBorrow?.interestRate)}%</p>
+            <p className={styles.details_amount + " " + styles.rate_text}>{Number(currentBorrow?.interestRate)}%</p>
           </div>
         </div>
       </Box>}

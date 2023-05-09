@@ -15,7 +15,7 @@ const Header = ({ nav }: { nav?: boolean }) => {
           <img src={logo} alt="" />
           <p>Early Bird</p>
         </div>
-        <div className={styles.tabs} >
+        <div className={"d-none d-md-block " + styles.tabs} >
           {nav && <Tabs />}
         </div>
         <ConnectButton />

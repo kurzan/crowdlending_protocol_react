@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import styles from "./Layout.module.css";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
+import Tabs from "../../components/Tabs/Tabs";
 
 const LayoutPage = ({children, nav = true}:{children: ReactNode, nav?: boolean}) => {
  
@@ -14,6 +15,10 @@ const LayoutPage = ({children, nav = true}:{children: ReactNode, nav?: boolean})
             </main>
         </div>
         <Footer />
+        <div className={styles.mobileNav}>
+          <Tabs />
+        </div>
+        
     </div>
   )
 };

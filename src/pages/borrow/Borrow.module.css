@@ -91,6 +91,10 @@
   gap: 8px
 }
 
+.rate_text {
+  color: green;
+}
+
 .back {
   display: flex;
   align-items: center;

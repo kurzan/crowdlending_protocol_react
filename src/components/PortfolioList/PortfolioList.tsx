@@ -57,7 +57,7 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
                     <div className={styles.tableCell}>
                         <p className={styles.tableHeadText}>Status</p>
                     </div>
-                    <div className={styles.tableCell}>
+                    <div className={styles.tableCell + " " + styles.cancel}>
                         
                     </div>
                 </div>
@@ -91,7 +91,7 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
                         <div className={styles.tableCell}>
                             <Status status={portfolio.status} />
                         </div>
-                        <div className={styles.tableCell}>
+                        <div className={styles.tableCell + " " + styles.cancel}>
                             <CancelButton disabled={false} onClick={() => {
                                 setChoosenBorrow(portfolio.borrowId);
                                 write?.()
