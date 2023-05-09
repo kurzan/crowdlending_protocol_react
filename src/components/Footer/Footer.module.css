@@ -28,3 +28,8 @@
   display: flex;
   gap: 32px;
 }
+
+.socials>a {
+  color: #a2a1a1;
+  text-decoration: none;
+}

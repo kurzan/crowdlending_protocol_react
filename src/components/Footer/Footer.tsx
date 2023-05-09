@@ -15,8 +15,8 @@ const Footer = () => {
       </div>
 
       <div className={styles.socials}>
-        <p>Twitter</p>
-        <p>Telegram</p>
+        <a href="https://twitter.com/EarlyBirdFi" target="blank_">Twitter</a>
+        <a href="" target="blank_">Telegram</a>
       </div>
 
     </footer>
