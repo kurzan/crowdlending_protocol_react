@@ -1,17 +1,15 @@
 .mainInfo {
-    padding: 48px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: space-between;
+  margin-top: 28px;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(380px, auto));
 }
 
 .info {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 800px;
-    width: 48%;
+    flex: 1 0 auto;
 }
 
 .info > h1 {
@@ -26,28 +24,27 @@
 }
 
 .buttonsBox {
-    margin-top: 24px;
+    margin-top: 28px;
     flex-wrap: wrap;
     display: flex;
     gap: 8px;
 }
 
 .description {
-    margin-top: 88px;
+    margin-top: 68px;
+    max-width: 400px;
 }
 
 .bigLogo {
-    width: 49%;
-    position: relative;
-    
+  position: relative;
+  width: 300px;
+  height: 300px;
 }
 
-.bigLogo>img{
-    position: absolute;
-    top: 50%;      
-    left: 50%;
-    width: 400px;
-    height: 400px;
-   transform: translate(-50%, -50%);
-   z-index: -2;
+.bigLogo>img {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  align-items: center;
 }
+

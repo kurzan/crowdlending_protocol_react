@@ -7,17 +7,16 @@ import logo from '../../images/mainlogo.png'
 const Home = () => {
 
   const navigate = useNavigate();
- 
-  return(
-      <LayoutPage>
-        <div className={styles.bg}>
+
+  return (
+    <LayoutPage>
         <div className={styles.mainInfo}>
           <div className={styles.info}>
             <h1>BLOCKCHAIN <span className={styles.fut}>FUNDING</span> <br></br>IS THE FUTURE</h1>
 
             <div className={styles.buttonsBox}>
-              <Button onClick={() => navigate('/borrows')}  title={"GO TO INVEST"} />
-              <Button style={{backgroundColor: 'transparent', border: '1px solid black', color: 'black'}} title={"GET A BORROW"} />
+              <Button onClick={() => navigate('/borrows')} title={"GO TO INVEST"} />
+              <Button style={{ backgroundColor: 'transparent', border: '1px solid black', color: 'black' }} title={"GET A BORROW"} />
             </div>
 
             <div className={styles.description}>
@@ -30,12 +29,11 @@ const Home = () => {
 
           <div className={styles.bigLogo}>
             <img src={logo} alt="" />
-          </div>  
+          </div>
 
         </div>
-        </div>
 
-      </LayoutPage>
+    </LayoutPage>
   )
 };
 
