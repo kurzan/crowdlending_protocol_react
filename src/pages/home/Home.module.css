@@ -1,8 +1,15 @@
+.container {
+  max-width: 100%;
+}
+
 .mainInfo {
   margin-top: 28px;
   display: grid;
+  align-items: center;
   grid-gap: 16px;
   grid-template-columns: repeat(auto-fill, minmax(49%, auto));
+  justify-content: space-between;
+  max-width: 100%;
 }
 
 .info {

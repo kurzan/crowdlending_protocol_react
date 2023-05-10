@@ -1,6 +1,6 @@
 import Button from '../Button/Button';
-import { FC, useEffect, useState } from 'react';
-import { usePrepareContractWrite, useContractWrite, useAccount, useWaitForTransaction} from 'wagmi';
+import { FC, useEffect, useState,useCallback } from 'react';
+import { usePrepareContractWrite, useContractWrite, useAccount, useWaitForTransaction, useBalance} from 'wagmi';
 import { contract } from "../../services/web3config";
 import { ethers } from "ethers";
 import styles from "./InvestField.module.css";
@@ -19,6 +19,10 @@ const InvestField: FC<TInvestFieldProps> = ({id, currentBorrow}) => {
 
   const { address, isConnected } = useAccount();
   const [inputValue, setInputValue] = useState(0.01);
+
+  const { data: investorBalance, isError, isLoading } = useBalance({
+    address: address,
+  })
 
   const inputHandler = (userBet: number) => {
     setInputValue(userBet);
@@ -41,7 +45,19 @@ const InvestField: FC<TInvestFieldProps> = ({id, currentBorrow}) => {
     hash: investData?.hash,
   })
 
-  const maxInvestValue = Number(currentBorrow?.borrowingGoal) - Number(currentBorrow?.totalBorrowed);
+  const maxInvestValue = useCallback(() => {
+    const maxInContract = Number(currentBorrow?.borrowingGoal) - Number(currentBorrow?.totalBorrowed);
+    if (investorBalance && Number(investorBalance.value) <= maxInContract) {
+      return Number(investorBalance.value)
+    }
+
+    return maxInContract;
+  }, [investorBalance, currentBorrow?.borrowingGoal, currentBorrow?.totalBorrowed ])
+
+
+  useEffect(() => {
+    console.log(maxInvestValue())
+  }, [maxInvestValue])
 
   useEffect(() => {
     if (!dataWaitInvest) return;
@@ -68,7 +84,7 @@ const InvestField: FC<TInvestFieldProps> = ({id, currentBorrow}) => {
     <form action="" className={styles.form}>
       <div className={styles.input_box}>
         <input onChange={e => inputHandler(Number(e.target.value))} value={inputValue} id="bet" className={styles.input} type="number" placeholder="0.01" min="0.01" step="0.01"  />
-        <button onClick={() => setInputValue(Number(ethers.utils.formatEther(maxInvestValue.toString())))} className={styles.max} type='button'>MAX</button>
+        <button onClick={() => setInputValue(Number(ethers.utils.formatEther(maxInvestValue().toString())))} className={styles.max} type='button'>MAX</button>
       </div>
       {isConnected && <Button onClick={write} isLoading={isLoadingInvestData || loadingWaitInvest} disabled={prepareLoading || isLoadingInvestData || error || loadingWaitInvest ? true : false} title={!isLoadingInvestData ? "Invest" : "Pending..."} />}
         <Box margin="0" bg={"rgb(249, 249, 249)"} >
@@ -83,7 +99,7 @@ const InvestField: FC<TInvestFieldProps> = ({id, currentBorrow}) => {
 
               <div className={styles.trans_info}>
                 <p className={styles.trans_text}>Maximum</p>
-                <p className={styles.trans_amount}>{Number(ethers.utils.formatEther(maxInvestValue.toString()))} tBNB</p>
+                <p className={styles.trans_amount}>{Number(ethers.utils.formatEther(maxInvestValue().toString())).toFixed(3)} tBNB</p>
               </div>
 
               <div className={styles.trans_info}>

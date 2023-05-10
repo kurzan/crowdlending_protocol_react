@@ -185,11 +185,6 @@ export const contractAbi = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_borrowId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
 				"name": "_borrowingGoal",
 				"type": "uint256"
 			},
@@ -264,6 +259,19 @@ export const contractAbi = [
 			}
 		],
 		"name": "investmentAdd",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "message",
+				"type": "string"
+			}
+		],
+		"name": "investmentCancel",
 		"type": "event"
 	},
 	{

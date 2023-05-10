@@ -10,13 +10,15 @@ const Home = () => {
 
   return (
     <LayoutPage>
+
+      <div className="container">
         <div className={styles.mainInfo}>
           <div className={styles.info}>
             <h1>BLOCKCHAIN <span className={styles.fut}>FUNDING</span> <br></br>IS THE FUTURE</h1>
 
             <div className={styles.buttonsBox}>
-              <Button onClick={() => navigate('/borrows')} title={"GO TO INVEST"} />
-              <Button style={{ backgroundColor: 'transparent', border: '1px solid black', color: 'black' }} title={"GET A BORROW"} />
+              <Button type="button" onClick={() => navigate('/borrows')} title={"GO TO INVEST"} />
+              <Button type="button" style={{ backgroundColor: 'transparent', border: '1px solid black', color: 'black' }} title={"GET A BORROW"} />
             </div>
 
             <div className={styles.description}>
@@ -32,6 +34,9 @@ const Home = () => {
           </div>
 
         </div>
+      </div>
+
+
 
     </LayoutPage>
   )

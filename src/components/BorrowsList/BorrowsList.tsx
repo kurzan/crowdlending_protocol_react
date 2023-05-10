@@ -34,6 +34,10 @@ const BorrowsList = () => {
   };
 
   useEffect(() => {
+    console.log(borrows)
+  }, [borrows])
+
+  useEffect(() => {
     const sortedStatuses = [0];
 
     const sortedData = borrows?.reduce(
@@ -57,7 +61,7 @@ const BorrowsList = () => {
     () => {
       const search = searchValue || '';
       return sortedBorrows?.filter(
-        item => item.companyName.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1
+        item => item.borrower.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1
       );
     },
     [sortedBorrows, searchValue]

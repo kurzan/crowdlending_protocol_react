@@ -6,9 +6,10 @@ import { publicProvider } from "wagmi/providers/public";
 import { contractAbi } from "./abi";
 
 
-const CONTRACT_ADDRESS: `0x${string}` = "0x05f68EFc41e0ecb5c025e87c40333153E71C0863";
+const CONTRACT_ADDRESS: `0x${string}` = "0x37a21089a83DD3F949f800D82DD9e23e5715A896";
 
-// const CONTRACT_ADDRESS: `0x${string}` = "0xC33C21C126E32e785EAa3FFEbB8F2FC933B92d7A";
+// const CONTRACT_ADDRESS: `0x${string}` = "0x05f68EFc41e0ecb5c025e87c40333153E71C0863";
+
 
 export const { chains, provider, webSocketProvider } = configureChains(
   [

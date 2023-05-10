@@ -10,9 +10,10 @@ type TButtonProps = {
   disabled?: boolean;
   isLoading?: boolean;
   style?: CSSProperties;
+  type?: string;
 };
 
-const Button: FC<TButtonProps> = ({title, onClick, disabled, isLoading, style}) => {
+const Button: FC<TButtonProps> = ({type = 'web3', title, onClick, disabled, isLoading, style}) => {
 
   const { connector: activeConnector, isConnected } = useAccount();
   const { connect, connectors, error, pendingConnector } = useConnect();
@@ -37,7 +38,8 @@ const Button: FC<TButtonProps> = ({title, onClick, disabled, isLoading, style}) 
           strokeWidth={4}
           strokeWidthSecondary={2}
         />}
-        <p className={styles.text}>{isCon ? title : "Connect wallet"}</p>
+        {type !== 'button' ? <p className={styles.text}>{isCon ? title : "Connect wallet"}</p> :
+        <p className={styles.text}>{title}</p>}
       </button>
   )
 };
