@@ -25,6 +25,10 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
         args: [choosenBorrow],
     });
 
+    useEffect(() => {
+        console.log(choosenBorrow)
+    }, [choosenBorrow])
+
     const { data: investData, isLoading: isLoadingCancelInvest, isSuccess, write, reset, status } = useContractWrite(config);
 
     const navigate = useNavigate();
@@ -47,6 +51,11 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
                     </div>
 
                     <div className={styles.tableCell}>
+                        <p className={styles.tableHeadText}>Est income</p>
+                    </div>
+
+
+                    <div className={styles.tableCell}>
                         <p className={styles.tableHeadText}>Rate</p>
                     </div>
 
@@ -61,8 +70,8 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
                         
                     </div>
                 </div>
-                {portfolio && portfolio?.map(portfolio => (
-                    <div className={styles.portfolioItem}>
+                {portfolio && portfolio?.map((portfolio, index) => (
+                    <div key={index} className={styles.portfolioItem}>
 
                         <div className={styles.tableCell}>
                             <CompanyLogo src={portfolio.image} alt={portfolio.companyName} />
@@ -81,6 +90,10 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
                         </div>
 
                         <div className={styles.tableCell}>
+                            <p className={styles.tableText + " " + styles.rate}>+ {Number(portfolio.amount) / 10 ** 18 / 100 * Number(portfolio.interestRate)}</p>
+                        </div>
+
+                        <div className={styles.tableCell}>
                             <p className={styles.tableText + " " + styles.rate}>{Number(portfolio.interestRate)}%</p>
                         </div>
 
@@ -92,10 +105,13 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
                             <Status status={portfolio.status} />
                         </div>
                         <div className={styles.tableCell + " " + styles.cancel}>
-                            <CancelButton disabled={false} onClick={() => {
-                                setChoosenBorrow(portfolio.borrowId);
+
+                            {portfolio.status === 0 &&  <CancelButton disabled={false} onClick={() => {
+                                setChoosenBorrow(() => portfolio.borrowId);
                                 write?.()
-                            }}/>
+                            }}/>}
+
+
                         </div>
                     </div>
                 ))}

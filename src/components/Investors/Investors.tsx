@@ -39,42 +39,53 @@ const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: st
           </div>
 
           <div className={styles.rightPart}>
-                <div className={styles.investorPerecent}>
-                  <p className={styles.tableHeadText}>Percentage</p>
-                </div>
 
-                <div className={styles.investorAmount}>
-                  <p className={styles.investorAmountText + " " + styles.tableHeadText}>Value</p>
-                </div>
-              </div>
+            <div className={styles.investorPerecent}>
+              <p className={styles.tableHeadText}>Share</p>
+            </div>
+
+            <div className={styles.investorAmount}>
+              <p className={styles.investorAmountText + " " + styles.tableHeadText}>Invest value</p>
+            </div>
+
+            <div className={styles.investorAmount}>
+              <p className={styles.investorAmountText + " " + styles.tableHeadText}>Est income</p>
+            </div>
+          </div>
 
 
         </div>
 
 
-          {currentBorrow?.investors.filter(item => Number(item.amount) > 0).map((item, index) => (
-            <div key={index} className={styles.investorItem}>
-              <div className={styles.investorBox}>
-                <MdAccountCircle />
-                <p className={styles.investorAddress}>{address === item.investor ? 'You' : getShortAddress(item.investor)}</p>
-              </div>
-
-              <div className={styles.rightPart}>
-                <div className={styles.investorPerecent}>
-                  {address === item.investor && currentBorrow.status === 0 ? (
-                    <CancelButton disabled={isLoadingCancelInvest} onClick={write} />
-                  ) : null}
-                  <p>{getPercents(Number(ethers.utils.formatEther(item.amount)))}%</p>
-                </div>
-
-                <div className={styles.investorAmount}>
-                  <p className={styles.investorAmountText}>{ethers.utils.formatEther(item.amount)}</p>
-                  <CoinIcon />
-                </div>
-              </div>
-
+        {currentBorrow?.investors.filter(item => Number(item.amount) > 0).map((item, index) => (
+          <div key={index} className={styles.investorItem}>
+            <div className={styles.investorBox}>
+              <MdAccountCircle size={22} />
+              <p className={styles.investorAddress}>{address === item.investor ? 'You' : getShortAddress(item.investor)}</p>
+              {address === item.investor && currentBorrow.status === 0 ? (
+                  <CancelButton disabled={isLoadingCancelInvest} onClick={write} />
+                ) : null}
             </div>
-          ))}
+
+            <div className={styles.rightPart}>
+
+              <div className={styles.investorPerecent}>
+                <p>{getPercents(Number(ethers.utils.formatEther(item.amount)))}%</p>
+              </div>
+
+              <div className={styles.investorAmount}>
+                <p className={styles.investorAmountText}>{ethers.utils.formatEther(item.amount)}</p>
+                <CoinIcon />
+              </div>
+
+              <div className={styles.investorAmount}>
+                <p className={styles.investorAmountText + " " + styles.rate}>+ {ethers.utils.formatEther(item.amount / 100 * currentBorrow.interestRate)}</p>
+                <CoinIcon />
+              </div>
+            </div>
+
+          </div>
+        ))}
       </Box>
     </>
   )
