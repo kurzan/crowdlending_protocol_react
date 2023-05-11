@@ -15,10 +15,10 @@
 
 .skeletonList {
   display: flex;
-  gap: 8px;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
+  height: 240px;
 }
 
 .heading {

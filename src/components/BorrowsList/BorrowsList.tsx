@@ -27,7 +27,7 @@ const BorrowsList = () => {
 
   const selectPageHandle = (selectedPage: any) => { 
     if (borrows && selectedPage >= 1 &&
-      selectedPage <= Math.ceil(borrows.length / 6) &&
+      selectedPage <= Math.ceil(borrows.length / 8) &&
       selectedPage !== page) {
       setPage(selectedPage)
     }
@@ -57,7 +57,7 @@ const BorrowsList = () => {
     () => {
       const search = searchValue || '';
       return sortedBorrows?.filter(
-        item => item.borrower.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1
+        item => item.companyName.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1
       );
     },
     [sortedBorrows, searchValue]
@@ -71,9 +71,17 @@ const BorrowsList = () => {
       </div> : <Skeleton containerClassName={styles.skeletonHeading} count={1} height={50} width={"100%"} borderRadius={"0.5rem"} />}
       <div className={styles.list}>
         {!borrows ?
-          <Skeleton containerClassName={styles.skeletonList} count={6} height={260} width={260} borderRadius={"0.5rem"} />
+          <>
+            <Skeleton containerClassName={styles.skeletonList} count={1} borderRadius={"0.5rem"} />
+            <Skeleton containerClassName={styles.skeletonList} count={1} borderRadius={"0.5rem"} />
+            <Skeleton containerClassName={styles.skeletonList} count={1} borderRadius={"0.5rem"} />
+            <Skeleton containerClassName={styles.skeletonList} count={1} borderRadius={"0.5rem"} />
+            <Skeleton containerClassName={styles.skeletonList} count={1} borderRadius={"0.5rem"} />
+            <Skeleton containerClassName={styles.skeletonList} count={1} borderRadius={"0.5rem"} />
+          </>
+          
           :
-          <>{borrows && searchBorrows?.slice(page * 6 - 6, page * 6).map((borrow, index) =>
+          <>{borrows && searchBorrows?.slice(page * 8 - 8, page * 8).map((borrow, index) =>
              <BorrowCard key={index} borrow={borrow} />)}</>
         }
       </div>
@@ -85,7 +93,7 @@ const BorrowsList = () => {
           </div>
           <div className='pageNumbers'>
             {
-              [...Array(Math.ceil(borrows.length / 6))].map((n, i) => {
+              [...Array(Math.ceil(borrows.length / 8))].map((n, i) => {
                 return <div
                   key={i}
                   className={`num ${page === i + 1 ? `numActive` : ''}`}

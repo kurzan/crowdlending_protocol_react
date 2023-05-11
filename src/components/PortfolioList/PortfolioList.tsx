@@ -90,7 +90,7 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
                         </div>
 
                         <div className={styles.tableCell}>
-                            <p className={styles.tableText + " " + styles.rate}>+ {Number(portfolio.amount) / 10 ** 18 / 100 * Number(portfolio.interestRate)}</p>
+                            <p className={styles.tableText + " " + styles.rate}>+ {(Number(portfolio.amount) / 10 ** 18 / 100 * Number(portfolio.interestRate)).toFixed(5)}</p>
                         </div>
 
                         <div className={styles.tableCell}>
