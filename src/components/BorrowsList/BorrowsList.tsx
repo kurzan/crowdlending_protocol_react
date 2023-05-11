@@ -34,10 +34,6 @@ const BorrowsList = () => {
   };
 
   useEffect(() => {
-    console.log(borrows)
-  }, [borrows])
-
-  useEffect(() => {
     const sortedStatuses = [0];
 
     const sortedData = borrows?.reduce(
@@ -78,7 +74,7 @@ const BorrowsList = () => {
           <Skeleton containerClassName={styles.skeletonList} count={6} height={260} width={260} borderRadius={"0.5rem"} />
           :
           <>{borrows && searchBorrows?.slice(page * 6 - 6, page * 6).map((borrow, index) =>
-             <BorrowCard borrow={borrow} />)}</>
+             <BorrowCard key={index} borrow={borrow} />)}</>
         }
       </div>
 
