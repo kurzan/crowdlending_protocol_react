@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, FC } from 'react';
+import { useState, useEffect, useCallback, FC, SyntheticEvent } from 'react';
 import { useData } from "../../hooks/useData";
 import { useAccount, useContractWrite, usePrepareContractWrite } from 'wagmi';
 import styles from './PortfolioList.module.css';
@@ -71,7 +71,7 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
                     </div>
                 </div>
                 {portfolio && portfolio?.map((portfolio, index) => (
-                    <div key={index} className={styles.portfolioItem}>
+                    <div key={index} className={styles.portfolioItem} onClick={() => navigate(`/borrows/${Number(portfolio.borrowId)}`)}>
 
                         <div className={styles.tableCell}>
                             <CompanyLogo src={portfolio.image} alt={portfolio.companyName} />
@@ -106,7 +106,8 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
                         </div>
                         <div className={styles.tableCell + " " + styles.cancel}>
 
-                            {portfolio.status === 0 &&  <CancelButton disabled={false} onClick={() => {
+                            {portfolio.status === 0 &&  <CancelButton disabled={false} onClick={(e: SyntheticEvent) => {
+                                e.stopPropagation();
                                 setChoosenBorrow(() => portfolio.borrowId);
                                 write?.()
                             }}/>}
