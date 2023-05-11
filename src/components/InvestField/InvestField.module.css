@@ -57,3 +57,7 @@
 .waitContainer > p{
   font-size: 18px;
 }
+
+.warning {
+  color: rgb(207, 184, 140);
+}

@@ -49,12 +49,9 @@ const InvestField: FC<TInvestFieldProps> = ({ error, id, currentBorrow, button }
         <button onClick={() => setInputValue(Number(ethers.utils.formatEther(maxInvestValue().toString())))} className={styles.max} type='button'>MAX</button>
       </div>
       {isConnected && button}
-      <Box margin="0" bg={"rgb(249, 249, 249)"} >
-        {error ? <p>An error occurred preparing the transaction</p>
-          :
-          (
-            <>
+      {error && <p className={styles.warning}>something  wrong</p>}
 
+      <Box margin="0" bg={"rgb(249, 249, 249)"} >
               <div className={styles.trans_info}>
                 <p className={styles.trans_text}>You balance</p>
                 <p className={styles.trans_amount}>{ethers.utils.formatEther(investorBalance?.value as BigNumberish)} tBNB</p>
@@ -78,11 +75,6 @@ const InvestField: FC<TInvestFieldProps> = ({ error, id, currentBorrow, button }
                 <p className={styles.trans_text}>Gas cost</p>
                 <p className={styles.trans_amount}>-</p>
               </div>
-
-
-            </>
-          )
-        }
       </Box>
 
 

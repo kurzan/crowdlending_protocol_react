@@ -232,6 +232,7 @@ const Borrow = () => {
               <p className={styles.modalHeading}>Congratulations</p>
               <img src={doneImg} alt="done" />
               <p className={styles.modalSubHeading}>You successfuly invested <span className={styles.modalSpan}>{inputValue}</span> in <span className={styles.modalSpan}>{currentBorrow?.companyName}</span></p>
+              <a href={`https://testnet.bscscan.com/tx/${investData?.hash}`} target="_blanc">View transaction</a>
             </div>
           </Modal>
         )}  
