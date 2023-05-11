@@ -19,7 +19,7 @@ import { DataProvider } from './services/providers/DataProvider';
 import Portfolio from './pages/portfolio/Portfolio';
 import { InputProvider } from './services/providers/InputProvider';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Home />,
