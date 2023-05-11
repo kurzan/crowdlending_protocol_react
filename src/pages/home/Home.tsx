@@ -2,7 +2,7 @@ import styles from "./Home.module.css";
 import LayoutPage from "../layout/Layout";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
-import logo from '../../images/mainlogo.png'
+import logo from '../../images/Vector.png'
 
 const Home = () => {
 
