@@ -16,9 +16,6 @@ import Home from './pages/home/Home';
 import Borrow from './pages/borrow/Borrow';
 import Borrows from './pages/borrows/Borrows';
 import { DataProvider } from './services/providers/DataProvider';
-//@ts-ignore
-import { ReactNotifications } from 'react-notifications-component';
-import 'react-notifications-component/dist/theme.css';
 import Portfolio from './pages/portfolio/Portfolio';
 import { InputProvider } from './services/providers/InputProvider';
 
@@ -50,7 +47,6 @@ root.render(
         <RainbowKitProvider chains={chains}>
           <DataProvider>
             <InputProvider>
-              <ReactNotifications />
               <RouterProvider router={router} />
             </InputProvider>
           </DataProvider>
