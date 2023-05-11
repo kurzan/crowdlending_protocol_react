@@ -50,11 +50,18 @@ const Portfolio = () => {
             You invested <span className={styles.assets}>{portfolioVolume} tBNB</span> in <span className={styles.assets}>{portfolioCount}</span> project with avg rate <span className={styles.assets}>~{avgRate?.toFixed(2)}%</span>
           </p> : null
         }
-        {!isConnected && <p>Connect your wallets to get started</p>}
+        {!isConnected && (
+          <div className={styles.emptyPortfolio}>
+            <p>Connect your wallets to get started</p>
+            <img src={walletImg} width={250} height={250} alt="" />
+          </div>
+
+        )}
         {isConnected && !portfolioCount && (
-          <div>
+          <div className={styles.emptyPortfolio}>
             <p>Your portfolio is emty</p>
             <img src={portfolioImg} width={250} height={250} alt="" />
+            
           </div> 
         )}
       </div>

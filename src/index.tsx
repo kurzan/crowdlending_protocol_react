@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {
+  createBrowserRouter,
   createHashRouter,
   RouterProvider,
 } from "react-router-dom";
@@ -19,8 +20,9 @@ import { DataProvider } from './services/providers/DataProvider';
 import { ReactNotifications } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import Portfolio from './pages/portfolio/Portfolio';
+import { InputProvider } from './services/providers/InputProvider';
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
@@ -47,8 +49,10 @@ root.render(
     <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
           <DataProvider>
-            <ReactNotifications />
-            <RouterProvider router={router} />
+            <InputProvider>
+              <ReactNotifications />
+              <RouterProvider router={router} />
+            </InputProvider>
           </DataProvider>
         </RainbowKitProvider>
     </WagmiConfig>  

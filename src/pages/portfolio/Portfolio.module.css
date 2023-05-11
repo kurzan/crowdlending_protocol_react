@@ -18,8 +18,30 @@
   .heading > p {
     font-size: 24px;
     font-weight: 600;
+    text-align: center;
   }
 
   .assets {
     color:#50BEAF;
+  }
+
+  .emptyPortfolio {
+    margin:12px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .emptyPortfolio > p {
+    font-weight: 600;
+    font-size: 24px;
+    padding-bottom: 32px;
+  }
+
+  .imgBox {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 48px;
+    border-radius: 100%;
   }

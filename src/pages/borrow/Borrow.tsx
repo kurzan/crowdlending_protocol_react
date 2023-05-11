@@ -5,9 +5,9 @@ import Button from "../../components/Button/Button";
 import Box from "../../components/Box/Box";
 import Modal from "../../components/Modal/Modal";
 import InvestField from "../../components/InvestField/InvestField";
-import { useData } from "../../hooks/useData";
+import { useData, useInputAmount } from "../../hooks/useData";
 import { Link, useParams } from "react-router-dom";
-import { useAccount } from 'wagmi';
+import { useAccount, useBalance, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import { ethers } from "ethers";
 import Status from "../../components/Status/Status";
 //@ts-ignore
@@ -24,10 +24,17 @@ import twIcon from '../../images/socials/icons8-twitter.svg';
 import disIcon from '../../images/socials/icons8-discord.svg';
 import ShareLinks from "../../components/ShareLinks/ShareLinks";
 import CompanyStatus from "../../components/CompanyStatus/CompanyStatus";
+import { contract } from "../../services/web3config";
+import { Oval } from "react-loader-spinner";
+import doneImg from '../../images/done.svg';
 
 const Borrow = () => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalWaitIsOpen, setModalWaitIsOpen] = useState(false);
+  const [modalDoneIsOpen, setModalDoneIsOpen] = useState(false);
+
+  const { inputValue } = useInputAmount();
 
   const [days, setdays] = useState(0);
   const [hours, sethours] = useState(0);
@@ -64,8 +71,45 @@ const Borrow = () => {
 
   }, [currentBorrow, timeRemaining]);
 
+  const { config, error, isLoading: prepareLoading } = usePrepareContractWrite({
+    address: contract.address,
+    abi: contract.abi,
+    functionName: 'invest',
+    args: [id],
+    overrides: {
+      from: address,
+      value: ethers.utils.parseEther(inputValue.toString())
+    }
+  });
+
+  const { data: investData, isLoading: isLoadingInvestData, isSuccess, write, reset } = useContractWrite({
+    ...config,
+    onSuccess(data) {
+      setModalIsOpen(false);
+      setModalWaitIsOpen(true);
+    },
+  });
+
+  const { data: dataWaitInvest, isError: errorWaitInvest, isLoading: loadingWaitInvest } = useWaitForTransaction({
+    hash: investData?.hash,
+    onSuccess(data) {
+      setModalWaitIsOpen(false);
+      setModalDoneIsOpen(true);
+    },
+  })
+
+
+
   const modalHandler = () => {
     setModalIsOpen(!modalIsOpen);
+  };
+
+  const modalWaitHandler = () => {
+    setModalWaitIsOpen(!modalWaitIsOpen);
+  };
+
+  const modalDoneHandler = () => {
+    setModalDoneIsOpen(!modalDoneIsOpen);
   };
 
   useEffect(() => {
@@ -157,8 +201,41 @@ const Borrow = () => {
       {investors ? <Investors title={`Investors (${investors})`} currentBorrow={currentBorrow} /> : null}
 
       {modalIsOpen && <Modal onClose={modalHandler} title="Enter amount">
-        <InvestField id={id} currentBorrow={currentBorrow} />
+        <InvestField error={error} id={id} currentBorrow={currentBorrow} button={ <Button onClick={write} isLoading={isLoadingInvestData || loadingWaitInvest} disabled={prepareLoading || isLoadingInvestData || error || loadingWaitInvest ? true : false} title={!isLoadingInvestData ? "Invest" : "Pending..."} />} />
       </Modal>}
+
+
+      {modalWaitIsOpen && (
+          <Modal onClose={modalWaitHandler}>
+            <div className={styles.waitContainer}>
+            <p>Wait for confirmations...</p>
+            <Oval
+              height={60}
+              width={60}
+              color="#4fa94d"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+              ariaLabel='oval-loading'
+              secondaryColor="#4fa94d"
+              strokeWidth={4}
+              strokeWidthSecondary={2}
+            />
+            </div>
+          </Modal>
+        )}
+
+
+        {modalDoneIsOpen && (
+          <Modal onClose={modalDoneHandler}>
+            <div className={styles.waitContainer}>
+              <p className={styles.modalHeading}>Congratulations</p>
+              <img src={doneImg} alt="done" />
+              <p className={styles.modalSubHeading}>You successfuly invested <span className={styles.modalSpan}>{inputValue}</span> in <span className={styles.modalSpan}>{currentBorrow?.companyName}</span></p>
+            </div>
+          </Modal>
+        )}  
+
 
     </LayoutPage>
   )

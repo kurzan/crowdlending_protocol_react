@@ -46,3 +46,14 @@
   font-size: 0.75rem;
   line-height: 1rem;
 }
+
+.waitContainer {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.waitContainer > p{
+  font-size: 18px;
+}
