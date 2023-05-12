@@ -55,10 +55,14 @@ const BorrowsList = () => {
 
   const searchBorrows = useMemo(
     () => {
-      const search = searchValue || '';
-      return sortedBorrows?.filter(
-        item => item.companyName.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1
-      );
+      try {
+        const search = searchValue || '';
+        return sortedBorrows?.filter(
+          item => item.companyName.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1
+        );
+      } catch (error) {
+        return sortedBorrows;
+      }
     },
     [sortedBorrows, searchValue]
   );
