@@ -112,10 +112,6 @@ const Borrow = () => {
     setModalDoneIsOpen(!modalDoneIsOpen);
   };
 
-  useEffect(() => {
-    console.log(currentBorrow)
-  }, [currentBorrow])
-
   return (
     <LayoutPage nav>
 

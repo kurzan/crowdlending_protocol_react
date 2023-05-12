@@ -81,7 +81,7 @@ const BorrowsList = () => {
           </>
           
           :
-          <>{borrows && searchBorrows?.slice(page * 8 - 8, page * 8).map((borrow, index) =>
+          <>{borrows && searchBorrows && searchBorrows?.slice(page * 8 - 8, page * 8).map((borrow, index) =>
              <BorrowCard key={index} borrow={borrow} />)}</>
         }
       </div>

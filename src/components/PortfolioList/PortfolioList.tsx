@@ -1,8 +1,6 @@
-import { useState, useEffect, useCallback, FC, SyntheticEvent } from 'react';
-import { useData } from "../../hooks/useData";
-import { useAccount, useContractWrite, usePrepareContractWrite } from 'wagmi';
+import { useState, FC, SyntheticEvent } from 'react';
+import { useContractWrite, usePrepareContractWrite } from 'wagmi';
 import styles from './PortfolioList.module.css';
-import { TBorrow } from '../../services/types';
 import CompanyLogo from '../CompanyLogo/CompanyLogo';
 import Status from '../Status/Status';
 import { useNavigate } from 'react-router-dom';
@@ -24,10 +22,6 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
         functionName: 'cancelInvest',
         args: [choosenBorrow],
     });
-
-    useEffect(() => {
-        console.log(choosenBorrow)
-    }, [choosenBorrow])
 
     const { data: investData, isLoading: isLoadingCancelInvest, isSuccess, write, reset, status } = useContractWrite(config);
 
@@ -106,9 +100,9 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
                         </div>
                         <div className={styles.tableCell + " " + styles.cancel}>
 
-                            {portfolio.status === 0 &&  <CancelButton disabled={isLoadingCancelInvest && choosenBorrow === portfolio.borrowId} onClick={(e: SyntheticEvent) => {
+                            {portfolio.status === 0 &&  <CancelButton data={investData} disabled={isLoadingCancelInvest && choosenBorrow === portfolio.borrowId} onClick={(e: SyntheticEvent) => {
                                 e.stopPropagation();
-                                setChoosenBorrow(() => portfolio.borrowId);
+                                setChoosenBorrow(portfolio.borrowId);
                                 write?.()
                             }}/>}
 

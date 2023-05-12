@@ -63,7 +63,7 @@ const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: st
               <MdAccountCircle size={22} />
               <p className={styles.investorAddress}>{address === item.investor ? 'You' : getShortAddress(item.investor)}</p>
               {address === item.investor && currentBorrow.status === 0  && !isSuccess ? (
-                  <CancelButton disabled={isLoadingCancelInvest} onClick={write} />
+                  <CancelButton data={investData} disabled={isLoadingCancelInvest} onClick={write} />
                 ) : null}
             </div>
 
