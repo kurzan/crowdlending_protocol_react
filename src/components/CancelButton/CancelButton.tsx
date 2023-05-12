@@ -1,16 +1,24 @@
 import { Oval } from "react-loader-spinner";
 import styles from './CancelButton.module.css';
-import { FC } from "react";
+import { FC, useState } from "react";
+import { useWaitForTransaction } from "wagmi";
 
 
 type TCacelButtonProps = {
     disabled: boolean;
     onClick: any;
+    data: any;
 }
 
-const CancelButton: FC<TCacelButtonProps> = ({disabled, onClick}) => {
+const CancelButton: FC<TCacelButtonProps> = ({data, disabled, onClick}) => {
+
+    const { data: dataWaitInvest, isError: errorWaitInvest, isLoading: loadingWaitInvest } = useWaitForTransaction({
+        hash: data?.hash
+      })
+
+
     return(
-        <button disabled={disabled} className={styles.button} onClick={onClick}>
+        <button disabled={disabled || loadingWaitInvest} className={styles.button} onClick={onClick}>
         {disabled ? <Oval
             height={20}
             width={20}
