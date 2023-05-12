@@ -45,7 +45,7 @@ Investor Disadvantages. Even though there is always a risk of default during a t
 Deployed to following networks:
 - [x] BSC Testnet
 
-## Video proccess of investing
+## Investment process on video
 
 https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/48946328-2922-425f-85fd-7a3a70ddf91e
 
