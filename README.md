@@ -9,6 +9,12 @@
 
 ## Now project LIVE on BSC Testnet on https://earlybird.finance/
 
+## Contract source
+
+```shell
+src/contract/EarlyBird.sol
+```
+
 ⚠️ **Mobile version supported on 80%** ⚠️
 
 ## Todo
@@ -69,5 +75,7 @@ https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/48946328-
   ## Getting Started
 
 To invest, the user needs to have a wallet that supports the Binance Smart Chain and has some TBNB (the native token of the Binance Smart Chain Testnet) in it. The user can then connect their wallet to the dApp and use it.
+  
+ 
 
 
