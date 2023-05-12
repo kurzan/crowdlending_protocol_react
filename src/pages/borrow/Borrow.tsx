@@ -229,6 +229,7 @@ const Borrow = () => {
               <img src={doneImg} alt="done" />
               <p className={styles.modalSubHeading}>You successfuly invested <span className={styles.modalSpan}>{inputValue}</span> in <span className={styles.modalSpan}>{currentBorrow?.companyName}</span></p>
               <a href={`https://testnet.bscscan.com/tx/${investData?.hash}`} target="_blanc">View transaction</a>
+              <a href={`https://twitter.com/intent/tweet?url=https%3A%2F%2Fearlybird.finance%2Fborrows%2F${currentBorrow?.borrowId}&text=I%20invested%20${inputValue}%20tBNB%20at%20%40EarlyBirdFi%20check%20it%3A`} target="_blanc">Share to Twitter</a>
             </div>
           </Modal>
         )}  
