@@ -24,6 +24,11 @@ const Stats = () => {
       </div>
 
       <div className={styles.item}>
+        <p className={styles.text}>Investors</p>
+        <p className={styles.amount}>{borrowsIds && borrowsIds.length}</p>
+      </div>
+
+      <div className={styles.item}>
         <p className={styles.text}>Avg rate</p>
         <p className={styles.amount + " " + styles.rate}>~{avgRate?.toFixed(2)}</p>
       </div>

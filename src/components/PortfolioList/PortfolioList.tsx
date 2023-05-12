@@ -106,7 +106,7 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
                         </div>
                         <div className={styles.tableCell + " " + styles.cancel}>
 
-                            {portfolio.status === 0 &&  <CancelButton disabled={false} onClick={(e: SyntheticEvent) => {
+                            {portfolio.status === 0 &&  <CancelButton disabled={isLoadingCancelInvest && choosenBorrow === portfolio.borrowId} onClick={(e: SyntheticEvent) => {
                                 e.stopPropagation();
                                 setChoosenBorrow(() => portfolio.borrowId);
                                 write?.()
