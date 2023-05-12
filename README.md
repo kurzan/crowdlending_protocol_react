@@ -14,12 +14,16 @@
 ## Todo
 - [x] Working smart-contract
 - [x] DApp design and functionality
+- [x] Statistics platform 
+- [x] Borrow page
+- [x] Portfolio page
 - [x] Investing procces
 - [x] Cancel investment
 - [ ] Front-end borrow management: Create / Close / Cancelled borrows, withdraw, pay to investors and etc. </br>/* now it is possible only through the smart contract interface /*
 - [ ] Borrowers pages
 - [ ] Rating and scoring system
 - [ ] Opportunity for investors to leave comments under borrows and borrowers pages
+- [ ] Analytics of companies on the platform
 
 
 ## Overview
