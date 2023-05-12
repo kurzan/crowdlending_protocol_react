@@ -16,8 +16,9 @@
 - [x] DApp design and functionality
 - [x] Statistics platform 
 - [x] Borrow page
-- [x] Portfolio page
+- [x] Portfolio page with investors stats
 - [x] Investing procces
+- [x] Share actions to socials
 - [x] Cancel investment
 - [ ] Front-end borrow management: Create / Close / Cancelled borrows, withdraw, pay to investors and etc. </br>/* now it is possible only through the smart contract interface /*
 - [ ] Borrowers pages
@@ -43,6 +44,10 @@ Investor Disadvantages. Even though there is always a risk of default during a t
 
 Deployed to following networks:
 - [x] BSC Testnet
+
+## Video proccess of investing
+
+https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/48946328-2922-425f-85fd-7a3a70ddf91e
 
 ## Screenshots
 
