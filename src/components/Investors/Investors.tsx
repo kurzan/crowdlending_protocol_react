@@ -26,7 +26,7 @@ const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: st
 
 
   const getPercents = (investAmoutn: number) => {
-    return (investAmoutn / Number(ethers.utils.formatEther(currentBorrow.borrowingGoal)) * 100);
+    return (investAmoutn / Number(currentBorrow.borrowingGoal) * 100).toFixed(2);
   };
 
   return (
@@ -70,16 +70,16 @@ const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: st
             <div className={styles.rightPart}>
 
               <div className={styles.investorPerecent}>
-                <p>{getPercents(Number(ethers.utils.formatEther(item.amount)))}%</p>
+                <p>{getPercents(Number(item.amount))}%</p>
               </div>
 
               <div className={styles.investorAmount}>
-                <p className={styles.investorAmountText}>{ethers.utils.formatEther(item.amount)}</p>
+                <p className={styles.investorAmountText}>{Number(item.amount) / 10 ** 18}</p>
                 <CoinIcon />
               </div>
 
               <div className={styles.investorAmount}>
-                <p className={styles.investorAmountText + " " + styles.rate}>+ {ethers.utils.formatEther(item.amount / 100 * currentBorrow.interestRate)}</p>
+                <p className={styles.investorAmountText + " " + styles.rate}>+ {Number(item.amount / 100 * currentBorrow.interestRate) / 10 ** 18 }</p>
                 <CoinIcon />
               </div>
             </div>
