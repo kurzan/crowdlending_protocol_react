@@ -27,6 +27,7 @@ import CompanyStatus from "../../components/CompanyStatus/CompanyStatus";
 import { contract } from "../../services/web3config";
 import { Oval } from "react-loader-spinner";
 import doneImg from '../../images/done.svg';
+import TooltipBox from "../../components/TooltipBox/TooltipBox";
 
 const Borrow = () => {
 
@@ -147,7 +148,10 @@ const Borrow = () => {
         <div className={styles.statusBox}>
           {Number(currentBorrow?.status) === 1 && <div className={styles.timerBox}>
             <MdQueryBuilder />
-            <p className={styles.timer}>Ends in: {`${days}d ${hours}h ${mins}m ${secs}s`}</p>
+            <TooltipBox tooltipText={'dsfsdfs'} >
+              <p className={styles.timer}>Ends in: {`${days}d ${hours}h ${mins}m ${secs}s`}</p>
+            </TooltipBox>
+
           </div>}
           <Status status={currentBorrow?.status} />
         </div>

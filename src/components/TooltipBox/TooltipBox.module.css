@@ -1,0 +1,30 @@
+.tooltipItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.tooltipCase {
+  align-items: flex-start;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-direction: column;
+  width: 120px;
+  position: absolute;
+  background-color: grey;
+  border-radius: 12px;
+  padding: 6px;
+  top: 120%;
+  right: 0%;
+  background-color:white;
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tooltipCase > a {
+  color: black;
+  text-decoration: none;
+}

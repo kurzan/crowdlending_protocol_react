@@ -9,7 +9,7 @@ import { ethers } from "ethers";
 import { Oval } from 'react-loader-spinner';
 import CancelButton from '../CancelButton/CancelButton';
 import { MdAccountCircle } from 'react-icons/md';
-import { ONE_DAY_IN_SEC, getShortAddress, getYearRate } from '../../services/utils';
+import { getShortAddress, getYearRate } from '../../services/utils';
 
 const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: string }) => {
 

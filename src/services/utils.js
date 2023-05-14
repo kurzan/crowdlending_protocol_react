@@ -23,7 +23,7 @@ export const checkIsImage = (url) => {
 
 export const getDate = (timestamp) => {
   let date = new Date(Number(timestamp) * 1000);
-  let month = date.getMonth();
+  let month = date.getMonth() + 1;
   let day = date.getDate();
   let year = date.getFullYear();
 
