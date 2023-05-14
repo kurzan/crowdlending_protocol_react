@@ -1,5 +1,7 @@
 import {ethers} from 'ethers';
 
+export const ONE_DAY_IN_SEC = 86400;
+
 export const checkIsImage = (url) => {
   const options = {
     method: 'GET',
@@ -30,3 +32,7 @@ export const getDate = (timestamp) => {
 
 
 export const getShortAddress = (address) => `${address.slice(0, 6)}...${address.slice(-4)}`;
+
+export const getYearRate = (amount, rate, repiod) => {
+  return (((Number(amount) / 10 ** 18) * rate * ((repiod / ONE_DAY_IN_SEC) / 365)) / 100);
+};

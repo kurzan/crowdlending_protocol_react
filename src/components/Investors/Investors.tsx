@@ -9,7 +9,7 @@ import { ethers } from "ethers";
 import { Oval } from 'react-loader-spinner';
 import CancelButton from '../CancelButton/CancelButton';
 import { MdAccountCircle } from 'react-icons/md';
-import { getShortAddress } from '../../services/utils';
+import { ONE_DAY_IN_SEC, getShortAddress, getYearRate } from '../../services/utils';
 
 const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: string }) => {
 
@@ -48,7 +48,7 @@ const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: st
               <p className={styles.investorAmountText + " " + styles.tableHeadText}>Invest value</p>
             </div>
 
-            <div className={styles.investorAmount}>
+            <div className={styles.investorAmount + " " + styles.responce}>
               <p className={styles.investorAmountText + " " + styles.tableHeadText}>Est income</p>
             </div>
           </div>
@@ -78,8 +78,8 @@ const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: st
                 <CoinIcon />
               </div>
 
-              <div className={styles.investorAmount}>
-                <p className={styles.investorAmountText + " " + styles.rate}>+ {Number(item.amount / 100 * currentBorrow.interestRate) / 10 ** 18 }</p>
+              <div className={styles.investorAmount + " " + styles.responce}>
+                <p className={styles.investorAmountText + " " + styles.rate}>+ {getYearRate(item.amount, currentBorrow.interestRate, currentBorrow.borrowingPeriod).toFixed(8)}</p>
                 <CoinIcon />
               </div>
             </div>

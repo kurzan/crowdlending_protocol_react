@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { contract } from '../../services/web3config';
 import CancelButton from '../CancelButton/CancelButton';
 import { TPortfolio } from '../../pages/portfolio/Portfolio';
+import { getYearRate } from '../../services/utils';
 
 type TPortfolioListProps = {
  portfolio: TPortfolio[] | undefined;
@@ -84,7 +85,7 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
                         </div>
 
                         <div className={styles.tableCell}>
-                            <p className={styles.tableText + " " + styles.rate}>+ {(Number(portfolio.amount) / 10 ** 18 / 100 * Number(portfolio.interestRate)).toFixed(5)}</p>
+                            <p className={styles.tableText + " " + styles.rate}>+ {getYearRate(portfolio.amount, portfolio.interestRate, portfolio.borrowingPeriod).toFixed(8)}</p>
                         </div>
 
                         <div className={styles.tableCell}>

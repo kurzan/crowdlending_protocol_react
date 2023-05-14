@@ -32,6 +32,10 @@
   justify-content: end;
 }
 
+.responce {
+  width: 160px;
+}
+
 .investorPerecent {
   display: flex;
   gap: 24px;
