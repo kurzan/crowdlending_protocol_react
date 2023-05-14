@@ -15,7 +15,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css';
 import { MdKeyboardArrowLeft, MdQueryBuilder } from 'react-icons/md';
 import CoinIcon from "../../components/CoinIcon/CoinIcon";
-import { getDate } from "../../services/utils";
+import { formattedDate, getDate } from "../../services/utils";
 import Investors from "../../components/Investors/Investors";
 import LayoutPage from "../layout/Layout";
 import ShortAddress from "../../components/ShortAddress/ShortAddress";
@@ -50,6 +50,8 @@ const Borrow = () => {
   const currentBorrow = borrows?.find(borrow => Number(borrow.borrowId) === Number(id));
   const alreadyInvest = currentBorrow?.investors.find(item => item.investor === address);
   const investors = currentBorrow?.investors.filter(item => Number(item.amount) > 0).length;
+
+  const endDate = Number(currentBorrow?.startTime) + Number(currentBorrow?.borrowingPeriod);
 
   useEffect(() => {
     if (currentBorrow) {
@@ -146,12 +148,11 @@ const Borrow = () => {
         </div>
 
         <div className={styles.statusBox}>
-          {Number(currentBorrow?.status) === 1 && <div className={styles.timerBox}>
+          {Number(currentBorrow?.status) === 1 && currentBorrow && <div className={styles.timerBox}>
             <MdQueryBuilder />
-            <TooltipBox tooltipText={'dsfsdfs'} >
+            <TooltipBox tooltipText={formattedDate(endDate)} >
               <p className={styles.timer}>Ends in: {`${days}d ${hours}h ${mins}m ${secs}s`}</p>
             </TooltipBox>
-
           </div>}
           <Status status={currentBorrow?.status} />
         </div>

@@ -36,3 +36,15 @@ export const getShortAddress = (address) => `${address.slice(0, 6)}...${address.
 export const getYearRate = (amount, rate, repiod) => {
   return (((Number(amount) / 10 ** 18) * rate * ((repiod / ONE_DAY_IN_SEC) / 365)) / 100);
 };
+
+
+export const formattedDate = (timestamp) => {
+
+  const date = new Date(timestamp*1000); 
+  const year = date.getFullYear();
+  const month = (date.getMonth()+1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+
+}
