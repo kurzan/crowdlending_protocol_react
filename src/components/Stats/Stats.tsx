@@ -1,6 +1,8 @@
 import { useData } from '../../hooks/useData';
 import styles from './Stats.module.css';
 import CoinIcon from '../CoinIcon/CoinIcon';
+import { useEffect } from 'react';
+import { TBorrow, TInvestors } from '../../services/types';
 
 const Stats = () => {
 
@@ -8,7 +10,17 @@ const Stats = () => {
   
   const totalBorrowed = borrows?.reduce((acc, item) => acc + Number(item.totalBorrowed), 0);
   const avgRate = borrows && borrows?.reduce((acc, item) => acc + Number(item.interestRate), 0) / borrows?.length;
+  
+  const investorsSet = new Set();
+  borrows?.forEach(borrow => {
+    borrow.investors.forEach(investor => {
+      if (investor.investor !== '0x0000000000000000000000000000000000000000') {
+        investorsSet.add(investor.investor);
+      }
+    });
+  });
 
+ const totalInvestors = Array.from(investorsSet);
 
 
   return(
@@ -24,6 +36,11 @@ const Stats = () => {
       </div>
       
       <div className={styles.item}>
+        <p className={styles.text}>Investors</p>
+        <p className={styles.amount}>{totalInvestors?.length}</p>
+      </div>
+
+      <div className={styles.item}>
         <p className={styles.text}>Avg rate</p>
         <p className={styles.amount + " " + styles.rate}>~{avgRate?.toFixed(2)}</p>
       </div>
@@ -33,3 +50,6 @@ const Stats = () => {
 };
 
 export default Stats;
+
+
+
