@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import portfolioImg from './../../images/portfolio.svg';
 import walletImg from './../../images/wallet.svg';
+import Skeleton from "react-loading-skeleton";
+import { Oval } from "react-loader-spinner";
 
 export type TPortfolio = Partial<TBorrow> & { amount?: number }
 
@@ -53,19 +55,43 @@ const Portfolio = () => {
         {!isConnected && (
           <div className={styles.emptyPortfolio}>
             <p>Connect your wallets to get started</p>
-            <img src={walletImg} width={250} height={250} alt="" />
+            <div className={styles.imgBox}> 
+              <img src={walletImg} width={220} height={220} alt="" />
+            </div>
+            <Button style={{ width: "200px", margin: "0 auto", paddingTop: "18px" }} onClick={() => navigate('/borrows')} title={"GO TO INVEST"} />
           </div>
 
         )}
-        {isConnected && !portfolioCount && (
+        {borrows && isConnected && !portfolioCount &&
           <div className={styles.emptyPortfolio}>
             <p>Your portfolio is emty</p>
-            <img src={portfolioImg} width={250} height={250} alt="" />
-            
-          </div> 
-        )}
+            <div className={styles.imgBox}> 
+              <img src={portfolioImg} width={220} height={220} alt="" />
+            </div>
+            <Button style={{ width: "200px", margin: "0 auto"}} onClick={() => navigate('/borrows')} title={"GO TO INVEST"} />
+          </div>
+        }
       </div>
-      {portfolioCount && portfolioCount > 0 ? <PortfolioList portfolio={portfolio} /> : <Button style={{ width: "200px", margin: "0 auto" }} onClick={() => navigate('/borrows')} title={"GO TO INVEST"} />}
+
+      {borrows && portfolioCount && portfolioCount > 0 ? <PortfolioList portfolio={portfolio} /> : null}
+
+      {!borrows && isConnected && (
+        <div className={styles.emptyPortfolio}>
+          <p>Portfolio is loading...</p>
+          <Oval
+            height={60}
+            width={60}
+            color="#4fa94d"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            ariaLabel='oval-loading'
+            secondaryColor="#4fa94d"
+            strokeWidth={4}
+            strokeWidthSecondary={2}
+          />
+        </div>
+      )}
 
     </LayoutPage>
   )

@@ -41,7 +41,5 @@
   .imgBox {
     display: flex;
     align-items: center;
-    background-color: white;
-    padding: 48px;
-    border-radius: 100%;
+    padding-bottom: 16px;
   }

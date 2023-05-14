@@ -1,8 +1,6 @@
 import { useData } from '../../hooks/useData';
 import styles from './Stats.module.css';
 import CoinIcon from '../CoinIcon/CoinIcon';
-import { useEffect } from 'react';
-import { TBorrow, TInvestors } from '../../services/types';
 import Skeleton from 'react-loading-skeleton';
 
 const Stats = () => {
