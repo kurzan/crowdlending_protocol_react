@@ -124,7 +124,7 @@ const Borrow = () => {
         </Link>
 
         <div className={styles.share}>
-          <ShareLinks />
+          <ShareLinks currentBorrow={currentBorrow}/>
         </div>
       </div>
 
