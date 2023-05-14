@@ -3,6 +3,7 @@ import styles from './Stats.module.css';
 import CoinIcon from '../CoinIcon/CoinIcon';
 import { useEffect } from 'react';
 import { TBorrow, TInvestors } from '../../services/types';
+import Skeleton from 'react-loading-skeleton';
 
 const Stats = () => {
 
@@ -27,22 +28,22 @@ const Stats = () => {
     <div className={styles.container}>
       <div className={styles.item}>
         <p className={styles.text}>Total borrowed</p>
-        <p className={styles.amount}>{totalBorrowed && totalBorrowed / 10 ** 18} <CoinIcon /></p>
+        {!borrows ? <Skeleton count={1} borderRadius={"0.5rem"} /> : <p className={styles.amount}>{totalBorrowed && totalBorrowed / 10 ** 18} <CoinIcon /></p>}
       </div>
 
       <div className={styles.item}>
         <p className={styles.text}>Borrows</p>
-        <p className={styles.amount}>{borrowsIds && borrowsIds.length}</p>
+        {!borrows ? <Skeleton count={1} borderRadius={"0.5rem"} /> : <p className={styles.amount}>{borrowsIds && borrowsIds.length}</p>}
       </div>
       
       <div className={styles.item}>
         <p className={styles.text}>Investors</p>
-        <p className={styles.amount}>{totalInvestors?.length}</p>
+        {!borrows ? <Skeleton count={1} borderRadius={"0.5rem"} /> : <p className={styles.amount}>{totalInvestors?.length}</p>}
       </div>
 
       <div className={styles.item}>
         <p className={styles.text}>Avg rate</p>
-        <p className={styles.amount + " " + styles.rate}>~{avgRate?.toFixed(2)}</p>
+        {!borrows ? <Skeleton count={1} borderRadius={"0.5rem"} /> : <p className={styles.amount + " " + styles.rate}>~{avgRate?.toFixed(2)}</p>}
       </div>
 
     </div>
