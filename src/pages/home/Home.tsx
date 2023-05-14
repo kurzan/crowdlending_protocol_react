@@ -3,6 +3,7 @@ import LayoutPage from "../layout/Layout";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import logo from '../../images/Vector.png'
+import Stats from "../../components/Stats/Stats";
 
 const Home = () => {
 
@@ -14,7 +15,9 @@ const Home = () => {
       <div className="container">
         <div className={styles.mainInfo}>
           <div className={styles.info}>
-            <h1>BLOCKCHAIN <span className={styles.fut}>FUNDING</span> <br></br>IS THE FUTURE</h1>
+            <h1 className={styles.heading}>BLOCKCHAIN <span className={styles.fut}>FUNDING</span> <br></br>IS THE FUTURE</h1>
+
+            <Stats />
 
             <div className={styles.buttonsBox}>
               <Button type="button" onClick={() => navigate('/borrows')} title={"GO TO INVEST"} />
@@ -32,8 +35,8 @@ const Home = () => {
           <div className={styles.bigLogo}>
             <img src={logo} alt="" />
           </div>
-
         </div>
+        
       </div>
 
 

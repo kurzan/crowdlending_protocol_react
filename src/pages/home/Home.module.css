@@ -2,6 +2,10 @@
   max-width: 100%;
 }
 
+.heading {
+  padding-bottom: 18px;
+}
+
 .mainInfo {
   margin-top: 28px;
   display: grid;
@@ -31,7 +35,7 @@
 }
 
 .buttonsBox {
-    margin-top: 28px;
+    margin-top: 48px;
     flex-wrap: wrap;
     display: flex;
     gap: 8px;
@@ -55,4 +59,3 @@
   height: 300px;
   align-items: center;
 }
-

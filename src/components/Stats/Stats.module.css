@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  flex-wrap: wrap;
   gap: 30px;
 }
 
@@ -22,3 +23,11 @@
 .rate {
   color:green;
 }
+
+/* 
+@media (max-width: 320px) { 
+  .text {
+    color: red;
+  }
+
+} */
