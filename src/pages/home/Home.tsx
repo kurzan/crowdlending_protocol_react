@@ -4,10 +4,15 @@ import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import logo from '../../images/Vector.png'
 import Stats from "../../components/Stats/Stats";
+import { useEffect, useState } from "react";
 
 const Home = () => {
 
   const navigate = useNavigate();
+
+  const [blockchain, setBlockchain] = useState('');
+  const blockchainText = 'BLOCKCHAIN';
+  const [index, setIndex] = useState(0);
 
   return (
     <LayoutPage>
@@ -15,7 +20,7 @@ const Home = () => {
       <div className="container">
         <div className={styles.mainInfo}>
           <div className={styles.info}>
-            <h1 className={styles.heading}>BLOCKCHAIN <span className={styles.fut}>FUNDING</span> <br></br>IS THE FUTURE</h1>
+            <h1 className={styles.heading}><p className={styles.animatedText}>BLOCKCHAIN</p> <span className={styles.fut}>FUNDING</span> <br></br>IS THE FUTURE</h1>
 
             <Stats />
 
