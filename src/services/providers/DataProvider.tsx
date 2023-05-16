@@ -72,12 +72,6 @@ export const DataProvider = ({ children }: { children: any }) => {
         return Object.assign({}, item1, item2);
       });
       setBorrows(mergedArray);
-
-      console.log(mergedArray)
-
-
-      console.log(mergedArray)
-
       
     } catch (error) {
       setIsError(true);
