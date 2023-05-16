@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     max-width: 380px;
-    gap: 28px;
+    gap: 14px;
 }
 
 .heading {
