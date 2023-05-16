@@ -2,7 +2,7 @@ import { addDoc, getDocs, collection } from "@firebase/firestore";
 import { createContext, FC, useCallback, useEffect, useMemo, useState } from "react";
 import { db } from '../firebase';
 import { TBorrow } from "../types";
-import { useContractRead,useProvider, useContract, useContractEvent } from "wagmi";
+import { useContractRead, useProvider, useContract, useContractEvent } from "wagmi";
 import { contract } from "../web3config";
 
 interface IContext {
@@ -13,7 +13,7 @@ interface IContext {
 
 export const DataContext = createContext<IContext>({} as IContext);
 
-export const DataProvider = ({children}: {children: any}) => {
+export const DataProvider = ({ children }: { children: any }) => {
   const [borrows, setBorrows] = useState<any | null>(null);
   const [isError, setIsError] = useState(false);
   const [borrowsIds, setBorrowsIds] = useState<number[]>();
@@ -50,39 +50,35 @@ export const DataProvider = ({children}: {children: any}) => {
         return
       }
 
-      let borrowsFromFirebase: any[] = [];
-      let borrowsFromContract = [];
 
-      await getDocs(collection(db, "borrows"))
-      .then((querySnapshot)=>{               
+      let borrowsFromContract = [];
+      let borrowers: any[] = [];
+
+      await getDocs(collection(db, "borrowers"))
+        .then((querySnapshot) => {
           const newData = querySnapshot.docs
-              .map((doc) => ({...doc.data(), borrowId:doc.id }));
-              borrowsFromFirebase = newData;                
-      })
+            .map((doc) => ({ ...doc.data() }));
+          borrowers = newData;
+        })
+
 
       for (let i = 0; i < borrowsIds.length; i++) {
-          const borrow = await contractBorrow?.getBorrow(i);
-          borrowsFromContract.push(borrow);
+        const borrow = await contractBorrow?.getBorrow(i);
+        borrowsFromContract.push(borrow);
       }
 
-      const mergeByProperty = (arrays: any, property = "borrowId") => {
-        const arr = arrays.flatMap((item: any) => item);
-      
-        const obj = arr.reduce((acc: any, item: any) => {
-          return {
-            ...acc,
-            [item[property]]: { ...acc[item[property]], ...item }
-          };
-        }, {});
-      
-        return Object.values(obj);
-      };
+      const mergedArray = borrowsFromContract.map(item1 => {
+        const item2 = borrowers.find(item2 => item1.borrower === item2.borrower);
+        return Object.assign({}, item1, item2);
+      });
+      setBorrows(mergedArray);
 
-      const mergedBorrows = mergeByProperty([borrowsFromFirebase, borrowsFromContract]);
-      setBorrows(mergedBorrows);
+      console.log(mergedArray)
+
+
+      console.log(mergedArray)
 
       
-
     } catch (error) {
       setIsError(true);
     }
@@ -130,11 +126,11 @@ export const DataProvider = ({children}: {children: any}) => {
 
   useEffect(() => {
     getBorrows();
-    
+
   }, [getBorrows])
 
   const value = useMemo(() => ({
-    borrows, isError,borrowsIds
+    borrows, isError, borrowsIds
   }), [borrows, isError, borrowsIds])
 
   return <DataContext.Provider value={value}>
