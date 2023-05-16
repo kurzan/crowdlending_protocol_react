@@ -7,7 +7,6 @@ import { contractAbi } from "./abi";
 
 
 const CONTRACT_ADDRESS: `0x${string}` = "0xB644E311E961f09695EE46e9568f21999907ffd0";
-// const CONTRACT_ADDRESS: `0x${string}` = "0x37a21089a83DD3F949f800D82DD9e23e5715A896";
 
 
 export const { chains, provider, webSocketProvider } = configureChains(

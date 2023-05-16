@@ -18,6 +18,7 @@ import Borrows from './pages/borrows/Borrows';
 import { DataProvider } from './services/providers/DataProvider';
 import Portfolio from './pages/portfolio/Portfolio';
 import { InputProvider } from './services/providers/InputProvider';
+import CreateBorrow from './pages/create-borrow/CreateBorrow';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "/borrows/:id",
     element: <Borrow />,
+  },
+  {
+    path: "/addborrow",
+    element: <CreateBorrow />,
   },
 ]);
 

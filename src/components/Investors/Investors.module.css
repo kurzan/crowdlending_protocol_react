@@ -12,9 +12,10 @@
 .investorItem {
   display: flex;
   justify-content: space-between;
-  padding-top: 4px;
+  padding-top: 8px;
   margin-right: 4px;
-  padding-bottom: 4px;
+  padding-bottom: 8px;
+  border-bottom: 0.0635rem solid #F5F5F5;
 }
 
 .investorBox {

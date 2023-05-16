@@ -26,7 +26,7 @@ const Home = () => {
 
             <div className={styles.buttonsBox}>
               <Button type="button" onClick={() => navigate('/borrows')} title={"GO TO INVEST"} />
-              <Button type="button" style={{ backgroundColor: 'transparent', border: '1px solid black', color: 'black' }} title={"GET A BORROW"} />
+              <Button type="button" onClick={() => navigate('/addborrow')} style={{ backgroundColor: 'transparent', border: '1px solid black', color: 'black' }} title={"GET A BORROW"} />
             </div>
 
             <div className={styles.description}>

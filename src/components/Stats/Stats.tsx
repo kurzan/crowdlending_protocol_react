@@ -19,10 +19,10 @@ const Stats = () => {
     });
   });
 
- const totalInvestors = Array.from(investorsSet);
+  const totalInvestors = Array.from(investorsSet);
 
 
-  return(
+  return( borrows ?
     <div className={styles.container}>
       <div className={styles.item}>
         <p className={styles.text}>Total borrowed</p>
@@ -45,7 +45,7 @@ const Stats = () => {
       </div>
 
     </div>
-  )
+  : null )
 };
 
 export default Stats;
