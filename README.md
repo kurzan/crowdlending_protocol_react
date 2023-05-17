@@ -76,7 +76,8 @@ https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/48946328-
 
   ![image](https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/71e6ce75-9d6a-43ec-8eb4-6aee89a567de)
 
-<b>4. and more UI/UX elements on pages
+ <b> 4. Verified borrower card and unverified borrower card
+   <img width="645" alt="Снимок экрана 2023-05-17 в 22 28 35" src="https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/8b6372d9-ef0e-4656-bc62-6d914052c948">
   
   
   ## Getting Started
