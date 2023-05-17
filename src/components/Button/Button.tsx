@@ -11,10 +11,9 @@ type TButtonProps = {
   isLoading?: boolean;
   style?: CSSProperties;
   type?: string;
-  submit?: any;
 };
 
-const Button: FC<TButtonProps> = ({submit, type = 'web3', title, onClick, disabled, isLoading, style}) => {
+const Button: FC<TButtonProps> = ({type = 'web3', title, onClick, disabled, isLoading, style}) => {
 
   const { connector: activeConnector, isConnected } = useAccount();
   const { connect, connectors, error, pendingConnector } = useConnect();
@@ -26,7 +25,7 @@ const Button: FC<TButtonProps> = ({submit, type = 'web3', title, onClick, disabl
   }, [isConnected])
 
   return(
-      <button type={submit} style={style} disabled={disabled} onClick={onClick} className={styles.button}>
+      <button type="button" style={style} disabled={disabled} onClick={onClick} className={styles.button}>
         {isLoading && <Oval
           height={20}
           width={20}
