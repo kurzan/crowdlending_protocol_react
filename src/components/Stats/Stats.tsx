@@ -19,7 +19,7 @@ const Stats = () => {
     });
   });
 
- const totalInvestors = Array.from(investorsSet);
+  const totalInvestors = Array.from(investorsSet);
 
 
   return(
@@ -45,7 +45,7 @@ const Stats = () => {
       </div>
 
     </div>
-  )
+    )
 };
 
 export default Stats;
