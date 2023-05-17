@@ -21,19 +21,21 @@ src/contract/EarlyBird.sol
 - [x] Working smart-contract
 - [x] DApp design and functionality
 - [x] Statistics platform 
+- [x] Create borrow
+- [x] Verify borrower
 - [x] Borrow page
 - [x] Portfolio page with investors stats
 - [x] Investing procces
 - [x] Share actions to socials
 - [x] Cancel investment
-- [ ] Front-end borrow management: Create / Close / Cancelled borrows, withdraw, pay to investors and etc. </br>/* now it is possible only through the smart contract interface /*
+- [ ] Front-end borrow management: Close / Cancelled borrows, withdraw, pay to investors and etc. </br>/* now it is possible only through the smart contract interface /*
 - [ ] Borrowers pages
 - [ ] Rating and scoring system
 - [ ] Opportunity for investors to leave comments under borrows and borrowers pages
 - [ ] Analytics of companies on the platform
 
 
-## Overview
+## Overview and roadmap
 
 Early Bird is a decentralized application (dApp) built on the Binance Smart Chain Testnet that blurs the boundaries between companies and investors, each user of the platform can invest in a company located anywhere in the world. In turn, companies can raise financing for their projects more efficiently due to the absence of long chains of intermediaries in obtaining loans and due to the wide range of coverage around the world.
 
@@ -47,6 +49,8 @@ Disadvantages of the company - Not all companies participate in funds in this wa
 
 Investor Disadvantages. Even though there is always a risk of default during a thorough due diligence. Investors should carefully consider which company to invest in after examining their financial condition.
 
+<img width="1106" alt="Снимок экрана 2023-05-17 в 20 11 14" src="https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/8e83fd8b-77f8-4e26-b6d0-be4cb5155d2b">
+
 
 Deployed to following networks:
 - [x] BSC Testnet
@@ -56,6 +60,9 @@ Deployed to following networks:
 https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/48946328-2922-425f-85fd-7a3a70ddf91e
 
 ## Screenshots
+
+<img width="1080" alt="Снимок экрана 2023-05-17 в 20 04 40" src="https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/97f702f3-8edf-44d6-8244-2aa6036d3c5b">
+
 
 <b>1. Borrows card, statistics, search and nav menu 
 
