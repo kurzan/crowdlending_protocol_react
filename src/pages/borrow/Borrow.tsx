@@ -197,7 +197,7 @@ const Borrow = () => {
       </Box>}
 
       {(currentBorrow?.status === 0 && !alreadyInvest) && <div className={styles.button}>
-        <Button disabled={Number(currentBorrow?.status) !== 0 || !isConnected ? true : false} onClick={modalHandler} title="Invest 🔥" />
+        <Button disabled={Number(currentBorrow?.status) !== 0 || !isConnected ? true : false} onClick={modalHandler} title={verifiedBorrower ? "Invest 🔥" : "Invest ⚠" }/>   
       </div>}
       <Box title="About borrower" bg={!verifiedBorrower ? "#FFF3E0" : ""}>
         <p className={styles.aboutBorrower}>{currentBorrow?.info}</p>

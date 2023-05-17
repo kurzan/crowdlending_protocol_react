@@ -70,10 +70,6 @@ const BorrowCard = ({ borrow }: { borrow: TBorrow }) => {
 
   }, [borrow, timeRemaining]);
 
-  useEffect(() => {
-    console.log(Number(borrow?.createTime))
-  }, [borrow])
-
   return (
     <div style={!verifiedBorrower ? {backgroundColor: '#FFF3E0'} : {}}  className={borrow.status === 0 ? styles.card : styles.card + ' ' + styles.card_unactive} onClick={() => navigate(`/borrows/${Number(borrow.borrowId)}`)}>
       <div className={styles.head}>

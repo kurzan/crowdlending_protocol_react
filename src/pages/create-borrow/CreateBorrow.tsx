@@ -63,10 +63,6 @@ function CreateBorrow() {
     })
 
     useEffect(() => {
-        console.log(borrowers)
-    }, [borrowers])
-
-    useEffect(() => {
         console.log(values)
     }, [values])
 
@@ -76,9 +72,9 @@ function CreateBorrow() {
                 <p className={styles.heading}>Interact with a smart contract and create a borrow 👷🏽 </p>
                 <form className={styles.form} onSubmit={write}>
 
-                    <Input label="Borrowing goal" placeholder={"min 0.1, max 1 tBNB"} name="borrowingGoal" value={values.borrowingGoal || ''} onChange={handleChange} type="number" min={0.1} max={1} />
+                    <Input label="Borrowing goal, tBNB" placeholder={"min 0.1, max 1 tBNB"} name="borrowingGoal" value={values.borrowingGoal || ''} onChange={handleChange} type="number" min={0.1} max={1} />
                     <Input label="Period, days" placeholder={"min 7 days, max 90 days"} name="borrowingPeriod" value={values.borrowingPeriod || ''} onChange={handleChange} type="number" min={7} max={90} />
-                    <Input label="Interest rate" placeholder={"for ex. 9-15%"} name="interestRate" value={values.interestRate || ''} onChange={handleChange} type="number" />
+                    <Input label="Interest rate, APR" placeholder={"for ex. 9-15%"} name="interestRate" value={values.interestRate || ''} onChange={handleChange} type="number" />
 
                     <Button submit={"submit"} isLoading={isLoadingInvestData || loadingWaitInvest} disabled={prepareLoading || isLoadingInvestData || error || loadingWaitInvest ? true : false} title={!isLoadingInvestData ? "Create borrow" : "Pending..."} />
                 </form>
