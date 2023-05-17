@@ -1,7 +1,7 @@
 import { addDoc, getDocs, collection } from "@firebase/firestore";
 import { createContext, FC, useCallback, useEffect, useMemo, useState } from "react";
 import { db } from '../firebase';
-import { TBorrow } from "../types";
+import { TBorrow, TBorrowers } from "../types";
 import { useContractRead, useProvider, useContract, useContractEvent } from "wagmi";
 import { contract } from "../web3config";
 
@@ -9,12 +9,14 @@ interface IContext {
   borrows: TBorrow[] | null,
   isError: boolean,
   borrowsIds: number[] | undefined;
-}
+  borrowers: TBorrowers[];
+};
 
 export const DataContext = createContext<IContext>({} as IContext);
 
 export const DataProvider = ({ children }: { children: any }) => {
   const [borrows, setBorrows] = useState<any | null>(null);
+  const [borrowers, setBorrowers] = useState<any | null>(null);
   const [isError, setIsError] = useState(false);
   const [borrowsIds, setBorrowsIds] = useState<number[]>();
 
@@ -60,7 +62,8 @@ export const DataProvider = ({ children }: { children: any }) => {
             .map((doc) => ({ ...doc.data() }));
           borrowers = newData;
         })
-
+      
+        setBorrowers(borrowers);
 
       for (let i = 0; i < borrowsIds.length; i++) {
         const borrow = await contractBorrow?.getBorrow(i);
@@ -124,8 +127,8 @@ export const DataProvider = ({ children }: { children: any }) => {
   }, [getBorrows])
 
   const value = useMemo(() => ({
-    borrows, isError, borrowsIds
-  }), [borrows, isError, borrowsIds])
+    borrows, borrowers, isError, borrowsIds
+  }), [borrows, isError, borrowsIds, borrowers])
 
   return <DataContext.Provider value={value}>
     {children}

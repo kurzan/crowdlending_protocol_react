@@ -9,8 +9,8 @@ type TInputProps = {
     onChange?: any;
     label?: string;
     placeholder?: string;
-    max?: string;
-    min?: string;
+    max?: number;
+    min?: number;
     required?: boolean;
 }
 

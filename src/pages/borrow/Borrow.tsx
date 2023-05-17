@@ -15,7 +15,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css';
 import { MdKeyboardArrowLeft, MdQueryBuilder } from 'react-icons/md';
 import CoinIcon from "../../components/CoinIcon/CoinIcon";
-import { formattedDate, getDate } from "../../services/utils";
+import { formattedDate, getDate, getShortAddress } from "../../services/utils";
 import Investors from "../../components/Investors/Investors";
 import LayoutPage from "../layout/Layout";
 import ShortAddress from "../../components/ShortAddress/ShortAddress";
@@ -30,7 +30,7 @@ import doneImg from '../../images/done.svg';
 import TooltipBox from "../../components/TooltipBox/TooltipBox";
 
 const Borrow = () => {
-
+  const [verifiedBorrower, setVerifiedBorrower] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalWaitIsOpen, setModalWaitIsOpen] = useState(false);
   const [modalDoneIsOpen, setModalDoneIsOpen] = useState(false);
@@ -44,7 +44,7 @@ const Borrow = () => {
   const [timeRemaining, setTimeRemaining] = useState(0);
 
   const { id } = useParams();
-  const { borrows } = useData();
+  const { borrows, borrowers } = useData();
   const { address, isConnected } = useAccount();
 
   const currentBorrow = borrows?.find(borrow => Number(borrow.borrowId) === Number(id));
@@ -52,6 +52,16 @@ const Borrow = () => {
   const investors = currentBorrow?.investors.filter(item => Number(item.amount) > 0).length;
 
   const endDate = Number(currentBorrow?.startTime) + Number(currentBorrow?.borrowingPeriod);
+
+  useEffect(() => {
+
+    if(borrowers && borrowers.find(item => item.borrower === currentBorrow?.borrower)) {
+      setVerifiedBorrower(true)
+    } else {
+      setVerifiedBorrower(false)
+    }
+
+}, [borrowers, currentBorrow?.borrower])
 
   useEffect(() => {
     if (currentBorrow) {
@@ -140,8 +150,8 @@ const Borrow = () => {
           <div className={styles.companyTexts}>
             <p className={styles.borrowId}>№ {Number(currentBorrow?.borrowId)}</p>
             <div className={styles.companyNameBox}>
-              <p className={styles.companyName}>{currentBorrow?.companyName}</p>
-              <CompanyStatus verified={true}/>
+              {verifiedBorrower ? <p className={styles.companyName}>{currentBorrow?.companyName}</p> : <p className={styles.companyName}>{getShortAddress(currentBorrow?.borrower)}</p>}
+              <CompanyStatus verified={verifiedBorrower}/>
             </div>
             
           </div>
@@ -159,7 +169,7 @@ const Borrow = () => {
 
       </div>
 
-      {!currentBorrow ? <Skeleton height={100} /> : <Box >
+      {!currentBorrow ? <Skeleton height={100} /> : <Box bg={!verifiedBorrower ? "#FFF3E0" : ""}>
         <div className={styles.details}>
           <div className={styles.details_item}>
             <p className={styles.details_text}>Created at</p>
@@ -189,14 +199,15 @@ const Borrow = () => {
       {(currentBorrow?.status === 0 && !alreadyInvest) && <div className={styles.button}>
         <Button disabled={Number(currentBorrow?.status) !== 0 || !isConnected ? true : false} onClick={modalHandler} title="Invest 🔥" />
       </div>}
-      <Box title="About borrower">
+      <Box title="About borrower" bg={!verifiedBorrower ? "#FFF3E0" : ""}>
         <p className={styles.aboutBorrower}>{currentBorrow?.info}</p>
-        <div className={styles.socials}>
+        {verifiedBorrower ? (<div className={styles.socials}>
           {borrows && <ShortAddress address={currentBorrow?.borrower} />}
           <img src={tgIcon} width={24} height={24} alt="" />
           <img src={twIcon} width={24} height={24} alt="" />
           <img src={disIcon} width={24} height={24} alt="" />
-        </div>
+        </div>) : <p>⚠ Unverified borrower. Hight risk to invest ⚠</p>
+        }
       </Box>
 
       {investors ? <Investors title={`Investors (${investors})`} currentBorrow={currentBorrow} /> : null}

@@ -1,8 +1,16 @@
+.container {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.container > p {
+  align-self: center;
+}
+
 .form {
     margin: 28px auto;
     display: flex;
     flex-direction: column;
-    max-width: 380px;
     gap: 14px;
 }
 

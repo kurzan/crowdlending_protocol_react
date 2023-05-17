@@ -6,10 +6,24 @@ import { ethers } from "ethers";
 import Status from "../Status/Status";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
-import { getDate } from "../../services/utils";
+import { getDate, getShortAddress } from "../../services/utils";
+import { useData } from "../../hooks/useData";
 
 const BorrowCard = ({ borrow }: { borrow: TBorrow }) => {
+  const [verifiedBorrower, setVerifiedBorrower] = useState(true);
   const navigate = useNavigate();
+  const { borrowers } = useData();
+
+  useEffect(() => {
+
+    if(borrowers && borrowers.find(item => item.borrower === borrow.borrower)) {
+      setVerifiedBorrower(true)
+    } else {
+      setVerifiedBorrower(false)
+    }
+
+
+}, [borrowers, borrow.borrower])
 
   const [startDate, setStartDate] = useState<string>();
   const [closetDate, setClosedDate] = useState<string>();
@@ -61,7 +75,7 @@ const BorrowCard = ({ borrow }: { borrow: TBorrow }) => {
   }, [borrow])
 
   return (
-    <div className={borrow.status === 0 ? styles.card : styles.card + ' ' + styles.card_unactive} onClick={() => navigate(`/borrows/${Number(borrow.borrowId)}`)}>
+    <div style={!verifiedBorrower ? {backgroundColor: '#FFF3E0'} : {}}  className={borrow.status === 0 ? styles.card : styles.card + ' ' + styles.card_unactive} onClick={() => navigate(`/borrows/${Number(borrow.borrowId)}`)}>
       <div className={styles.head}>
         <CompanyLogo src={borrow.image} alt={borrow.companyName} />     
         <div className={styles.statusBox}>
@@ -74,8 +88,8 @@ const BorrowCard = ({ borrow }: { borrow: TBorrow }) => {
 
       <div className={styles.company}>
         
-        <p className={styles.name}>{borrow.companyName}</p>
-        <p className={styles.desc}>{borrow.description}</p>
+        {verifiedBorrower ? <p className={styles.name}>{borrow.companyName}</p> : <p className={styles.name}>{getShortAddress(borrow.borrower)}</p>}
+        {verifiedBorrower ? <p className={styles.desc}>{borrow.description}</p> : <p className={styles.desc}>Unverified</p>}
       </div>
 
       <TotalBar from={Number(ethers.utils.formatEther(borrow.totalBorrowed))} to={Number(ethers.utils.formatEther(borrow.borrowingGoal))} />
