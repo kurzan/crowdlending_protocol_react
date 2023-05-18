@@ -26,7 +26,7 @@ const Stats = () => {
     <div className={styles.container}>
       <div className={styles.item}>
         <p className={styles.text}>Total borrowed</p>
-        {!borrows ? <Skeleton count={1} borderRadius={"0.5rem"} /> : <p className={styles.amount}>{totalBorrowed && totalBorrowed / 10 ** 18} <CoinIcon /></p>}
+        {!borrows ? <Skeleton count={1} borderRadius={"0.5rem"} /> : <p className={styles.amount}>{totalBorrowed && (totalBorrowed / 10 ** 18).toFixed(2)} <CoinIcon /></p>}
       </div>
 
       <div className={styles.item}>
