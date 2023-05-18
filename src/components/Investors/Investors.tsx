@@ -9,7 +9,8 @@ import { ethers } from "ethers";
 import { Oval } from 'react-loader-spinner';
 import CancelButton from '../CancelButton/CancelButton';
 import { MdAccountCircle } from 'react-icons/md';
-import { getShortAddress, getYearRate } from '../../services/utils';
+import { getShortAddress, getShortAmount, getYearRate } from '../../services/utils';
+import TooltipBox from '../TooltipBox/TooltipBox';
 
 const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: string }) => {
 
@@ -74,7 +75,7 @@ const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: st
               </div>
 
               <div className={styles.investorAmount}>
-                <p className={styles.investorAmountText}>{Number(item.amount) / 10 ** 18}</p>
+                <p className={styles.investorAmountText}>{getShortAmount((Number(item.amount) / 10 ** 18).toString())}</p>
                 <CoinIcon />
               </div>
 

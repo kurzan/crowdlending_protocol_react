@@ -19,8 +19,7 @@ const TotalBar: FC<TTotalBarProps> = ({from = 0, to = 0}) => {
       <div className={styles.total_head}>
         <div className={styles.total_amount}>   
 
-          <TooltipBox tooltipText={from}><p className={styles.from}>{getShortAmount(from.toString())}</p></TooltipBox>
-    
+          <p className={styles.from}>{getShortAmount(from.toString())}</p>
           <span className={styles.slash}> / </span><p className={styles.to}>{to}</p>
           <CoinIcon />
         </div>

@@ -15,7 +15,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css';
 import { MdKeyboardArrowLeft, MdQueryBuilder } from 'react-icons/md';
 import CoinIcon from "../../components/CoinIcon/CoinIcon";
-import { formattedDate, getDate, getShortAddress } from "../../services/utils";
+import { formattedDate, getDate, getShortAddress, getShortAmount } from "../../services/utils";
 import Investors from "../../components/Investors/Investors";
 import LayoutPage from "../layout/Layout";
 import ShortAddress from "../../components/ShortAddress/ShortAddress";
@@ -182,7 +182,7 @@ const Borrow = () => {
             <p className={styles.details_text}>Total borrowed</p>
             <div className={styles.coins_amount}>
               <p className={styles.details_amount}>
-                {currentBorrow?.totalBorrowed ? Number(ethers.utils.formatEther(currentBorrow.totalBorrowed)) : 0}/
+                {currentBorrow?.totalBorrowed ? getShortAmount((Number(ethers.utils.formatEther(currentBorrow.totalBorrowed))).toString()) : 0}/
                 {currentBorrow?.totalBorrowed ? Number(ethers.utils.formatEther(currentBorrow.borrowingGoal)) : 0}
               </p>
               <CoinIcon />
