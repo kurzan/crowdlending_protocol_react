@@ -47,7 +47,7 @@ const BorrowsList = () => {
       },
       []
     )
-      .sort((a, b) => (b.statusSort - a.statusSort) || (a.idSort - b.idSort))
+      .sort((a, b) => (b.idSort - a.idSort) || (b.statusSort - a.statusSort))
       .map(({ item }) => item);
 
     setSortedBorrows(sortedData);
