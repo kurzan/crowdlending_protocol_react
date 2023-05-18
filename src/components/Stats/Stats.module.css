@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 24px;
 }
 
 .item {
@@ -24,10 +24,10 @@
   color:green;
 }
 
-/* 
-@media (max-width: 320px) { 
+
+/* @media (max-width: 320px) { 
   .text {
-    color: red;
+    font-size: 10px;
   }
 
 } */
