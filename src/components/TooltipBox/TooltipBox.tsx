@@ -3,8 +3,8 @@ import styles from "./TooltipBox.module.css";
 
 
 type TTooltipBoxProps = {
-  tooltipText: string;
-  children: ReactNode;
+  tooltipText: string | number;
+  children: any;
 };
 
 const TooltipBox: FC<TTooltipBoxProps> = ({tooltipText, children}) => {

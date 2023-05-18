@@ -12,7 +12,7 @@
   gap: 8px;
   justify-content: center;
   flex-direction: column;
-  width: 120px;
+  width: 100%;
   position: absolute;
   background-color: grey;
   border-radius: 12px;

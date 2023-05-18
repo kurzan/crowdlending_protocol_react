@@ -39,6 +39,15 @@ export const getShortAddress = (address) => {
   return '';
 };
 
+
+export const getShortAmount = (amount) => {
+  if(amount.length > 6) {
+    return `${amount.slice(0, 5)}..${amount.slice(-3)}`
+  }
+
+  return amount;
+};
+
 export const getYearRate = (amount, rate, repiod) => {
   return (((Number(amount) / 10 ** 18) * rate * ((repiod / ONE_DAY_IN_SEC) / 365)) / 100);
 };
