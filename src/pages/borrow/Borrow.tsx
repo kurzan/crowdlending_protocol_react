@@ -112,7 +112,6 @@ const Borrow = () => {
   })
 
 
-
   const modalHandler = () => {
     setModalIsOpen(!modalIsOpen);
   };
