@@ -8,6 +8,12 @@
   width: 120px;
   justify-content: center;
   cursor: pointer;
+  transition: transform 0.2s ease-in-out
+}
+
+.scale {
+  scale: 1.05;
+  transition: transform 0.2s ease-in-out
 }
 
 .container>p {

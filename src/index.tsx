@@ -19,27 +19,33 @@ import { DataProvider } from './services/providers/DataProvider';
 import Portfolio from './pages/portfolio/Portfolio';
 import { InputProvider } from './services/providers/InputProvider';
 import CreateBorrow from './pages/create-borrow/CreateBorrow';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+    errorElement: <ErrorBoundary />
   },
   {
     path: "/borrows",
     element: <Borrows />,
+    errorElement: <ErrorBoundary />
   },
   {
     path: "/portfolio",
     element: <Portfolio />,
+    errorElement: <ErrorBoundary />
   },
   {
     path: "/borrows/:id",
     element: <Borrow />,
+    errorElement: <ErrorBoundary />
   },
   {
     path: "/addborrow",
     element: <CreateBorrow />,
+    errorElement: <ErrorBoundary />
   },
 ]);
 
