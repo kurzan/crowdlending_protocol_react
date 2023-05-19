@@ -202,7 +202,7 @@ const Borrow = () => {
         </div>
       </Box>}
 
-      {currentBorrowwer && <BorrowControl/>}
+      {currentBorrowwer && <BorrowControl currentBorrow={currentBorrow}/>}
 
       {(currentBorrow?.status === 0 && !alreadyInvest && !currentBorrowwer) && <div className={styles.button}>
         <Button disabled={Number(currentBorrow?.status) !== 0 || !isConnected ? true : false} onClick={modalHandler} title={verifiedBorrower ? "Invest 🔥" : "Invest ⚠" }/>   

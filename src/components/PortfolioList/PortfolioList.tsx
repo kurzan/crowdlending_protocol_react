@@ -27,6 +27,7 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
     const { data: investData, isLoading: isLoadingCancelInvest, isSuccess, write, reset, status } = useContractWrite(config);
 
     const navigate = useNavigate();
+    
 
     return (
         <>  

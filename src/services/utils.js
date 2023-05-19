@@ -49,7 +49,7 @@ export const getShortAmount = (amount) => {
 };
 
 export const getYearRate = (amount, rate, repiod) => {
-  return (((Number(amount) / 10 ** 18) * rate * ((repiod / ONE_DAY_IN_SEC) / 365)) / 100);
+  return ((Number(amount) / 10 ** 18) * (rate / 100) * (repiod / ONE_DAY_IN_SEC)) / 365;
 };
 
 

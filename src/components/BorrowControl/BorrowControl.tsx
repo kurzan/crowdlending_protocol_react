@@ -1,13 +1,150 @@
+import { useAccount, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
+import { useState, useEffect, SyntheticEvent, ChangeEvent } from 'react';
+import { TBorrow } from '../../services/types';
+import { getYearRate } from '../../services/utils';
 import Box from '../Box/Box';
+import Button from '../Button/Button';
 import styles from './BorrowControl.module.css';
+import { contract } from '../../services/web3config';
+import Modal from '../Modal/Modal';
+import Input from '../Input/Input';
+import { useForm } from '../../hooks/useForms';
+import { ethers } from 'ethers';
+import WaitModal from '../WaitModal/WaitModal';
+import DoneModal from '../DoneModal/DoneModal';
 
 
-const BorrowControl = () => {
-    return(
-        <Box title="Borrow's management">
+const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }) => {
 
-        </Box>
+    const { address } = useAccount();
+
+    const [depositValue, setDepostiValue] = useState(0);
+
+    const [modalWithdrawIsOpen, setModaWithdrawIsOpen] = useState(false);
+    const [modalDepositIsOpen, setModaDepositIsOpen] = useState(false);
+    const [modalCloseIsOpen, setModaCloseIsOpen] = useState(false);
+
+
+    const [modalWaitIsOpen, setModalWaitIsOpen] = useState(false);
+    const [modalDoneIsOpen, setModalDoneIsOpen] = useState(false);
+
+    const handleDepositInput = (e: ChangeEvent<HTMLInputElement>) => {
+        setDepostiValue(Number(e.target.value))
+    };
+
+
+    const { config: depositMoneyConfig, error: errorDeposit, isLoading: prepareLoading } = usePrepareContractWrite({
+        address: contract.address,
+        abi: contract.abi,
+        functionName: 'depositMoney',
+        args: [currentBorrow?.borrowId],
+        overrides: {
+            from: address,
+            value: ethers.utils.parseEther(depositValue.toString()) || 0
+        }
+    });
+
+    const { data: depositData, isLoading: isLoadingDepositData, isSuccess, write: depositWrite, reset } = useContractWrite({
+        ...depositMoneyConfig,
+        onSuccess(data) {
+            setModalWaitIsOpen(true);
+        },
+    });
+
+    const { data: dataWaitDeposit, isError: errorWaitInvest, isLoading: loadingWaitDeposit } = useWaitForTransaction({
+        hash: depositData?.hash,
+        onSuccess(data) {
+            setModaDepositIsOpen(false);
+            setModalWaitIsOpen(false);
+            setModalDoneIsOpen(true);
+        },
+    })
+
+    useEffect(() => {
+        console.log(depositValue)
+    }, [depositValue])
+
+
+    const modalDepositHandler = () => {
+        setModaDepositIsOpen(!modalDepositIsOpen);
+    };
+
+    const modalWithdrawHandler = () => {
+        setModaWithdrawIsOpen(!modalWithdrawIsOpen);
+    };
+
+    const modalCloseHandler = () => {
+        setModaCloseIsOpen(!modalCloseIsOpen);
+    };
+
+
+    const modalWaitHandler = () => {
+        setModalWaitIsOpen(!modalWaitIsOpen);
+    };
+
+    const modalDoneHandler = () => {
+        setModalDoneIsOpen(!modalDoneIsOpen);
+    };
+
+    return (
+        <>
+            <Box title="Borrow's management">
+                <div className={styles.details}>
+                    <div className={styles.details_item}>
+                        <p className={styles.details_text}>Borrow balance</p>
+                        <p className={styles.details_amount}>{Number(currentBorrow?.borrowBalance) / 10 ** 18}</p>
+                    </div>
+                    <div className={styles.details_item}>
+                        <p className={styles.details_text}>interest to pay</p>
+                        <p className={styles.details_amount}>{getYearRate(currentBorrow?.borrowingGoal, currentBorrow?.interestRate, currentBorrow?.borrowingPeriod)}</p>
+                    </div>
+
+                    <div className={styles.controlBurrons}>
+                        <Button onClick={modalWithdrawHandler} title='withdraw ' />
+                        <Button onClick={modalDepositHandler} title='Deposit' />
+                        <Button onClick={modalCloseHandler} style={{ backgroundColor: 'red' }} title='Close Borrow' />
+                    </div>
+                </div>
+            </Box>
+
+            {modalWithdrawIsOpen && (
+                <Modal onClose={modalWithdrawHandler} title='Withdraw from borrow'>
+                    <Input />
+                </Modal>
+            )}
+
+            {modalDepositIsOpen && (
+                <Modal onClose={modalDepositHandler} title='Deposit to borrow'>
+                    <div className={styles.modalInners}>
+                        <Input type='number' onChange={handleDepositInput} value={depositValue || ""} placeholder={"0"} />
+
+                        <Button
+                            onClick={depositWrite}
+                            isLoading={isLoadingDepositData || loadingWaitDeposit}
+                            disabled={prepareLoading || isLoadingDepositData || errorDeposit || loadingWaitDeposit ? true : false}
+                            title='Deposit'
+                        />
+                    </div>
+                </Modal>
+            )}
+
+            {modalWaitIsOpen && <WaitModal modalWaitHandler={modalWaitHandler} text={"Wait for confirmations..."} />}
+            {modalDoneIsOpen && <DoneModal modalDoneHandler={modalDoneHandler} text={"You have successfully deposited"} hash={depositData?.hash} />}
+
+            {modalCloseIsOpen && (
+                <Modal onClose={modalCloseHandler} title='Close borrow'>
+                    <Input />
+                </Modal>
+            )}
+
+
+        </>
+
     )
 };
 
 export default BorrowControl;
+
+
+
+

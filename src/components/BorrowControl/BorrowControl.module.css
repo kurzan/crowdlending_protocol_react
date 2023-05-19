@@ -1,0 +1,37 @@
+.details {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .details_item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .details_text {
+    color: gray;
+    font-size: 14px;
+  }
+  
+  .details_amount {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  .controlBurrons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+
+  .modalInners {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }

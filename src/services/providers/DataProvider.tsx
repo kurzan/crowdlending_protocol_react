@@ -120,6 +120,15 @@ export const DataProvider = ({ children }: { children: any }) => {
     },
   });
 
+  useContractEvent({
+    address: contract.address,
+    abi: contract.abi,
+    eventName: 'borrowDeposited',
+    listener(node, label, owner) {
+      console.log(node, label, owner)
+      getBorrows();
+    },
+  });
 
   useEffect(() => {
     getBorrows();

@@ -1,4 +1,4 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LayoutPage from "../layout/Layout";
 import styles from './CreateBorrow.module.css';
 import Button from "../../components/Button/Button";
@@ -9,10 +9,9 @@ import { contract } from "../../services/web3config";
 import { ethers } from "ethers";
 import { useData } from "../../hooks/useData";
 import Box from "../../components/Box/Box";
-import { Oval } from "react-loader-spinner";
-import doneImg from '../../images/done.svg';
-import Modal from "../../components/Modal/Modal";
 import { useNavigate } from "react-router-dom";
+import WaitModal from "../../components/WaitModal/WaitModal";
+import DoneModal from "../../components/DoneModal/DoneModal";
 
 type TInitialState = {
     borrowingGoal: number,
@@ -28,6 +27,7 @@ function CreateBorrow() {
     const { borrowers, borrows } = useData();
     const { values, handleChange, setValues } = useForm({} as TInitialState);
     const { address, isConnected } = useAccount();
+
     const navigate = useNavigate();
 
     const [modalWaitIsOpen, setModalWaitIsOpen] = useState(false);
@@ -76,19 +76,6 @@ function CreateBorrow() {
         },
     })
 
-    useEffect(() => {
-        console.log(values)
-    }, [values])
-
-
-    useEffect(() => {
-        console.log(alreadyBorrower)
-
-    }, [alreadyBorrower])
-
-
-
-
     const modalWaitHandler = () => {
         setModalWaitIsOpen(!modalWaitIsOpen);
     };
@@ -124,37 +111,8 @@ function CreateBorrow() {
 
             </div>
 
-            {modalWaitIsOpen && (
-                <Modal onClose={modalWaitHandler}>
-                    <div className={styles.waitContainer}>
-                        <p>Wait for confirmations...</p>
-                        <Oval
-                            height={60}
-                            width={60}
-                            color="#4fa94d"
-                            wrapperStyle={{}}
-                            wrapperClass=""
-                            visible={true}
-                            ariaLabel='oval-loading'
-                            secondaryColor="#4fa94d"
-                            strokeWidth={4}
-                            strokeWidthSecondary={2}
-                        />
-                    </div>
-                </Modal>
-            )}
-
-
-            {modalDoneIsOpen && (
-                <Modal onClose={modalDoneHandler}>
-                    <div className={styles.waitContainer}>
-                        <p className={styles.modalHeading}>Congratulations</p>
-                        <img src={doneImg} alt="done" />
-                        <p className={styles.modalSubHeading}>You successfuly create borrow</p>
-                        <a href={`https://testnet.bscscan.com/tx/${investData?.hash}`} target="_blanc">View transaction</a>
-                    </div>
-                </Modal>
-            )}
+            {modalWaitIsOpen && <WaitModal modalWaitHandler={modalWaitHandler} text={"Wait for confirmations..."}/>}
+            {modalDoneIsOpen && <DoneModal modalDoneHandler={modalDoneHandler} heading="Congratulations" text="You successfuly create borrow" hash={investData?.hash}/>}
 
         </LayoutPage>
     );

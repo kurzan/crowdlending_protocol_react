@@ -30,4 +30,5 @@ export type TBorrow = {
     startTime: number;
     closeTime: number;
     createTime: BigNumberish;
+    borrowBalance: BigNumberish;
 };

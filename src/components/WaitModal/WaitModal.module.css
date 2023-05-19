@@ -1,0 +1,7 @@
+.waitContainer {
+  padding: 16px;
+  display: flex;
+  gap: 18px;
+  flex-direction: column;
+  align-items: center;
+}
