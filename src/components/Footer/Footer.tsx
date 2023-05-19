@@ -11,7 +11,7 @@ const Footer = () => {
         </div>
         
         <p>Supported Chains</p>
-        <img src={binanceImg} alt={"BNB Chain"} width="22px" height="22px" />
+        <a href={`https://testnet.bscscan.com/address/${contract.address}`} target="_blank" rel="noreferrer"><img src={binanceImg} alt={"BNB Chain"} width="22px" height="22px" /></a>
       </div>
 
       <div className={styles.socials}>

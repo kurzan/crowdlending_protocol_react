@@ -82,6 +82,8 @@ const BorrowsList = () => {
             <Skeleton containerClassName={styles.skeletonList} count={1} borderRadius={"0.5rem"} />
             <Skeleton containerClassName={styles.skeletonList} count={1} borderRadius={"0.5rem"} />
             <Skeleton containerClassName={styles.skeletonList} count={1} borderRadius={"0.5rem"} />
+            <Skeleton containerClassName={styles.skeletonList} count={1} borderRadius={"0.5rem"} />
+            <Skeleton containerClassName={styles.skeletonList} count={1} borderRadius={"0.5rem"} />
           </>
           
           :
