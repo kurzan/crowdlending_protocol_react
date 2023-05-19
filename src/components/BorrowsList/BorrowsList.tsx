@@ -47,7 +47,7 @@ const BorrowsList = () => {
       },
       []
     )
-      .sort((a, b) => (b.idSort - a.idSort) || (b.statusSort - a.statusSort))
+      .sort((a, b) => (b.idSort - a.idSort) || (a.statusSort - b.statusSort))
       .map(({ item }) => item);
 
     setSortedBorrows(sortedData);
@@ -74,6 +74,7 @@ const BorrowsList = () => {
         <Stats />
       </div> : <Skeleton containerClassName={styles.skeletonHeading} count={1} height={50} width={"100%"} borderRadius={"0.5rem"} />}
       <div className={styles.list}>
+
         {!borrows ?
           <>
             <Skeleton containerClassName={styles.skeletonList} count={1} borderRadius={"0.5rem"} />

@@ -1,5 +1,5 @@
 import { useAccount, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
-import { useState, useEffect, SyntheticEvent, ChangeEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { TBorrow } from '../../services/types';
 import { getYearRate } from '../../services/utils';
 import Box from '../Box/Box';
@@ -8,7 +8,6 @@ import styles from './BorrowControl.module.css';
 import { contract } from '../../services/web3config';
 import Modal from '../Modal/Modal';
 import Input from '../Input/Input';
-import { useForm } from '../../hooks/useForms';
 import { ethers } from 'ethers';
 import WaitModal from '../WaitModal/WaitModal';
 import DoneModal from '../DoneModal/DoneModal';
@@ -129,8 +128,12 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
 
                     <div className={styles.controlBurrons}>
                         <Button onClick={modalWithdrawHandler} title='Withdraw ' />
-                        <Button onClick={modalDepositHandler} title='Deposit' />
-                        <Button onClick={modalCloseHandler} style={{ backgroundColor: 'red' }} title='Close Borrow' />
+                        {currentBorrow?.status !== 2 && 
+                        <>
+                            <Button onClick={modalDepositHandler} title='Deposit' />
+                            <Button onClick={modalCloseHandler} style={{ backgroundColor: 'red' }} title='Close Borrow' />
+                        </>
+                        }
                     </div>
                 </div>
             </Box>

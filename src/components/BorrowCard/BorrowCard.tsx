@@ -71,7 +71,7 @@ const BorrowCard = ({ borrow }: { borrow: TBorrow }) => {
   }, [borrow, timeRemaining]);
 
   return (
-    <div style={!verifiedBorrower ? {backgroundColor: '#FFF3E0'} : {}}  className={borrow.status === 0 ? styles.card : styles.card + ' ' + styles.card_unactive} onClick={() => navigate(`/borrows/${Number(borrow.borrowId)}`)}>
+    <div style={!verifiedBorrower ? {backgroundColor: '#FFF3E0'} : {}}  className={borrow.status <= 1 ? styles.card : styles.card + ' ' + styles.card_unactive} onClick={() => navigate(`/borrows/${Number(borrow.borrowId)}`)}>
       <div className={styles.head}>
         <CompanyLogo src={borrow.image} alt={borrow.companyName} />     
         <div className={styles.statusBox}>
