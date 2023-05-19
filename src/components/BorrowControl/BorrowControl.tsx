@@ -26,7 +26,9 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
 
 
     const [modalWaitIsOpen, setModalWaitIsOpen] = useState(false);
+
     const [modalDoneIsOpen, setModalDoneIsOpen] = useState(false);
+    const [modalCloseDoneIsOpen, setModalCloseDoneIsOpen] = useState(false);
 
     const handleDepositInput = (e: ChangeEvent<HTMLInputElement>) => {
         setDepostiValue(Number(e.target.value))
@@ -60,10 +62,31 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
         },
     })
 
-    useEffect(() => {
-        console.log(depositValue)
-    }, [depositValue])
 
+
+
+    const { config: closeBorrowConfig, error: errorCloseBorrow, isLoading: prepareLoadingCloseBorrow } = usePrepareContractWrite({
+        address: contract.address,
+        abi: contract.abi,
+        functionName: 'closeBorrow',
+        args: [currentBorrow?.borrowId],
+    });
+
+    const { data: closeBorrowData, isLoading: isLoadingCloseBorrow, isSuccess: isSuccessCloseBorrow, write: closeBorrowWrite, reset: closeBorrowReset } = useContractWrite({
+        ...closeBorrowConfig,
+        onSuccess(data) {
+            setModalWaitIsOpen(true);
+        },
+    });
+
+    const { data: dataWaitCloseBorrow, isError: errorWaitCloseBorrow, isLoading: loadingWaitCloseBorrow } = useWaitForTransaction({
+        hash: closeBorrowData?.hash,
+        onSuccess(data) {
+            setModaCloseIsOpen(false);
+            setModalWaitIsOpen(false);
+            setModalCloseDoneIsOpen(true);
+        },
+    })
 
     const modalDepositHandler = () => {
         setModaDepositIsOpen(!modalDepositIsOpen);
@@ -86,6 +109,11 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
         setModalDoneIsOpen(!modalDoneIsOpen);
     };
 
+
+    const modalCloseDoneHandler = () => {
+        setModalCloseDoneIsOpen(!modalCloseDoneIsOpen);
+    };
+
     return (
         <>
             <Box title="Borrow's management">
@@ -100,7 +128,7 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
                     </div>
 
                     <div className={styles.controlBurrons}>
-                        <Button onClick={modalWithdrawHandler} title='withdraw ' />
+                        <Button onClick={modalWithdrawHandler} title='Withdraw ' />
                         <Button onClick={modalDepositHandler} title='Deposit' />
                         <Button onClick={modalCloseHandler} style={{ backgroundColor: 'red' }} title='Close Borrow' />
                     </div>
@@ -117,7 +145,6 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
                 <Modal onClose={modalDepositHandler} title='Deposit to borrow'>
                     <div className={styles.modalInners}>
                         <Input type='number' onChange={handleDepositInput} value={depositValue || ""} placeholder={"0"} />
-
                         <Button
                             onClick={depositWrite}
                             isLoading={isLoadingDepositData || loadingWaitDeposit}
@@ -130,10 +157,21 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
 
             {modalWaitIsOpen && <WaitModal modalWaitHandler={modalWaitHandler} text={"Wait for confirmations..."} />}
             {modalDoneIsOpen && <DoneModal modalDoneHandler={modalDoneHandler} text={"You have successfully deposited"} hash={depositData?.hash} />}
+            {modalCloseDoneIsOpen && <DoneModal modalDoneHandler={modalCloseDoneHandler} text={"You have successfully closed the borrow"} hash={closeBorrowData?.hash} />}
 
             {modalCloseIsOpen && (
-                <Modal onClose={modalCloseHandler} title='Close borrow'>
-                    <Input />
+                <Modal onClose={modalCloseHandler} title='Are you shure?'>
+                    <div className={styles.modalInners}>
+                        {errorCloseBorrow && <Box>
+                            <p>Something wrong</p>
+                        </Box>}
+                        <Button
+                            onClick={closeBorrowWrite}
+                            isLoading={isLoadingCloseBorrow || loadingWaitCloseBorrow}
+                            disabled={prepareLoadingCloseBorrow || isLoadingCloseBorrow || errorCloseBorrow || loadingWaitDeposit ? true : false}
+                            title={isLoadingCloseBorrow ? 'Pending...' : 'Close'}
+                        />
+                    </div>
                 </Modal>
             )}
 
