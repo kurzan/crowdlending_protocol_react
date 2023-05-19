@@ -115,6 +115,11 @@
   font-weight: 400;
 }
 
+.expectedBox > p {
+  font-weight: 600;
+  color: rgb(214, 144, 15);
+}
+
 .timerBox {
   display: flex;
   justify-content: center;

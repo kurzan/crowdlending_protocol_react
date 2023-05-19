@@ -28,6 +28,8 @@ import { contract } from "../../services/web3config";
 import { Oval } from "react-loader-spinner";
 import doneImg from '../../images/done.svg';
 import TooltipBox from "../../components/TooltipBox/TooltipBox";
+import BorrowControl from "../../components/BorrowControl/BorrowControl";
+import moment from 'moment';
 
 const Borrow = () => {
   const [verifiedBorrower, setVerifiedBorrower] = useState(true);
@@ -48,10 +50,12 @@ const Borrow = () => {
   const { address, isConnected } = useAccount();
 
   const currentBorrow = borrows?.find(borrow => Number(borrow.borrowId) === Number(id));
+  const currentBorrowwer = currentBorrow?.borrower === address;
   const alreadyInvest = currentBorrow?.investors.find(item => item.investor === address);
   const investors = currentBorrow?.investors.filter(item => Number(item.amount) > 0).length;
 
   const endDate = Number(currentBorrow?.startTime) + Number(currentBorrow?.borrowingPeriod);
+  const expired = endDate < Date.now();
 
   useEffect(() => {
 
@@ -157,11 +161,14 @@ const Borrow = () => {
         </div>
 
         <div className={styles.statusBox}>
-          {Number(currentBorrow?.status) === 1 && currentBorrow && <div className={styles.timerBox}>
+          {Number(currentBorrow?.status) === 1 && currentBorrow && !expired && <div className={styles.timerBox}>
             <MdQueryBuilder />
             <TooltipBox tooltipText={formattedDate(endDate)} >
               <p className={styles.timer}>Ends in: {`${days}d ${hours}h ${mins}m ${secs}s`}</p>
             </TooltipBox>
+          </div>}
+          {Number(currentBorrow?.status) === 1 && currentBorrow && expired && <div className={styles.expectedBox}>
+            <p>⚠️ Borrower expected to pay {formattedDate(endDate)}</p>
           </div>}
           <Status status={currentBorrow?.status} />
         </div>
@@ -195,7 +202,9 @@ const Borrow = () => {
         </div>
       </Box>}
 
-      {(currentBorrow?.status === 0 && !alreadyInvest) && <div className={styles.button}>
+      {currentBorrowwer && <BorrowControl/>}
+
+      {(currentBorrow?.status === 0 && !alreadyInvest && !currentBorrowwer) && <div className={styles.button}>
         <Button disabled={Number(currentBorrow?.status) !== 0 || !isConnected ? true : false} onClick={modalHandler} title={verifiedBorrower ? "Invest 🔥" : "Invest ⚠" }/>   
       </div>}
       <Box title="About borrower" bg={!verifiedBorrower ? "#FFF3E0" : ""}>
