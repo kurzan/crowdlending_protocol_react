@@ -11,6 +11,7 @@ import { TBorrow } from '../../services/types';
 import { Search } from '../Search/Search';
 import Stats from '../Stats/Stats';
 import BorrowsTabs from '../BorrowsTabs/BorrowsTabs';
+import { useSearchParams } from 'react-router-dom';
 
 type TSortedBorrow = {
   statusSort: number;
@@ -54,6 +55,7 @@ export type TTab = {
 
 const BorrowsList = () => {
   const [activeTab, setActiveTab] = useState<TTab>(tabs[1]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleTabClick = (tab: any) => {
     setActiveTab(tab);
@@ -107,12 +109,12 @@ const BorrowsList = () => {
   const searchBorrows = useMemo(
     () => {
       try {
-        const search = searchValue || '';
+        const searchValue = searchParams.get('search') || '';
         const filtered = filteredBorrows?.filter(
           item => {
             const borrower = item.borrower?.toLocaleLowerCase() || '';
             const companyName = item.companyName?.toLocaleLowerCase() || '';
-            return borrower.includes(search) || companyName.includes(search);
+            return borrower.includes(searchValue) || companyName.includes(searchValue);
           }
         );
         return filtered;
@@ -120,7 +122,7 @@ const BorrowsList = () => {
         return filteredBorrows;
       }
     },
-    [filteredBorrows, searchValue]
+    [filteredBorrows, searchParams]
   );
 
   return (
