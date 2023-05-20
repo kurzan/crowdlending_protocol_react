@@ -1,9 +1,11 @@
 .container {
   padding: 0;
   display: flex;
+  flex-wrap: wrap;
   border-radius: 24px;
   margin-top: 8px;
   margin-bottom: 8px;
+  max-width: 100%;
 }
 
 .tab_element {
@@ -30,3 +32,4 @@
 .tab_element:hover {
   background-color: white;
 }
+

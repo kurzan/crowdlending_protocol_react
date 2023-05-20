@@ -10,7 +10,7 @@ import BorrowCard from '../BorrowCard/BorrowCard';
 import { TBorrow } from '../../services/types';
 import { Search } from '../Search/Search';
 import Stats from '../Stats/Stats';
-import BorrowsTabs from '../BorrowsTabs/BorrowsTabs';
+import BorrowsTabs from '../BorrowsTabs/BorrowsTAbs';
 
 type TSortedBorrow = {
   statusSort: number;
@@ -83,18 +83,27 @@ const BorrowsList = () => {
     setSortedBorrows(sortedData);
   }, [borrows])
 
+
+  const filteredBorrows = useMemo(() => {
+    try {
+      return sortedBorrows?.filter(item => item.status === activeTab.status)
+    } catch (error) {
+      return sortedBorrows;
+    }
+  }, [sortedBorrows, activeTab.status])
+
   const searchBorrows = useMemo(
     () => {
       try {
         const search = searchValue || '';
-        return sortedBorrows?.filter(
+        return filteredBorrows?.filter(
           item => item.companyName.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1
         );
       } catch (error) {
-        return sortedBorrows;
+        return filteredBorrows;
       }
     },
-    [sortedBorrows, searchValue]
+    [filteredBorrows, searchValue]
   );
 
   return (
@@ -120,7 +129,7 @@ const BorrowsList = () => {
           
           :
           <>
-          {borrows && searchBorrows && searchBorrows?.filter(item => item.status === activeTab.status).slice(page * 8 - 8, page * 8).map((borrow, index) =>
+          {borrows && searchBorrows && searchBorrows?.slice(page * 8 - 8, page * 8).map((borrow, index) =>
              <BorrowCard key={index} borrow={borrow} />)}
           </>
         }
@@ -133,7 +142,7 @@ const BorrowsList = () => {
           </div>
           <div className='pageNumbers'>
             {
-              [...Array(Math.ceil(borrows.length / 8))].map((n, i) => {
+              [...Array(Math.ceil(filteredBorrows ? filteredBorrows.length / 8 : 1))].map((n, i) => {
                 return <div
                   key={i}
                   className={`num ${page === i + 1 ? `numActive` : ''}`}
