@@ -10,7 +10,7 @@ import BorrowCard from '../BorrowCard/BorrowCard';
 import { TBorrow } from '../../services/types';
 import { Search } from '../Search/Search';
 import Stats from '../Stats/Stats';
-import BorrowsTabs from '../BorrowsTabs/BorrowsTAbs';
+import BorrowsTabs from '../BorrowsTabs/BorrowsTabs';
 
 type TSortedBorrow = {
   statusSort: number;
