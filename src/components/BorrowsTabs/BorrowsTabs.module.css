@@ -1,0 +1,32 @@
+.container {
+  padding: 0;
+  display: flex;
+  border-radius: 24px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.tab_element {
+  border-radius: 12px;
+  box-sizing: border-box;
+  padding: 9px 16px 9px 16px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 6px 4px 6px 4px;
+  height: 38px;
+  cursor: pointer;
+  text-align: center;
+  align-items: center;
+  max-width: 140px;
+  min-width: 90px;
+  vertical-align: middle;
+}
+
+.active {
+  background-color: white;
+}
+
+.tab_element:hover {
+  background-color: white;
+}

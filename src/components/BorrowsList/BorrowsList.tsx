@@ -10,6 +10,7 @@ import BorrowCard from '../BorrowCard/BorrowCard';
 import { TBorrow } from '../../services/types';
 import { Search } from '../Search/Search';
 import Stats from '../Stats/Stats';
+import BorrowsTabs from '../BorrowsTabs/BorrowsTabs';
 
 type TSortedBorrow = {
   statusSort: number;
@@ -17,8 +18,37 @@ type TSortedBorrow = {
   item: TBorrow;
 }
 
+const tabs = [
+  {
+    label: "Open",
+    status: 0
+  },
+  {
+    label: "Active",
+    status: 1
+  },
+  {
+    label: "Closed",
+    status: 2
+  },
+  {
+    label: "Canceled",
+    status: 3
+  }
+];
+
+export type TTab = {
+  label: string;
+  status: number;
+}
 
 const BorrowsList = () => {
+  const [activeTab, setActiveTab] = useState<TTab>(tabs[0]);
+
+  const handleTabClick = (tab: any) => {
+    setActiveTab(tab);
+  };
+
   const [page, setPage] = useState(1);
   const { isError, borrows } = useData();
 
@@ -73,8 +103,9 @@ const BorrowsList = () => {
         <Search placeholder="Search" setSearch={setSearchValue} />
         <Stats />
       </div> : <Skeleton containerClassName={styles.skeletonHeading} count={1} height={50} width={"100%"} borderRadius={"0.5rem"} />}
+      <BorrowsTabs tabs={tabs} onTabClick={handleTabClick} activeTab={activeTab} />
       <div className={styles.list}>
-
+        
         {!borrows ?
           <>
             <Skeleton containerClassName={styles.skeletonList} count={1} borderRadius={"0.5rem"} />
@@ -88,8 +119,10 @@ const BorrowsList = () => {
           </>
           
           :
-          <>{borrows && searchBorrows && searchBorrows?.slice(page * 8 - 8, page * 8).map((borrow, index) =>
-             <BorrowCard key={index} borrow={borrow} />)}</>
+          <>
+          {borrows && searchBorrows && searchBorrows?.filter(item => item.status === activeTab.status).slice(page * 8 - 8, page * 8).map((borrow, index) =>
+             <BorrowCard key={index} borrow={borrow} />)}
+          </>
         }
       </div>
 
