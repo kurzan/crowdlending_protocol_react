@@ -20,30 +20,40 @@ type TSortedBorrow = {
 
 const tabs = [
   {
+    label: "All",
+    status: -1,
+    text: 'All borrows'
+  },
+  {
     label: "Open",
-    status: 0
+    status: 0,
+    text: 'Borrows that are still in the process of raising funds'
   },
   {
     label: "Active",
-    status: 1
+    status: 1,
+    text: 'Formed borrows for which repayments are expected'
   },
   {
     label: "Closed",
-    status: 2
+    status: 2,
+    text: 'Completed borrows that have already matured'
   },
   {
     label: "Canceled",
-    status: 3
+    status: 3,
+    text: 'Failed and early canceled borrows'
   }
 ];
 
 export type TTab = {
   label: string;
   status: number;
+  text: string;
 }
 
 const BorrowsList = () => {
-  const [activeTab, setActiveTab] = useState<TTab>(tabs[0]);
+  const [activeTab, setActiveTab] = useState<TTab>(tabs[1]);
 
   const handleTabClick = (tab: any) => {
     setActiveTab(tab);
@@ -86,19 +96,26 @@ const BorrowsList = () => {
 
   const filteredBorrows = useMemo(() => {
     try {
-      return sortedBorrows?.filter(item => item.status === activeTab.status)
+      if (activeTab.status === -1) return sortedBorrows;
+      return sortedBorrows?.filter(item => item.status === activeTab.status);
     } catch (error) {
       return sortedBorrows;
     }
   }, [sortedBorrows, activeTab.status])
 
+
   const searchBorrows = useMemo(
     () => {
       try {
         const search = searchValue || '';
-        return filteredBorrows?.filter(
-          item => item.companyName.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) > -1
+        const filtered = filteredBorrows?.filter(
+          item => {
+            const borrower = item.borrower?.toLocaleLowerCase() || '';
+            const companyName = item.companyName?.toLocaleLowerCase() || '';
+            return borrower.includes(search) || companyName.includes(search);
+          }
         );
+        return filtered;
       } catch (error) {
         return filteredBorrows;
       }

@@ -23,11 +23,12 @@
   max-width: 140px;
   min-width: 90px;
   vertical-align: middle;
-
+  color:  #808190;
 }
 
 .active {
   background-color: white;
+  color: black;
 }
 
 .tab_element:hover {
