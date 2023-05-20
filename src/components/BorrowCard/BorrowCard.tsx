@@ -21,8 +21,6 @@ const BorrowCard = ({ borrow }: { borrow: TBorrow }) => {
     } else {
       setVerifiedBorrower(false)
     }
-
-
 }, [borrowers, borrow.borrower])
 
   const [startDate, setStartDate] = useState<string>();
@@ -34,6 +32,9 @@ const BorrowCard = ({ borrow }: { borrow: TBorrow }) => {
   const [secs, setsecs] = useState(0);
 
   const [timeRemaining, setTimeRemaining] = useState(0);
+
+  const endDate = Number(borrow?.startTime) + Number(borrow?.borrowingPeriod);
+  const expired = Date.now() > endDate*1000;
 
 
   let investors = 0;
@@ -111,7 +112,7 @@ const BorrowCard = ({ borrow }: { borrow: TBorrow }) => {
         {borrow.status === 1 &&
           <div className={styles.details_item}>
             <p className={styles.details_text}>Ends in</p>
-            <p className={styles.details_amount}>{days !== 0 && hours !== 0 ? `${days}d ${hours}h` : "⚠️ Expected" }</p>
+            <p className={styles.details_amount}>{!expired ? `${days}d ${hours}h` : "⚠️ Expected" }</p>
           </div>}
 
         {borrow.status === 2 &&

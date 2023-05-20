@@ -55,7 +55,7 @@ const Borrow = () => {
   const investors = currentBorrow?.investors.filter(item => Number(item.amount) > 0).length;
 
   const endDate = Number(currentBorrow?.startTime) + Number(currentBorrow?.borrowingPeriod);
-  const expired = endDate < Date.now();
+  const expired = Date.now() > endDate*1000;
 
   useEffect(() => {
 
