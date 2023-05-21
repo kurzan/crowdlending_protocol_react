@@ -124,6 +124,7 @@ const BorrowsList = () => {
     },
     [filteredBorrows, searchParams]
   );
+  
 
   return (
     <div className={styles.container}>
@@ -131,7 +132,7 @@ const BorrowsList = () => {
         <Search placeholder="Search" setSearch={setSearchValue} />
         <Stats />
       </div> : <Skeleton containerClassName={styles.skeletonHeading} count={1} height={50} width={"100%"} borderRadius={"0.5rem"} />}
-      <BorrowsTabs tabs={tabs} onTabClick={handleTabClick} activeTab={activeTab} />
+      <BorrowsTabs tabs={tabs} onTabClick={handleTabClick} activeTab={activeTab} count={filteredBorrows?.length} />
       <div className={styles.list}>
         
         {!borrows ?
