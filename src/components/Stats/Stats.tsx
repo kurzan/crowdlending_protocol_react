@@ -2,13 +2,14 @@ import { useData } from '../../hooks/useData';
 import styles from './Stats.module.css';
 import CoinIcon from '../CoinIcon/CoinIcon';
 import Skeleton from 'react-loading-skeleton';
+import Borrow from '../../pages/borrow/Borrow';
 
 const Stats = () => {
 
   const {borrows, borrowsIds} = useData();
   
   const totalBorrowed = borrows?.reduce((acc, item) => acc + Number(item.totalBorrowed), 0);
-  const avgRate = borrows && borrows?.reduce((acc, item) => acc + Number(item.interestRate), 0) / borrows?.length;
+  const avgRate = borrows && borrows.filter(borrow => borrow.status !== 3)?.reduce((acc, item) => acc + Number(item.interestRate), 0) / borrows?.length;
   
   const investorsSet = new Set();
   borrows?.forEach(borrow => {
@@ -22,6 +23,13 @@ const Stats = () => {
   const totalInvestors = Array.from(investorsSet);
 
 
+  const borrowersSet = new Set();
+  borrows?.forEach(borrow => {
+    borrowersSet.add(borrow.borrower)
+  });
+
+  const totalBorrowers = Array.from(borrowersSet);
+
   return(
     <div className={styles.container}>
       <div className={styles.item}>
@@ -30,8 +38,8 @@ const Stats = () => {
       </div>
 
       <div className={styles.item}>
-        <p className={styles.text}>Borrows</p>
-        {!borrows ? <Skeleton count={1} borderRadius={"0.5rem"} /> : <p className={styles.amount}>{borrowsIds && borrowsIds.length}</p>}
+        <p className={styles.text}>Borrowers</p>
+        {!borrows ? <Skeleton count={1} borderRadius={"0.5rem"} /> : <p className={styles.amount}>{totalBorrowers && totalBorrowers.length}</p>}
       </div>
       
       <div className={styles.item}>
