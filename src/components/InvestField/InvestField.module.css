@@ -40,13 +40,6 @@
   color: white;
 }
 
-.trans_info {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.75rem;
-  line-height: 1rem;
-}
-
 .waitContainer {
   display: flex;
   gap: 16px;

@@ -8,3 +8,26 @@
     box-sizing: border-box;
     border: solid 1px #e5e7eb;
   }
+
+  .inputBox {
+    position: relative;
+  }
+
+  .max {
+    top: 50%;
+    right: 4%;
+    padding: 4px;
+    padding-inline: 8px;
+    position: absolute;
+    height: 60%;
+    border-radius: 8px;
+    border: 0;
+    transform: translate(0, -50%);
+    border: solid 1px #e5e7eb;
+    font-size: 12px;
+  }
+  
+  .max:hover {
+    background-color: gray;
+    color: white;
+  }

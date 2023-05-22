@@ -11,6 +11,7 @@ import { Store } from 'react-notifications-component';
 import { Oval } from 'react-loader-spinner';
 import Modal from '../Modal/Modal';
 import { useInputAmount } from '../../hooks/useData';
+import PrepareTransInfo from '../PrepareTransInfo/PreapareTransInfo';
 
 type TInvestFieldProps = {
   id: any;
@@ -42,6 +43,31 @@ const InvestField: FC<TInvestFieldProps> = ({ error, id, currentBorrow, button }
     setInputValue(userAmount);
   };
 
+
+  const prerapeTransInfoValues = [
+    {
+      text: "You balance",
+      amount: `${ethers.utils.formatEther(investorBalance?.value as BigNumberish)} tBNB`      
+    },
+    {
+      text: "Minimum",
+      amount: "0,01 tBNB"
+    },
+    {
+      text: "Maximum",
+      amount: `${Number(ethers.utils.formatEther(maxInvestValue().toString())).toFixed(3)} tBNB`
+    },
+    {
+      text: "Fee",
+      amount: "0%"
+    },
+    {
+      text: "Gas cost",
+      amount: "-"
+    },
+  ]
+
+
   return (
     <form action="" className={styles.form}>
       <div className={styles.input_box}>
@@ -51,32 +77,7 @@ const InvestField: FC<TInvestFieldProps> = ({ error, id, currentBorrow, button }
       {isConnected && button}
       {error && <p className={styles.warning}>something  wrong</p>}
 
-      <Box margin="0" bg={"rgb(249, 249, 249)"} >
-              <div className={styles.trans_info}>
-                <p className={styles.trans_text}>You balance</p>
-                <p className={styles.trans_amount}>{ethers.utils.formatEther(investorBalance?.value as BigNumberish)} tBNB</p>
-              </div>
-              <div className={styles.trans_info}>
-                <p className={styles.trans_text}>Minimum</p>
-                <p className={styles.trans_amount}>0,01 tBNB</p>
-              </div>
-
-              <div className={styles.trans_info}>
-                <p className={styles.trans_text}>Maximum</p>
-                <p className={styles.trans_amount}>{Number(ethers.utils.formatEther(maxInvestValue().toString())).toFixed(3)} tBNB</p>
-              </div>
-
-              <div className={styles.trans_info}>
-                <p className={styles.trans_text}>Fee</p>
-                <p className={styles.trans_amount}>0%</p>
-              </div>
-
-              <div className={styles.trans_info}>
-                <p className={styles.trans_text}>Gas cost</p>
-                <p className={styles.trans_amount}>-</p>
-              </div>
-      </Box>
-
+      <PrepareTransInfo values={prerapeTransInfoValues}/>
 
     </form>
   )
