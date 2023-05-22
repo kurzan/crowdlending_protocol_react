@@ -28,7 +28,7 @@ src/contract/EarlyBird.sol
 - [x] Investing procces
 - [x] Share actions to socials
 - [x] Cancel investment
-- [ ] Front-end borrow management: Close / Cancelled borrows, withdraw, pay to investors and etc. </br>/* now it is possible only through the smart contract interface /*
+- [x] Front-end borrow management: Close / Cancelled borrows, pay to investors and etc. </br>/* now it is possible only through the smart contract interface /*
 - [ ] Borrowers pages
 - [ ] Rating and scoring system
 - [ ] Opportunity for investors to leave comments under borrows and borrowers pages
@@ -71,10 +71,14 @@ https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/48946328-
 <b>2. Borrow card with statistics, informations about borrow, investors and functionality invest or cancel invest
   
 ![image](https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/9429a7ff-e871-4cfe-8572-990b644da730)
+  
+<b>3. Borrow's managment page
+  ![image](https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/12841c01-0ad2-425b-a859-e6fc15d9c950)
 
 <b>3. Portfolio page
 
   ![image](https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/71e6ce75-9d6a-43ec-8eb4-6aee89a567de)
+  
 
  <b> 4. Verified borrower card and unverified borrower card
    <img width="645" alt="Снимок экрана 2023-05-17 в 22 28 35" src="https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/8b6372d9-ef0e-4656-bc62-6d914052c948">
