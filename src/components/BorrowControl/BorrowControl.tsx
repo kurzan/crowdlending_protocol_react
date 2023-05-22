@@ -1,5 +1,5 @@
 import { useAccount, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import { TBorrow } from '../../services/types';
 import { getShortAmount, getYearRate } from '../../services/utils';
 import Box from '../Box/Box';
@@ -117,8 +117,16 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
 
     const borrowBallance = Number(currentBorrow?.borrowBalance) / 10 ** 18;
     const interestAmount = getYearRate(currentBorrow?.borrowingGoal, currentBorrow?.interestRate, currentBorrow?.borrowingPeriod);
-    const allAmountsToPay = borrowBallance + interestAmount;
+    const allAmountsToPay = Number(currentBorrow?.borrowingGoal) / 10 ** 18 + interestAmount;
     const notEnought = allAmountsToPay - borrowBallance;
+
+
+    useEffect(() => {
+      console.log(allAmountsToPay)
+    
+
+    }, [allAmountsToPay])
+    
 
     return (
         <>
