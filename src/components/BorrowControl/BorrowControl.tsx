@@ -143,7 +143,7 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
 
                     <div className={styles.controlBurrons}>
                         <Button onClick={modalWithdrawHandler} title='Withdraw ' />
-                        {currentBorrow?.status !== 2 && 
+                        {currentBorrow && currentBorrow?.status <= 1 && 
                         <>
                             <Button onClick={modalDepositHandler} title='Deposit' />
                             <Button onClick={modalCloseHandler} style={{ backgroundColor: 'red' }} title='Close Borrow' />

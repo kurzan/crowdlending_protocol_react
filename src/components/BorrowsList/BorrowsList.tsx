@@ -76,6 +76,10 @@ const BorrowsList = () => {
   };
 
   useEffect(() => {
+    setPage(1)
+  }, [activeTab])
+
+  useEffect(() => {
     const sortedStatuses = [0];
 
     const sortedData = borrows?.reduce(
