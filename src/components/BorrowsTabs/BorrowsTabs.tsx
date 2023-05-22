@@ -1,6 +1,7 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { TTab } from '../BorrowsList/BorrowsList';
 import styles from './BorrowsTabs.module.css';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 type TBorrowsTabsProps = {
   tabs: any[];
@@ -9,12 +10,29 @@ type TBorrowsTabsProps = {
   count?: number;
 }
 
-const BorrowsTabs: FC<TBorrowsTabsProps> = ({ tabs, onTabClick, activeTab, count }) => {
+const BorrowsTabs: FC<TBorrowsTabsProps> = ({ tabs, onTabClick, count }) => {
+
+  const location = useLocation();
+  const queryTab = new URLSearchParams(location.search).get('tab');
+  const activeTab = tabs.find(tab => tab.label === queryTab) || tabs[1];
+
+  const navigate = useNavigate();
+
+  const handleTabClick = (tab: TTab) => {
+    const newPath = `/borrows?tab=${tab.label}`;
+    navigate(newPath, { replace: true });
+    onTabClick(tab);
+  };
+
+  useEffect(() => {
+    onTabClick(activeTab);
+  }, [activeTab,onTabClick])
+
   return (
     <>
     <ul className={styles.container}>
       {tabs.map((tab, index) => (
-        <div key={index} className={tab === activeTab ? styles.active + " " + styles.tab_element : styles.tab_element} onClick={() => onTabClick(tab)}>
+        <div key={index} className={tab === activeTab ? styles.active + " " + styles.tab_element : styles.tab_element} onClick={() => handleTabClick(tab)}>
           {tab.label} {tab === activeTab && <span className={styles.countText}>{count}</span>}
         </div>
       ))}
