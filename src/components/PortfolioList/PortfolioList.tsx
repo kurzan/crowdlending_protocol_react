@@ -53,7 +53,12 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
                         
                     </div>
                 </div>
-                {portfolio && portfolio?.map((portfolio, index) => <PortfolioInvestItem portfolio={portfolio}/>)}
+                
+                {portfolio && portfolio?.slice().sort((a, b) => {
+                    //@ts-ignore
+                    return a.status -  b.status
+                    }).map((portfolio, index) => <PortfolioInvestItem portfolio={portfolio}/>)}
+                
             </div>
         </>
 
