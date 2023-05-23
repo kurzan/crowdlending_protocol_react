@@ -24,9 +24,9 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
     const [modalDepositIsOpen, setModaDepositIsOpen] = useState(false);
     const [modalCloseIsOpen, setModaCloseIsOpen] = useState(false);
 
-
     const [modalWaitIsOpen, setModalWaitIsOpen] = useState(false);
 
+    const [modalWithdrawDoneIsOpen, setModalWithdrawDoneIsOpen] = useState(false);
     const [modalDoneIsOpen, setModalDoneIsOpen] = useState(false);
     const [modalCloseDoneIsOpen, setModalCloseDoneIsOpen] = useState(false);
 
@@ -88,6 +88,31 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
         },
     })
 
+
+    const { config: withdrawBorrowConfig, error: errorWithdrawBorrow, isLoading: prepareLoadingWithdrawBorrow } = usePrepareContractWrite({
+        address: contract.address,
+        abi: contract.abi,
+        functionName: 'withdrawMoney',
+        args: [currentBorrow?.borrowId, '100'],
+    });
+
+    const { data: withdrawBorrowData, isLoading: isLoadingWithdrawBorrow, isSuccess: isSuccessWithdrawBorrow, write: withdrawBorrowWrite, reset: withdrawBorrowReset } = useContractWrite({
+        ...withdrawBorrowConfig,
+        onSuccess(data) {
+            setModalWaitIsOpen(true);
+        },
+    });
+
+    const { data: dataWaitWithdrawBorrow, isError: errorWaitWithdrawBorrow, isLoading: loadingWaitWithdrawBorrow } = useWaitForTransaction({
+        hash: withdrawBorrowData?.hash,
+        onSuccess(data) {
+            setModaWithdrawIsOpen(false);
+            setModalWaitIsOpen(false);
+            setModalWithdrawDoneIsOpen(true);
+        },
+    })
+
+
     const modalDepositHandler = () => {
         setModaDepositIsOpen(!modalDepositIsOpen);
     };
@@ -114,6 +139,9 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
         setModalCloseDoneIsOpen(!modalCloseDoneIsOpen);
     };
 
+    const modalWithdrawDoneHandler = () => {
+        setModalWithdrawDoneIsOpen(!modalWithdrawDoneIsOpen);
+    };
 
     const borrowBallance = Number(currentBorrow?.borrowBalance) / 10 ** 18;
     const interestAmount = getYearRate(currentBorrow?.borrowingGoal, currentBorrow?.interestRate, currentBorrow?.borrowingPeriod);
@@ -122,11 +150,11 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
 
 
     useEffect(() => {
-      console.log(allAmountsToPay)
-    
+        console.log(allAmountsToPay)
+
 
     }, [allAmountsToPay])
-    
+
 
     return (
         <>
@@ -143,11 +171,11 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
 
                     <div className={styles.controlBurrons}>
                         <Button onClick={modalWithdrawHandler} title='Withdraw ' />
-                        {currentBorrow && currentBorrow?.status <= 1 && 
-                        <>
-                            <Button onClick={modalDepositHandler} title='Deposit' />
-                            <Button onClick={modalCloseHandler} style={{ backgroundColor: 'red' }} title='Close Borrow' />
-                        </>
+                        {currentBorrow && currentBorrow?.status <= 1 &&
+                            <>
+                                <Button onClick={modalDepositHandler} title='Deposit' />
+                                <Button onClick={modalCloseHandler} style={{ backgroundColor: 'red' }} title='Close Borrow' />
+                            </>
                         }
                     </div>
                 </div>
@@ -155,7 +183,17 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
 
             {modalWithdrawIsOpen && (
                 <Modal onClose={modalWithdrawHandler} title='Withdraw from borrow'>
-                    <Input />
+                    <div className={styles.modalInners}>
+                        {errorWithdrawBorrow && <Box>
+                            <p>Something wrong</p>
+                        </Box>}
+                        <Button
+                            onClick={withdrawBorrowWrite}
+                            isLoading={isLoadingWithdrawBorrow || loadingWaitWithdrawBorrow}
+                            disabled={prepareLoadingWithdrawBorrow || isLoadingWithdrawBorrow || errorWithdrawBorrow || loadingWaitWithdrawBorrow ? true : false}
+                            title={isLoadingCloseBorrow ? 'Pending...' : 'Withdraw all'}
+                        />
+                    </div>
                 </Modal>
             )}
 
@@ -163,7 +201,7 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
                 <Modal onClose={modalDepositHandler} title='Deposit to borrow'>
                     <div className={styles.modalInners}>
                         <p>Deposit funds with interest to pay out to investors</p>
-                        <Input type='number' setValue={setDepostiValue} onChange={handleDepositInput} value={depositValue} placeholder={"0"} min={0.001} fastBtn/>
+                        <Input type='number' setValue={setDepostiValue} onChange={handleDepositInput} value={depositValue} placeholder={"0"} min={0.001} fastBtn />
                         <Button
                             onClick={depositWrite}
                             isLoading={isLoadingDepositData || loadingWaitDeposit}
@@ -198,6 +236,7 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
             {modalWaitIsOpen && <WaitModal modalWaitHandler={modalWaitHandler} text={"Wait for confirmations..."} />}
             {modalDoneIsOpen && <DoneModal modalDoneHandler={modalDoneHandler} text={"You have successfully deposited"} hash={depositData?.hash} />}
             {modalCloseDoneIsOpen && <DoneModal modalDoneHandler={modalCloseDoneHandler} text={"You have successfully closed the borrow"} hash={closeBorrowData?.hash} />}
+            {modalWithdrawDoneIsOpen && <DoneModal modalDoneHandler={modalWithdrawDoneHandler} text={"You have successfully withdrawn funds from the borrow"} hash={withdrawBorrowData?.hash} />}
 
             {modalCloseIsOpen && (
                 <Modal onClose={modalCloseHandler} title='Are you sure?'>
