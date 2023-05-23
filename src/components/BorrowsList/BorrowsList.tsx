@@ -53,7 +53,7 @@ export type TTab = {
   text: string;
 }
 
-const BorrowsList = () => {
+const BorrowsList = ({borrows}: {borrows: TBorrow[] | null}) => {
   const [activeTab, setActiveTab] = useState<TTab>(tabs[1]);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -62,7 +62,7 @@ const BorrowsList = () => {
   };
 
   const [page, setPage] = useState(1);
-  const { isError, borrows } = useData();
+  const { isError } = useData();
 
   const [sortedBorrows, setSortedBorrows] = useState<TBorrow[] | undefined>();
   const [searchValue, setSearchValue] = useState();

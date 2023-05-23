@@ -31,7 +31,9 @@ const Portfolio = () => {
         interestRate: borrow.interestRate,
         borrowingPeriod: borrow.borrowingPeriod,
         status: borrow.status,
-        image: borrow.image
+        image: borrow.image,
+        startTime: borrow.startTime,
+        closeTime: borrow.closeTime
       });
     }
     return acc;

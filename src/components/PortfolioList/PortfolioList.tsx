@@ -1,5 +1,5 @@
-import { useState, FC, SyntheticEvent } from 'react';
-import { useContractWrite, usePrepareContractWrite } from 'wagmi';
+import { useState, FC, SyntheticEvent, useEffect } from 'react';
+import { useAccount, useContractWrite, usePrepareContractWrite } from 'wagmi';
 import styles from './PortfolioList.module.css';
 import CompanyLogo from '../CompanyLogo/CompanyLogo';
 import Status from '../Status/Status';
@@ -7,14 +7,25 @@ import { useNavigate } from 'react-router-dom';
 import { contract } from '../../services/web3config';
 import CancelButton from '../CancelButton/CancelButton';
 import { TPortfolio } from '../../pages/portfolio/Portfolio';
-import { getShortAddress, getShortAmount, getYearRate } from '../../services/utils';
+import { ONE_DAY_IN_SEC, getShortAddress, getShortAmount, getYearRate } from '../../services/utils';
 import { useBorrowDates } from '../../hooks/useBorrowDates';
+import BorrowsList from '../BorrowsList/BorrowsList';
+import { useData } from '../../hooks/useData';
 
 type TPortfolioListProps = {
- portfolio: TPortfolio[] | undefined;
+ portfolio: TPortfolio[] | null;
 }
 
 const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
+
+    const {address} = useAccount();
+    const {borrows} = useData();
+
+    const currentBorrows = borrows ? borrows?.filter(borrow => borrow.borrower === address) : null;
+
+    useEffect(() => {
+        console.log(currentBorrows)
+    }, [currentBorrows])
 
     return (
         <>  
@@ -58,7 +69,7 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
                     //@ts-ignore
                     return a.status -  b.status
                     }).map((portfolio, index) => <PortfolioInvestItem portfolio={portfolio}/>)}
-                
+            
             </div>
         </>
 
@@ -83,6 +94,19 @@ const PortfolioInvestItem: FC<TPortfolioInvestItemProps> = ({portfolio}) => {
     });
 
     const { data: investData, isLoading: isLoadingCancelInvest, isSuccess, write, reset, status } = useContractWrite(config);
+
+    const {
+        startDate,
+        closetDate,
+        days,
+        hours,
+        mins,
+        secs,
+        timeRemaining,
+        expired,
+        investors,
+      } = useBorrowDates(portfolio);
+
 
 
     return(
@@ -114,7 +138,7 @@ const PortfolioInvestItem: FC<TPortfolioInvestItemProps> = ({portfolio}) => {
                 </div>
 
                 <div className={styles.tableCell}>
-                    <p className={styles.tableText}>{Number(portfolio.borrowingPeriod) / 86400}d</p>
+                    <p className={styles.tableText}>{Number(portfolio.borrowingPeriod) / ONE_DAY_IN_SEC}d</p>
                 </div>
 
                 <div className={styles.tableCell}>
@@ -122,14 +146,18 @@ const PortfolioInvestItem: FC<TPortfolioInvestItemProps> = ({portfolio}) => {
                 </div>
                 <div className={styles.tableCell + " " + styles.cancel}>
 
-                    {portfolio.status === 0 &&  <CancelButton data={investData} disabled={isLoadingCancelInvest} onClick={(e: SyntheticEvent) => {
+                    {portfolio.status === 0 ? <CancelButton data={investData} disabled={isLoadingCancelInvest} onClick={(e: SyntheticEvent) => {
                         e.stopPropagation();
                         write?.();
-                    }}/>}
+                    }}/> : null}
 
                     {portfolio.status === 1 && (
-                        <p></p>
+                        <p>{`${days}d ${hours}h`}</p>
                     )}
+
+                    {portfolio.status && portfolio.status > 1 ? 
+                        <p>{closetDate}</p> : null
+                    }
 
                 </div>
             </div>
