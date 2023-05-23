@@ -6,6 +6,7 @@
   border: 0;
   border-radius: 12px;
   padding: 8px;
+  padding-right: 12px;
   box-sizing: border-box;
   background-color: white;
 }
@@ -14,7 +15,7 @@
   border: 0;
   outline: none;
   width: 100%;
-  color: #BCC5CD;
+  color: black;
   font-weight: 400;
   font-size: 16px;
   border: 0; 
@@ -26,31 +27,3 @@
   height: 25px;
   margin-right: 10px;
 }
-
-/* 
-const SearchInput = styled.input<TSearch>`
-  border: 0;
-  outline: none;
-  width: 100%;
-  color: #BCC5CD;
-  background-color: #484E53;
-  font-weight: 400;
-  font-size: 32px;
-  line-height: 38px;
-  border: 0; 
-
-  &::placeholder {
-    color: #BCC5CD;
-  }
-
-  &:focus {
-    outline: none;
-  }
-`;
-
-const SearchIcon = styled.img`
-  width: 36px;
-  height: 36px;
-  margin-right: 10px;
-  order: -1;
-`; */
