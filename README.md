@@ -28,10 +28,11 @@ src/contract/EarlyBird.sol
 - [x] Investing procces
 - [x] Share actions to socials
 - [x] Cancel investment
-- [x] Front-end borrow management: Close / Cancelled borrows, pay to investors and etc. </br>/* now it is possible only through the smart contract interface /*
+- [x] Front-end borrow management: Close / Cancel borrows, pay to investors
 - [ ] Borrowers pages
 - [ ] Rating and scoring system
-- [ ] Opportunity for investors to leave comments under borrows and borrowers pages
+- [ ] Opportunity for investors to leave comments under borrows and borrowers pages / one of the solutions <b>Web3MQ</b>
+- [ ] Automatic closing of the loan at the end of the term / one of the solutions <b>Chainlink</b>
 - [ ] Analytics of companies on the platform
 
 
@@ -57,7 +58,9 @@ Deployed to following networks:
 
 ## Investment process on video
 
-https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/48946328-2922-425f-85fd-7a3a70ddf91e
+https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/70534807-0b71-47f7-9469-8d4466284905
+
+On YouTube https://www.youtube.com/watch?v=2xbPLyXJXvw&t=12s
 
 ## Screenshots
 
@@ -66,7 +69,7 @@ https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/48946328-
 
 <b>1. Borrows card, statistics, search and nav menu 
 
-![image](https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/81ec448a-9841-4270-bf2c-bcddd6f0a755)
+![image](https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/1e215093-184d-484f-b612-bf2fe357315b)
   
 <b>2. Borrow card with statistics, informations about borrow, investors and functionality invest or cancel invest
   
@@ -84,10 +87,16 @@ https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/48946328-
    <img width="645" alt="Снимок экрана 2023-05-17 в 22 28 35" src="https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/8b6372d9-ef0e-4656-bc62-6d914052c948">
   
   
+   ## Research of crowdlending business
+   
+   ![A4 - 2](https://github.com/kurzan/crowdlending_protocol_react/assets/112556583/145c001d-614a-4542-8830-f7e7c7dd2fa0)
+
+   
+   
   ## Getting Started
 
 To invest, the user needs to have a wallet that supports the Binance Smart Chain and has some TBNB (the native token of the Binance Smart Chain Testnet) in it. The user can then connect their wallet to the dApp and use it.
   
- 
+
 
 
