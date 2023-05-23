@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { contract } from '../../services/web3config';
 import CancelButton from '../CancelButton/CancelButton';
 import { TPortfolio } from '../../pages/portfolio/Portfolio';
-import { getShortAmount, getYearRate } from '../../services/utils';
+import { getShortAddress, getShortAmount, getYearRate } from '../../services/utils';
 
 type TPortfolioListProps = {
  portfolio: TPortfolio[] | undefined;
@@ -72,8 +72,8 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
                         <div className={styles.tableCell}>
                             <CompanyLogo src={portfolio.image} alt={portfolio.companyName} />
                             <div className={styles.company}>
-                                <p className={styles.desc}>{portfolio.description}</p>
-                                <p className={styles.name}>{portfolio.companyName}</p>
+                                <p className={styles.desc}>{portfolio.description ? portfolio.description : "Unverified"}</p>
+                                <p className={styles.name}>{portfolio.companyName ? portfolio.companyName : getShortAddress(portfolio.borrower)}</p>
                             </div>
                         </div>
 

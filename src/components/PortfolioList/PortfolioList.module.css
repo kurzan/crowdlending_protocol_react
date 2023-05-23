@@ -39,7 +39,7 @@
 .tableCell:nth-child(1) {
     display: flex;
     gap: 8px;
-    width: 220px;
+    width: 240px;
     text-align: start;
 }
 

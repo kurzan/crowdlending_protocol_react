@@ -26,6 +26,7 @@ const Portfolio = () => {
     if (investor) {
       acc.push({
         borrowId: Number(borrow.borrowId),
+        borrower: borrow.borrower,
         amount: Number(investor.amount),
         companyName: borrow.companyName,
         description: borrow.description,
