@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import BorrowsList from "../../components/BorrowsList/BorrowsList";
 import LayoutPage from "../layout/Layout";
 
-const Home = () => {
+const Borrows = () => {
  
   return(
       <LayoutPage>
@@ -11,4 +11,4 @@ const Home = () => {
   )
 };
 
-export default Home;
+export default Borrows;

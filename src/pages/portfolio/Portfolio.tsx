@@ -1,6 +1,5 @@
 import { useAccount } from "wagmi";
 import PortfolioList from "../../components/PortfolioList/PortfolioList";
-import Stats from "../../components/Stats/Stats";
 import { useData } from "../../hooks/useData";
 import LayoutPage from "../layout/Layout";
 import styles from "./Portfolio.module.css";
@@ -9,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import portfolioImg from './../../images/portfolio.svg';
 import walletImg from './../../images/wallet.svg';
-import Skeleton from "react-loading-skeleton";
 import { Oval } from "react-loader-spinner";
 
 export type TPortfolio = Partial<TBorrow> & { amount?: number }
