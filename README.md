@@ -31,7 +31,8 @@ src/contract/EarlyBird.sol
 - [x] Front-end borrow management: Close / Cancel borrows, pay to investors
 - [ ] Borrowers pages
 - [ ] Rating and scoring system
-- [ ] Opportunity for investors to leave comments under borrows and borrowers pages
+- [ ] Opportunity for investors to leave comments under borrows and borrowers pages / one of the solutions <b>Web3MQ</b>
+- [ ] Automatic closing of the loan at the end of the term / one of the solutions <b>Chainlink</b>
 - [ ] Analytics of companies on the platform
 
 
