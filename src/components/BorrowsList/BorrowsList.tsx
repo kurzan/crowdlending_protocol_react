@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import './BorrowsList.css';
 import styles from './BorrowList.module.css';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
@@ -53,7 +53,13 @@ export type TTab = {
   text: string;
 }
 
-const BorrowsList = ({borrows}: {borrows: TBorrow[] | null}) => {
+type TBorrowListProps = {
+  borrows: TBorrow[] | null;
+  header?: boolean;
+  defaultTab?: number;
+}
+
+const BorrowsList: FC<TBorrowListProps> = ({borrows, header = true, defaultTab}) => {
   const [activeTab, setActiveTab] = useState<TTab>(tabs[1]);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -132,11 +138,16 @@ const BorrowsList = ({borrows}: {borrows: TBorrow[] | null}) => {
 
   return (
     <div className={styles.container}>
-      {borrows ? <div className={styles.heading}>
-        <Search placeholder="Search" setSearch={setSearchValue} />
-        <Stats />
-      </div> : <Skeleton containerClassName={styles.skeletonHeading} count={1} height={50} width={"100%"} borderRadius={"0.5rem"} />}
-      <BorrowsTabs tabs={tabs} onTabClick={handleTabClick} activeTab={activeTab} count={filteredBorrows?.length} />
+      {header && <>
+        {borrows ? <div className={styles.heading}>
+          <Search placeholder="Search" setSearch={setSearchValue} />
+          <Stats />
+        </div> : <Skeleton containerClassName={styles.skeletonHeading} count={1} height={50} width={"100%"} borderRadius={"0.5rem"} />}
+      </>}
+
+
+      
+      <BorrowsTabs tabs={tabs} onTabClick={handleTabClick} activeTab={activeTab} count={filteredBorrows?.length} defaultTab={defaultTab} />
       <div className={styles.list}>
         
         {!borrows ?

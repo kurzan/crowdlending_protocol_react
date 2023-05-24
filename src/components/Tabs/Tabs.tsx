@@ -1,28 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './Tabs.module.css';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
-const tabs = [
-  {
-    id: 0,
-    title: 'Home',
-    path: '/',
-  },
-  {
-    id: 0,
-    title: 'Borrows',
-    path: '/borrows',
-    path2: '/borrows'
-  },
-  {
-    id: 1,
-    title: 'Portfolio',
-    path: '/portfolio'
-  }
-];
+type TTabsProps = {
+  tabs: Array<any>;
+};
 
-
-const Tabs = () => {
+const Tabs: FC<TTabsProps> = ({tabs}) => {
 
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(0);

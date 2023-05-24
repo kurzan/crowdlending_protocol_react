@@ -7,19 +7,20 @@ type TBorrowsTabsProps = {
   tabs: any[];
   onTabClick: any;
   activeTab: TTab;
+  defaultTab?: number;
   count?: number;
 }
 
-const BorrowsTabs: FC<TBorrowsTabsProps> = ({ tabs, onTabClick, count }) => {
+const BorrowsTabs: FC<TBorrowsTabsProps> = ({ tabs, onTabClick, count, defaultTab = 1 }) => {
 
   const location = useLocation();
   const queryTab = new URLSearchParams(location.search).get('tab');
-  const activeTab = tabs.find(tab => tab.label === queryTab) || tabs[1];
+  const activeTab = tabs.find(tab => tab.label === queryTab) || tabs[defaultTab];
 
   const navigate = useNavigate();
 
   const handleTabClick = (tab: TTab) => {
-    const newPath = `/borrows?tab=${tab.label}`;
+    const newPath = `${location.pathname}?tab=${tab.label}`;
     navigate(newPath, { replace: true });
     onTabClick(tab);
   };
@@ -27,7 +28,7 @@ const BorrowsTabs: FC<TBorrowsTabsProps> = ({ tabs, onTabClick, count }) => {
   useEffect(() => {
     onTabClick(activeTab);
   }, [activeTab,onTabClick])
-
+  
   return (
     <>
     <ul className={styles.container}>

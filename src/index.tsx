@@ -38,6 +38,16 @@ const router = createBrowserRouter([
     errorElement: <ErrorBoundary />
   },
   {
+    path: "/portfolio/investments",
+    element: <Portfolio />,
+    errorElement: <ErrorBoundary />
+  },
+  {
+    path: "/portfolio/borrows",
+    element: <Portfolio />,
+    errorElement: <ErrorBoundary />
+  },
+  {
     path: "/borrows/:id",
     element: <Borrow />,
     errorElement: <ErrorBoundary />
