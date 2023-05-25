@@ -15,6 +15,7 @@ const Footer = () => {
       </div>
 
       <div className={styles.socials}>
+        <a href="./for_investors.pdf" target="blank_" className={styles.investorsText}>For investors</a>
         <a href="https://twitter.com/EarlyBirdFi" target="blank_">Twitter</a>
         <a href="https://t.me/earlybird_chat" target="blank_">Telegram</a>
       </div>

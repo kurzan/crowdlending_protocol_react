@@ -33,3 +33,9 @@
   color: #a2a1a1;
   text-decoration: none;
 }
+
+.investorsText {
+  background: -webkit-linear-gradient(#baff9a, #ef3000, #d9d9d9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
