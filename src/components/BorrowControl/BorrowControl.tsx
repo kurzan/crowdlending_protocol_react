@@ -147,6 +147,7 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
     const interestAmount = getYearRate(currentBorrow?.borrowingGoal, currentBorrow?.interestRate, currentBorrow?.borrowingPeriod);
     const allAmountsToPay = Number(currentBorrow?.borrowingGoal) / 10 ** 18 + interestAmount;
     const notEnought = allAmountsToPay - borrowBallance;
+    const needToPay = interestAmount + Number(currentBorrow?.borrowingGoal) / 10 ** 18;
 
 
     useEffect(() => {
@@ -167,6 +168,10 @@ const BorrowControl = ({ currentBorrow }: { currentBorrow: TBorrow | undefined }
                     <div className={styles.details_item}>
                         <p className={styles.details_text}>interest to pay</p>
                         <p className={styles.details_amount}>{interestAmount.toFixed(5)}</p>
+                    </div>
+                    <div className={styles.details_item}>
+                        <p className={styles.details_text}>Amount to pay</p>
+                        <p className={styles.details_amount}>{needToPay.toFixed(5)}</p>
                     </div>
 
                     <div className={styles.controlBurrons}>
