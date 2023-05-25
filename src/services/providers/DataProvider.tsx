@@ -52,8 +52,11 @@ export const DataProvider = ({ children }: { children: any }) => {
         return
       }
 
+      const borrowPromises = borrowsIds.map(async (id) => {
+        return contractBorrow?.getBorrow(id);
+      });
 
-      let borrowsFromContract = [];
+      const borrowsFromContract = await Promise.all(borrowPromises);
       let borrowers: any[] = [];
 
       await getDocs(collection(db, "borrowers"))
@@ -64,11 +67,6 @@ export const DataProvider = ({ children }: { children: any }) => {
         })
       
         setBorrowers(borrowers);
-
-      for (let i = 0; i < borrowsIds.length; i++) {
-        const borrow = await contractBorrow?.getBorrow(i);
-        borrowsFromContract.push(borrow);
-      }
 
       const mergedArray = borrowsFromContract.map(item1 => {
         const item2 = borrowers.find(item2 => item1.borrower === item2.borrower);
