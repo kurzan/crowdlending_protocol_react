@@ -60,7 +60,7 @@ const PortfolioInvestItem: FC<TPortfolioInvestItemProps> = ({portfolio}) => {
                 </div>
 
                 <div className={styles.tableCell}>
-                    <p className={styles.tableText}>{getShortAmount(Number(portfolio.amount) / 10 ** 18)}</p>
+                    <p className={styles.tableText}>{ getShortAmount(Number(portfolio.amount) / 10 ** 18)}</p>
                 </div>
 
                 <div className={styles.tableCell}>

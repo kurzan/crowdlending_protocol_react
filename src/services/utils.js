@@ -42,7 +42,7 @@ export const getShortAddress = (address) => {
 
 export const getShortAmount = (amount) => {
   if(amount.toString().length > 6) {
-    return `~${amount.slice(0, 5)}`
+    return `~${amount.toString().slice(0, 5)}`
   }
 
   return amount;
