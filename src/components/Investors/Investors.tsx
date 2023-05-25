@@ -32,7 +32,7 @@ const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: st
 
   return (
     <>
-      <Box title={title}>
+      <Box pd={0} title={title}>
         <div className={styles.investorItem}>
 
           <div className={styles.investorBox}>
@@ -58,14 +58,14 @@ const Investors = ({ currentBorrow, title }: { currentBorrow: TBorrow, title: st
         </div>
 
 
-        {currentBorrow?.investors.filter(item => Number(item.amount) > 0).map((item, index) => (
+        {currentBorrow?.investors.filter(item => Number(item.amount) > 0).sort((a, b) => a.investor === address ? -1 : b.investor === address ? 1 : 0).map((item, index) => (
           <div key={index} className={styles.investorItem}>
             <div className={styles.investorBox}>
               <MdAccountCircle size={22} />
               <p className={styles.investorAddress}>{address === item.investor ? 'You' : getShortAddress(item.investor)}</p>
-              {address === item.investor && currentBorrow.status === 0  && !isSuccess ? (
-                  <CancelButton data={investData} disabled={isLoadingCancelInvest} onClick={write} />
-                ) : null}
+              {address === item.investor && currentBorrow.status === 0 && !isSuccess ? (
+                <CancelButton data={investData} disabled={isLoadingCancelInvest} onClick={write} />
+              ) : null}
             </div>
 
             <div className={styles.rightPart}>
