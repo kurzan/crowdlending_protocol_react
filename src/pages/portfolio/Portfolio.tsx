@@ -1,10 +1,9 @@
 import { useAccount } from "wagmi";
 import PortfolioList from "../../components/PortfolioList/PortfolioList";
 import { useData } from "../../hooks/useData";
-import LayoutPage from "../layout/Layout";
 import styles from "./Portfolio.module.css";
 import { TBorrow } from "../../services/types";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import portfolioImg from './../../images/portfolio.svg';
 import walletImg from './../../images/wallet.svg';
@@ -58,7 +57,8 @@ const Portfolio = () => {
 
   return (
 
-    <LayoutPage>
+    <>
+
       <div className={styles.heading}>
         {location.pathname === '/portfolio/investments' && portfolioCount && portfolioCount > 0 ?
           <p>
@@ -128,7 +128,9 @@ const Portfolio = () => {
         </div>
       )}
 
-    </LayoutPage>
+
+    </>
+
   )
 };
 

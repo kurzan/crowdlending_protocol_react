@@ -85,7 +85,7 @@ function CreateBorrow() {
     };
 
     return (
-        <LayoutPage>
+        <>
             <div className={styles.container}>
                 {alreadyBorrower && <p className={styles.heading}>Already you have Opened borrow 👷🏽 </p>}
                 {!alreadyBorrower && <>
@@ -114,7 +114,7 @@ function CreateBorrow() {
             {modalWaitIsOpen && <WaitModal modalWaitHandler={modalWaitHandler} text={"Wait for confirmations..."}/>}
             {modalDoneIsOpen && <DoneModal modalDoneHandler={modalDoneHandler} heading="Congratulations" text="You successfuly create borrow" hash={investData?.hash}/>}
 
-        </LayoutPage>
+        </>
     );
 }
 

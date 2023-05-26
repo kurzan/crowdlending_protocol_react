@@ -8,9 +8,7 @@ const Borrows = () => {
   const { isError, borrows } = useData();
  
   return(
-      <LayoutPage>
         <BorrowsList borrows={borrows} />
-      </LayoutPage>
   )
 };
 

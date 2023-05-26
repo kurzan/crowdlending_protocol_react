@@ -3,9 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {
+  BrowserRouter,
   createBrowserRouter,
   createHashRouter,
+  Navigate,
+  Route,
   RouterProvider,
+  Routes,
 } from "react-router-dom";
 
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
@@ -20,6 +24,7 @@ import Portfolio from './pages/portfolio/Portfolio';
 import { InputProvider } from './services/providers/InputProvider';
 import CreateBorrow from './pages/create-borrow/CreateBorrow';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import LayoutPage from './pages/layout/Layout';
 
 const router = createBrowserRouter([
   {
@@ -68,7 +73,19 @@ root.render(
         <RainbowKitProvider chains={chains}>
           <DataProvider>
             <InputProvider>
-              <RouterProvider router={router} />
+              <BrowserRouter>
+                  <Routes>
+                    <Route path='/' element={<LayoutPage />}>
+                      <Route index element={<Home/>}/>
+                      <Route path='borrows' element={<Borrows/>}/>
+                      <Route path='portfolio/*' element={<Navigate to="./investments"/>}/>
+                      <Route path='portfolio/investments' element={<Portfolio/>}/>
+                      <Route path='portfolio/borrows' element={<Portfolio/>}/>
+                      <Route path='borrows/:id' element={<Borrow/>}/>
+                      <Route path='borrows/addborrow' element={<CreateBorrow/>}/>
+                    </Route>
+                  </Routes>
+              </BrowserRouter>  
             </InputProvider>
           </DataProvider>
         </RainbowKitProvider>

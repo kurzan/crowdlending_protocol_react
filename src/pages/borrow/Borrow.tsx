@@ -129,7 +129,7 @@ const Borrow = () => {
   };
 
   return (
-    <LayoutPage nav>
+    <>
 
       <div className={styles.preheader}>
         <Link to={-1 as any} className={styles.back}>
@@ -259,7 +259,7 @@ const Borrow = () => {
         )}  
 
 
-    </LayoutPage>
+    </>
   )
 };
 

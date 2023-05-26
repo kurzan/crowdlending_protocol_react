@@ -4,15 +4,16 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import Tabs from "../../components/Tabs/Tabs";
 import MobileNav from "../../components/MobileNav/MobileNav";
+import { Outlet } from "react-router-dom";
 
-const LayoutPage = ({children, nav = true}:{children: ReactNode, nav?: boolean}) => {
+const LayoutPage = ({nav = true}:{nav?: boolean}) => {
  
   return(
     <div className={styles.page}>
         <div className={styles.body}>
             <Header nav={nav ? true: false} />
             <main className={styles.container}>
-                {children}
+                <Outlet />
             </main>
         </div>
         <Footer />

@@ -13,7 +13,7 @@ export const mainNavTabs = [
   {
     id: 1,
     title: 'Portfolio',
-    path: '/portfolio/investments'
+    path: '/portfolio'
   }
 ];
 

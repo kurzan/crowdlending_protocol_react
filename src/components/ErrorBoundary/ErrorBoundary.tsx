@@ -6,9 +6,7 @@ const ErrorBoundary = () => {
     console.error(error);
     // Uncaught ReferenceError: path is not defined
     return (
-        <LayoutPage>
             <div>What's wrong, please reload the page!</div>
-        </LayoutPage>
     );
   }
 
