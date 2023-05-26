@@ -21,6 +21,12 @@
     text-align: center;
   }
 
+  .invesmentsBox {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
   .assets {
     color:#50BEAF;
   }

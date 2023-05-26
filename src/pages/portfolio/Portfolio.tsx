@@ -47,6 +47,11 @@ const Portfolio = () => {
     return acc;
   }, []);
 
+  const ordersList = portfolio?.filter(portfolio => portfolio.status === 0);
+  const upcomingList = portfolio?.filter(portfolio => portfolio.status === 1);
+  const payOutList = portfolio?.filter(portfolio => portfolio.status === 2);
+  const сancelledList = portfolio?.filter(portfolio => portfolio.status === 3);
+
   const portfolioCount = portfolio?.length;
   const portfolioVolume = portfolio && portfolio?.reduce((acc, item) => Number(item.amount) + acc, 0) / 10 ** 18;
   const avgRate = portfolio && portfolio?.reduce((acc, item) => Number(item.interestRate) + acc, 0) / portfolio?.length;
@@ -93,7 +98,14 @@ const Portfolio = () => {
       </div>
 
 
-      {location.pathname === '/portfolio/investments' && borrows && portfolioCount && portfolioCount > 0 ? <PortfolioList portfolio={portfolio} /> : null}
+      {location.pathname === '/portfolio/investments' && borrows && portfolioCount && portfolioCount > 0 ? (
+        <div className={styles.invesmentsBox}>
+          {ordersList?.length ? <PortfolioList titile={"Orders"} portfolio={ordersList} /> : null}
+          {upcomingList?.length ? <PortfolioList titile={"Upcoming payments"} portfolio={upcomingList} /> : null}
+          {payOutList?.length ? <PortfolioList titile={"Paid out"} portfolio={payOutList} /> : null}
+          {сancelledList?.length ? <PortfolioList titile={"Cancelled"} portfolio={сancelledList} /> : null}
+        </div>
+      ) : null}
       {location.pathname === '/portfolio/borrows' && currentBorrows && currentBorrows.length > 0 ? (
         <BorrowsList defaultTab={0} borrows={currentBorrows} header={false} />
       ) : null}

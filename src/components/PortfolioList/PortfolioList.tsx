@@ -9,7 +9,6 @@ import CancelButton from '../CancelButton/CancelButton';
 import { TPortfolio } from '../../pages/portfolio/Portfolio';
 import { ONE_DAY_IN_SEC, getShortAddress, getShortAmount, getYearRate } from '../../services/utils';
 import { useBorrowDates } from '../../hooks/useBorrowDates';
-import BorrowsList from '../BorrowsList/BorrowsList';
 import { useData } from '../../hooks/useData';
 
 
@@ -100,10 +99,11 @@ const PortfolioInvestItem: FC<TPortfolioInvestItemProps> = ({portfolio}) => {
 };
 
 type TPortfolioListProps = {
- portfolio: TPortfolio[] | null;
+ portfolio: TPortfolio[] | null | undefined;
+ titile: string;
 }
 
-const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
+const PortfolioList: FC<TPortfolioListProps> = ({portfolio, titile}) => {
 
     const {address} = useAccount();
     const {borrows} = useData();
@@ -115,7 +115,8 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
     }, [currentBorrows])
 
     return (
-        <>  
+        <div className={styles.portfolio}>  
+            <p className={styles.headingText}>{titile}</p>
             <div className={styles.container}>
                 <div className={styles.headTable}>
                     <div className={styles.tableCell}>
@@ -157,7 +158,7 @@ const PortfolioList: FC<TPortfolioListProps> = ({portfolio}) => {
                     }).map((portfolio, index) => <PortfolioInvestItem portfolio={portfolio}/>)}
             
             </div>
-        </>
+        </div>
 
     )
 };
