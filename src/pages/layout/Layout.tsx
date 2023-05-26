@@ -5,6 +5,7 @@ import Header from "../../components/Header/Header";
 import Tabs from "../../components/Tabs/Tabs";
 import MobileNav from "../../components/MobileNav/MobileNav";
 import { Outlet } from "react-router-dom";
+import { mainNavTabs } from "../../services/tabs";
 
 const LayoutPage = ({nav = true}:{nav?: boolean}) => {
  
@@ -18,7 +19,7 @@ const LayoutPage = ({nav = true}:{nav?: boolean}) => {
         </div>
         <Footer />
         <div className={styles.mobileNav}>
-          <MobileNav />
+          <MobileNav tabs={mainNavTabs} />
         </div>
         
     </div>

@@ -1,46 +1,42 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
 import styles from './MobileNav.module.css';
-import { useEffect, useState } from 'react';
+import { FC } from 'react';
 
-const tabs = [
-  {
-    id: 0,
-    title: 'Home',
-    path: '/',
-  },
-  {
-    id: 0,
-    title: 'Borrows',
-    path: '/borrows',
-    path2: '/borrows'
-  },
-  {
-    id: 1,
-    title: 'Portfolio',
-    path: '/portfolio'
-  }
-];
+type TTabProps = {
+  tab: any;
+};
 
-
-const MobileNav = () => {
+const TabItem: FC<TTabProps> = ({tab}) => {
 
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState(0);
 
-  const { pathname } = useLocation();
+  const match = useMatch({
+    path: tab.path,
+    end: tab.path.length === 1,
+  })
+
+  return(
+        <div onClick={() => {
+          navigate(tab.path);
+        }} className={match ? styles.active + " " +  styles.tab_element : styles.tab_element}>
+          <p className={styles.tab_title}>{tab.title}</p>
+        </div>
+  )
+};
+
+
+type TTabsProps = {
+  tabs: Array<any>;
+};
+
+
+const Tabs: FC<TTabsProps> = ({tabs}) => {
 
   return (
     <div className={styles.container}>
-      {tabs && tabs.map((tab, index) => (
-        <div key={index} onClick={() => {
-          setActiveTab(index);
-          navigate(tab.path);
-        }} className={pathname === tab.path || pathname === tab.path2 ? styles.active + " " +  styles.tab_element : styles.tab_element}>
-          <p className={styles.tab_title}>{tab.title}</p>
-        </div>
-      ))}
+      {tabs && tabs.map((tab, index) => <TabItem key={index} tab={tab}/>)}
     </div>
   )
 };
 
-export default MobileNav;
+export default Tabs;

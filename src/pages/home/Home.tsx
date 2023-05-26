@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import logo from '../../images/Vector.png'
 import Stats from "../../components/Stats/Stats";
 import { useEffect, useState } from "react";
+import HowItWorks from "../../components/HowItWorks/HowItWorks";
 
 const Home = () => {
 
@@ -41,7 +42,6 @@ const Home = () => {
             <img src={logo} alt="" />
           </div>
         </div>
-        
       </div>
 
 
