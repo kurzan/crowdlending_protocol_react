@@ -11,6 +11,7 @@ import {
   RouterProvider,
   Routes,
 } from "react-router-dom";
+import './i18n';
 
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiConfig } from "wagmi";

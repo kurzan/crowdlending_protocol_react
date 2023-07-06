@@ -5,12 +5,16 @@ import TotalBar from "../TotalBar/TotalBar";
 import { ethers } from "ethers";
 import Status from "../Status/Status";
 import { useNavigate } from "react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { getDate, getShortAddress } from "../../services/utils";
 import { useData } from "../../hooks/useData";
 import { useBorrowDates } from "../../hooks/useBorrowDates";
+import { useTranslation } from "react-i18next";
 
 const BorrowCard = ({ borrow }: { borrow: TBorrow }) => {
+
+  const { t } = useTranslation();
+
   const [verifiedBorrower, setVerifiedBorrower] = useState(true);
   const navigate = useNavigate();
   const { borrowers } = useData();
@@ -40,6 +44,7 @@ const BorrowCard = ({ borrow }: { borrow: TBorrow }) => {
   return (
     <div style={!verifiedBorrower ? { backgroundColor: '#FFF3E0' } : {}} className={borrow.status <= 1 ? styles.card : styles.card + ' ' + styles.card_unactive} onClick={() => navigate(`/borrows/${Number(borrow.borrowId)}`)}>
       <div className={styles.head}>
+        <p>{t('Welcome')}</p>
         <CompanyLogo src={borrow.image} alt={borrow.companyName} />
         <div className={styles.statusBox}>
 
