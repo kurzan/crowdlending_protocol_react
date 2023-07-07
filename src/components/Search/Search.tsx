@@ -14,7 +14,7 @@ export const Search: FC<TSearch> = ({ placeholder, setSearch }) => {
   const [searchValue, setSearchValue] = useState(searchParams.get("search") || "");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newSearchValue = e.target.value;
+    const newSearchValue = e.target.value.toLowerCase();
     setSearchValue(newSearchValue);
 
     const search = searchParams.get("search");

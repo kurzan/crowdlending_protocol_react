@@ -12,40 +12,14 @@ import { Search } from '../Search/Search';
 import Stats from '../Stats/Stats';
 import BorrowsTabs from '../BorrowsTabs/BorrowsTabs';
 import { useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { getLocalizedBorrowsTabs } from '../../services/tabs';
 
 type TSortedBorrow = {
   statusSort: number;
   idSort: number;
   item: TBorrow;
 }
-
-const tabs = [
-  {
-    label: "All",
-    status: -1,
-    text: 'All borrows'
-  },
-  {
-    label: "Open",
-    status: 0,
-    text: 'Borrows that are still in the process of raising funds'
-  },
-  {
-    label: "Active",
-    status: 1,
-    text: 'Formed borrows for which repayments are expected'
-  },
-  {
-    label: "Closed",
-    status: 2,
-    text: 'Completed borrows that have already matured'
-  },
-  {
-    label: "Canceled",
-    status: 3,
-    text: 'Failed and early canceled borrows'
-  }
-];
 
 export type TTab = {
   label: string;
@@ -60,6 +34,9 @@ type TBorrowListProps = {
 }
 
 const BorrowsList: FC<TBorrowListProps> = ({borrows, header = true, defaultTab}) => {
+  const { t } = useTranslation();
+  const tabs = getLocalizedBorrowsTabs(t);
+  
   const [activeTab, setActiveTab] = useState<TTab>(tabs[1]);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -140,7 +117,7 @@ const BorrowsList: FC<TBorrowListProps> = ({borrows, header = true, defaultTab})
     <div className={styles.container}>
       {header && <>
         {borrows ? <div className={styles.heading}>
-          <Search placeholder="Search" setSearch={setSearchValue} />
+          <Search placeholder={t("Search")} setSearch={setSearchValue} />
           <Stats />
         </div> : <Skeleton containerClassName={styles.skeletonHeading} count={1} height={50} width={"100%"} borderRadius={"0.5rem"} />}
       </>}
