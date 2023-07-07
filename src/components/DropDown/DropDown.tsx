@@ -4,10 +4,12 @@ import styles from "./DropDowm.module.css";
 type TDropDown = {
   children: ReactNode,
   title?: string,
-  img: string
+  img: string,
+  width?: string,
+  height?: string,
 }
 
-const DropDown: FC<TDropDown> = ({children, title, img}) => {
+const DropDown: FC<TDropDown> = ({children, title, img, width = "100%", height = "100%"}) => {
   const [showMenu, setShowMenu] = useState(false);
   const ref = useRef(null);
 
@@ -31,7 +33,7 @@ const DropDown: FC<TDropDown> = ({children, title, img}) => {
 
   return (
     <div className={styles.drop} ref={ref} onClick={handleShareClick}>
-      <img src={img} alt="" />
+      <img src={img} alt="" width={width} height={height} />
       <p>{title}</p>
       {showMenu && (
         <div className={styles.menu}>

@@ -5,15 +5,12 @@ import Tabs from "../Tabs/Tabs";
 import { useNavigate } from "react-router-dom";
 import { getLocalizedMainNavTabs } from "../../services/tabs";
 import { useTranslation } from "react-i18next";
+import LngHandler from "../LngHandler/LngHandler";
 
-const lngs = {
-  en: {nativeName: "English"},
-  ru: {nativeName: "Russian"}
-};
 
 const Header = ({ nav }: { nav?: boolean }) => {
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const localizedMainNavTabs = getLocalizedMainNavTabs(t);
 
@@ -29,13 +26,10 @@ const Header = ({ nav }: { nav?: boolean }) => {
         <div className={"d-none d-md-block " + styles.tabs} >
           {nav && <Tabs tabs={localizedMainNavTabs} />}
         </div>
-        <div>
-          {Object.keys(lngs).map((lng) => (
-            <button type="submit" key={lng} onClick={() => i18n.changeLanguage(lng)}>{lngs[lng as keyof typeof lngs].nativeName}</button>
-          ))}
+        <div className={styles.rightMenu}>
+          <LngHandler />
           <ConnectButton />
         </div>
-        
       </header>
     </>
   )
