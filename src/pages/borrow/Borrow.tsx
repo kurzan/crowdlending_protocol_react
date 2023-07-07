@@ -29,8 +29,11 @@ import doneImg from '../../images/done.svg';
 import TooltipBox from "../../components/TooltipBox/TooltipBox";
 import BorrowControl from "../../components/BorrowControl/BorrowControl";
 import moment from 'moment';
+import { useTranslation } from "react-i18next";
 
 const Borrow = () => {
+  const { t } = useTranslation();
+
   const [verifiedBorrower, setVerifiedBorrower] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalWaitIsOpen, setModalWaitIsOpen] = useState(false);
@@ -134,7 +137,7 @@ const Borrow = () => {
         <Link to={-1 as any} className={styles.back}>
           <>
             <MdKeyboardArrowLeft size={25} />
-            <p>Back</p>
+            <p>{t('Back')}</p>
           </>
         </Link>
 
@@ -163,11 +166,11 @@ const Borrow = () => {
           {Number(currentBorrow?.status) === 1 && currentBorrow && !expired && <div className={styles.timerBox}>
             <MdQueryBuilder />
             <TooltipBox tooltipText={formattedDate(endDate)} >
-              <p className={styles.timer}>Ends in: {`${days}d ${hours}h ${mins}m ${secs}s`}</p>
+              <p className={styles.timer}>{t('Ends in BorrowPage')}: {`${days}d ${hours}h ${mins}m ${secs}s`}</p>
             </TooltipBox>
           </div>}
           {Number(currentBorrow?.status) === 1 && currentBorrow && expired && <div className={styles.expectedBox}>
-            <p>⚠️ Borrower expected to pay {formattedDate(endDate)}</p>
+            <p>⚠️ {t('Borrower expected to pay')} {formattedDate(endDate)}</p>
           </div>}
           <Status status={currentBorrow?.status} />
         </div>
@@ -177,15 +180,15 @@ const Borrow = () => {
       {!currentBorrow ? <Skeleton height={100} /> : <Box bg={!verifiedBorrower ? "#FFF3E0" : ""}>
         <div className={styles.details}>
           <div className={styles.details_item}>
-            <p className={styles.details_text}>Created at</p>
+            <p className={styles.details_text}>{t('Created in')}</p>
             <p className={styles.details_amount}>{getDate(currentBorrow?.createTime)}</p>
           </div>
           <div className={styles.details_item}>
-            <p className={styles.details_text}>Period, days</p>
+            <p className={styles.details_text}>{t('Period, days')}</p>
             <p className={styles.details_amount}>{Number(currentBorrow?.borrowingPeriod) / 86400}</p>
           </div>
           <div className={styles.details_item}>
-            <p className={styles.details_text}>Total borrowed</p>
+            <p className={styles.details_text}>{t('Total borrowed Page')}</p>
             <div className={styles.coins_amount}>
               <p className={styles.details_amount}>
                 {currentBorrow?.totalBorrowed ? getShortAmount((Number(ethers.utils.formatEther(currentBorrow.totalBorrowed))).toString()) : 0}/
@@ -195,7 +198,7 @@ const Borrow = () => {
             </div>
           </div>
           <div className={styles.details_item}>
-            <p className={styles.details_text}>Interest rate</p>
+            <p className={styles.details_text}>{t('Interest rate')}</p>
             <p className={styles.details_amount + " " + styles.rate_text}>{Number(currentBorrow?.interestRate)}%</p>
           </div>
         </div>
@@ -204,30 +207,30 @@ const Borrow = () => {
       {currentBorrowwer && <BorrowControl currentBorrow={currentBorrow}/>}
 
       {(currentBorrow?.status === 0 && !alreadyInvest && !currentBorrowwer) && <div className={styles.button}>
-        <Button disabled={Number(currentBorrow?.status) !== 0 || !isConnected ? true : false} onClick={modalHandler} title={verifiedBorrower ? "Invest 🔥" : "Invest ⚠" }/>   
+        <Button disabled={Number(currentBorrow?.status) !== 0 || !isConnected ? true : false} onClick={modalHandler} title={verifiedBorrower ? t('Invest') + " 🔥" : t('Invest') + " ⚠" }/>   
       </div>}
-      <Box title="About borrower" bg={!verifiedBorrower ? "#FFF3E0" : ""}>
+      <Box title={t("About borrower")} bg={!verifiedBorrower ? "#FFF3E0" : ""}>
         <p className={styles.aboutBorrower}>{currentBorrow?.info}</p>
         {verifiedBorrower ? (<div className={styles.socials}>
           {borrows && <ShortAddress address={currentBorrow?.borrower} />}
           <img src={tgIcon} width={24} height={24} alt="" />
           <img src={twIcon} width={24} height={24} alt="" />
           <img src={disIcon} width={24} height={24} alt="" />
-        </div>) : <p>⚠ Unverified borrower. Hight risk to invest ⚠</p>
+        </div>) : <p>⚠ {t('Unverified borrower. Hight risk to invest')} ⚠</p>
         }
       </Box>
 
-      {investors ? <Investors title={`Investors (${investors})`} currentBorrow={currentBorrow} /> : null}
+      {investors ? <Investors title={t('Investors') + ` (${investors})`} currentBorrow={currentBorrow} /> : null}
 
-      {modalIsOpen && <Modal onClose={modalHandler} title="Enter amount">
-        <InvestField error={error} id={id} currentBorrow={currentBorrow} button={ <Button onClick={write} isLoading={isLoadingInvestData || loadingWaitInvest} disabled={prepareLoading || isLoadingInvestData || error || loadingWaitInvest ? true : false} title={!isLoadingInvestData ? "Invest" : "Pending..."} />} />
+      {modalIsOpen && <Modal onClose={modalHandler} title={t("Enter amount")}>
+        <InvestField error={error} id={id} currentBorrow={currentBorrow} button={ <Button onClick={write} isLoading={isLoadingInvestData || loadingWaitInvest} disabled={prepareLoading || isLoadingInvestData || error || loadingWaitInvest ? true : false} title={!isLoadingInvestData ? t("Invest") : t("Pending") + ' ...'} />} />
       </Modal>}
 
 
       {modalWaitIsOpen && (
           <Modal onClose={modalWaitHandler}>
             <div className={styles.waitContainer}>
-            <p>Wait for confirmations...</p>
+            <p>{t('Wait for confirmations')} ...</p>
             <Oval
               height={60}
               width={60}
@@ -248,11 +251,11 @@ const Borrow = () => {
         {modalDoneIsOpen && (
           <Modal onClose={modalDoneHandler}>
             <div className={styles.waitContainer}>
-              <p className={styles.modalHeading}>Congratulations</p>
+              <p className={styles.modalHeading}>{t('Congratulations')}</p>
               <img src={doneImg} alt="done" />
-              <p className={styles.modalSubHeading}>You successfuly invested <span className={styles.modalSpan}>{inputValue}</span> in <span className={styles.modalSpan}>{currentBorrow?.companyName}</span></p>
-              <a href={`https://testnet.bscscan.com/tx/${investData?.hash}`} target="_blanc">View transaction</a>
-              <a href={`https://twitter.com/intent/tweet?url=https%3A%2F%2Fearlybird.finance%2Fborrows%2F${currentBorrow?.borrowId}&text=I%20invested%20${inputValue}%20tBNB%20at%20%40EarlyBirdFi%20check%20it%3A`} target="_blanc">Share to Twitter</a>
+              <p className={styles.modalSubHeading}>{t('You successfuly invested')} <span className={styles.modalSpan}>{inputValue}</span> {t('in')} <span className={styles.modalSpan}>{currentBorrow?.companyName}</span></p>
+              <a href={`https://testnet.bscscan.com/tx/${investData?.hash}`} target="_blanc">{t('View transaction')}</a>
+              <a href={`https://twitter.com/intent/tweet?url=https%3A%2F%2Fearlybird.finance%2Fborrows%2F${currentBorrow?.borrowId}&text=I%20invested%20${inputValue}%20tBNB%20at%20%40EarlyBirdFi%20check%20it%3A`} target="_blanc">{t('Share to')} Twitter</a>
             </div>
           </Modal>
         )}  

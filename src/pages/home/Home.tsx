@@ -1,7 +1,7 @@
 import styles from "./Home.module.css";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
-import logo from '../../images/Vector.png'
+import logo from '../../images/Vector.png';
 import Stats from "../../components/Stats/Stats";
 import { useTranslation } from "react-i18next";
 
@@ -17,7 +17,7 @@ const Home = () => {
       <div className="container">
         <div className={styles.mainInfo}>
           <div className={styles.info}>
-            <h1 className={styles.heading}><p className={styles.animatedText}>BLOCKCHAIN</p> <span className={styles.fut}>FUNDING</span> <br></br>IS THE FUTURE</h1>
+            <h1 className={styles.heading}><p className={styles.animatedText}>WEB 3.0</p> <span className={styles.fut}>CROWDLENDING</span> <br></br>PROTOCOL</h1>
 
             <Stats />
 

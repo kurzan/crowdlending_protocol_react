@@ -3,7 +3,6 @@ import DropDown from "../DropDown/DropDown";
 import rU from '../../images/lang/ru.svg';
 import eN from '../../images/lang/en-us.svg';
 import styles from './LngHandler.module.css';
-import { useEffect } from "react";
 
 const lngs = {
   ru: { nativeName: "Русский", img: rU },

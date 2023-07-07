@@ -2,7 +2,6 @@ import { useData } from '../../hooks/useData';
 import styles from './Stats.module.css';
 import CoinIcon from '../CoinIcon/CoinIcon';
 import Skeleton from 'react-loading-skeleton';
-import Borrow from '../../pages/borrow/Borrow';
 import { useTranslation } from 'react-i18next';
 
 const Stats = () => {
@@ -37,7 +36,12 @@ const Stats = () => {
     <div className={styles.container}>
       <div className={styles.item}>
         <p className={styles.text}>{t('Total borrowed')}</p>
-        {!borrows ? <Skeleton count={1} borderRadius={"0.5rem"} /> : <p className={styles.amount}>{totalBorrowed && (totalBorrowed / 10 ** 18).toFixed(2)} <CoinIcon /></p>}
+        {!borrows ? <Skeleton count={1} borderRadius={"0.5rem"} /> : (
+          <div style={{display: "flex", alignItems: "center", gap: "6px"}}>
+            <p className={styles.amount}>{totalBorrowed && (totalBorrowed / 10 ** 18).toFixed(2)}</p>
+            <CoinIcon />
+          </div>
+        )}
       </div>
 
       <div className={styles.item}>

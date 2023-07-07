@@ -40,7 +40,38 @@ const resources = {
       "ClosedTabText": "Completed borrows that have already matured",
       "CanceledTabText": "CanceledTab",
 
-      "Search": "Search"
+      "Search": "Search",
+
+      "Supported Chains": "Supported Chains",
+      "For investors": "For investors",
+
+      "Back": "Back",
+      "Ends in BorrowPage": "Ends in",
+      "Share": "Share",
+      "Copy Link": "Copy Link",
+
+      "Borrower expected to pay": "Borrower expected to pay",
+      "Created in": "Created in",
+      "Period, days": "Period, days",
+      "Total borrowed Page": "Total borrowed",
+      "Interest rate": "Interest rate",
+      "About borrower": "About borrower",
+      "Unverified borrower. Hight risk to invest": "Unverified borrower. Hight risk to invest",
+      "Invest": "Invest",
+
+      "Enter amount": "Enter amount",
+      "Pending": "Pending",
+      "Wait for confirmations": "Wait for confirmations",
+      "Congratulations": "Congratulations",
+      "You successfuly invested": "You successfuly invested",
+      "in": 'in',
+      "View transaction": "View transaction",
+      "Share to": "Share to",
+
+
+
+
+
     }
   },
   ru: {
@@ -77,7 +108,33 @@ const resources = {
       "ClosedTabText": "Завершенные займы, которые уже погашены",
       "CanceledTabText": "CanceledTab",
 
-      "Search": "Поиск"
+      "Search": "Поиск",
+
+      "Supported Chains": "Поддерживаемые сети",
+      "For investors": "Инвесторам",
+
+      "Back": "Назад",
+      "Ends in BorrowPage": "Заканчивается через",
+      "Share": "Поделиться",
+      "Copy Link": "Ссылка",
+
+      "Borrower expected to pay": "Ожидается оплата по займу",
+      "Created in": "Дата создания",
+      "Period, days": "Срок, дней",
+      "Total borrowed Page": "Всего собрано",
+      "Interest rate": "Ставка",
+      "About borrower": "О заемщике",
+      "Unverified borrower. Hight risk to invest": "Непроверенный заемщик. Инвестирование в данный займ несет большой риск",
+      "Invest": "Инвестировать",
+
+      "Enter amount": "Введите сумму",
+      "Pending": "Ожидание",
+      "Wait for confirmations": "Транзакция выполняется",
+      "Congratulations": "Поздравляем",
+      "You successfuly invested": "Вы успешно инвестировали",
+      "in": 'в',
+      "View transaction": "Посмотреть транзакцию",
+      "Share to": "Поделиться в",
     }
   }
 };
@@ -86,7 +143,6 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .use(LanguageDetector)
   .init({
-    debug: true,
     resources,
     fallbackLng: 'ru',
 
