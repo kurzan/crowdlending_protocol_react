@@ -44,7 +44,6 @@ const BorrowCard = ({ borrow }: { borrow: TBorrow }) => {
   return (
     <div style={!verifiedBorrower ? { backgroundColor: '#FFF3E0' } : {}} className={borrow.status <= 1 ? styles.card : styles.card + ' ' + styles.card_unactive} onClick={() => navigate(`/borrows/${Number(borrow.borrowId)}`)}>
       <div className={styles.head}>
-        <p>{t('Welcome')}</p>
         <CompanyLogo src={borrow.image} alt={borrow.companyName} />
         <div className={styles.statusBox}>
 
@@ -57,7 +56,7 @@ const BorrowCard = ({ borrow }: { borrow: TBorrow }) => {
       <div className={styles.company}>
 
         {verifiedBorrower ? <p className={styles.name}>{borrow.companyName}</p> : <p className={styles.name}>{getShortAddress(borrow.borrower)}</p>}
-        {verifiedBorrower ? <p className={styles.desc}>{borrow.description}</p> : <p className={styles.desc}>Unverified</p>}
+        {verifiedBorrower ? <p className={styles.desc}>{borrow.description}</p> : <p className={styles.desc}>{t('Unverifed')}</p>}
       </div>
 
       <TotalBar from={Number(ethers.utils.formatEther(borrow.totalBorrowed))} to={Number(ethers.utils.formatEther(borrow.borrowingGoal))} />
@@ -65,36 +64,36 @@ const BorrowCard = ({ borrow }: { borrow: TBorrow }) => {
       <div className={styles.details}>
 
         <div className={styles.details_item}>
-          <p className={styles.details_text}>Rate</p>
+          <p className={styles.details_text}>{t("Rate")}</p>
           <p className={styles.details_amount + " " + styles.rate}>{Number(borrow.interestRate)}%</p>
         </div>
 
         <div className={styles.details_item}>
-          <p className={styles.details_text}>Period</p>
+          <p className={styles.details_text}>{t("Period")}</p>
           <p className={styles.details_amount}>{Number(borrow.borrowingPeriod) / 86400}d</p>
         </div>
 
         {borrow.status === 0 &&
           <div className={styles.details_item}>
-            <p className={styles.details_text}>Created on</p>
+            <p className={styles.details_text}>{t("Created on")}</p>
             <p className={styles.details_amount}>{startDate}</p>
           </div>}
 
         {borrow.status === 1 &&
           <div className={styles.details_item}>
-            <p className={styles.details_text}>Ends in</p>
-            <p className={styles.details_amount}>{!expired ? `${days}d ${hours}h` : "⚠️ Expected"}</p>
+            <p className={styles.details_text}>{t("Ends in")}</p>
+            <p className={styles.details_amount}>{!expired ? days + "d " + hours + "h" : "⚠️ " + t("Expected")}</p>
           </div>}
 
         {borrow.status === 2 &&
           <div className={styles.details_item}>
-            <p className={styles.details_text}>Closed</p>
+            <p className={styles.details_text}>{t("Closed")}</p>
             <p className={styles.details_amount}>{closetDate}</p>
           </div>}
 
         {borrow.status === 3 &&
           <div className={styles.details_item}>
-            <p className={styles.details_text}>Closed</p>
+            <p className={styles.details_text}>{t("Closed")}</p>
             <p className={styles.details_amount}>{closetDate}</p>
           </div>}
 

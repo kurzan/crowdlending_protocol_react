@@ -17,7 +17,6 @@ import { MdKeyboardArrowLeft, MdQueryBuilder } from 'react-icons/md';
 import CoinIcon from "../../components/CoinIcon/CoinIcon";
 import { formattedDate, getDate, getShortAddress, getShortAmount } from "../../services/utils";
 import Investors from "../../components/Investors/Investors";
-import LayoutPage from "../layout/Layout";
 import ShortAddress from "../../components/ShortAddress/ShortAddress";
 import tgIcon from '../../images/socials/tg.svg';
 import twIcon from '../../images/socials/icons8-twitter.svg';

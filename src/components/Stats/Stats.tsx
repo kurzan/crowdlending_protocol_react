@@ -3,8 +3,11 @@ import styles from './Stats.module.css';
 import CoinIcon from '../CoinIcon/CoinIcon';
 import Skeleton from 'react-loading-skeleton';
 import Borrow from '../../pages/borrow/Borrow';
+import { useTranslation } from 'react-i18next';
 
 const Stats = () => {
+
+  const { t } = useTranslation();
 
   const {borrows, borrowsIds} = useData();
   
@@ -33,22 +36,22 @@ const Stats = () => {
   return(
     <div className={styles.container}>
       <div className={styles.item}>
-        <p className={styles.text}>Total borrowed</p>
+        <p className={styles.text}>{t('Total borrowed')}</p>
         {!borrows ? <Skeleton count={1} borderRadius={"0.5rem"} /> : <p className={styles.amount}>{totalBorrowed && (totalBorrowed / 10 ** 18).toFixed(2)} <CoinIcon /></p>}
       </div>
 
       <div className={styles.item}>
-        <p className={styles.text}>Borrowers</p>
+        <p className={styles.text}>{t('Borrowers')}</p>
         {!borrows ? <Skeleton count={1} borderRadius={"0.5rem"} /> : <p className={styles.amount}>{totalBorrowers && totalBorrowers.length}</p>}
       </div>
       
       <div className={styles.item}>
-        <p className={styles.text}>Investors</p>
+        <p className={styles.text}>{t('Investors')}</p>
         {!borrows ? <Skeleton count={1} borderRadius={"0.5rem"} /> : <p className={styles.amount}>{totalInvestors?.length}</p>}
       </div>
 
       <div className={styles.item}>
-        <p className={styles.text}>Avg rate</p>
+        <p className={styles.text}>{t('Avg rate')}</p>
         {!borrows ? <Skeleton count={1} borderRadius={"0.5rem"} /> : <p className={styles.amount + " " + styles.rate}>~{avgRate?.toFixed(2)}</p>}
       </div>
 

@@ -1,19 +1,15 @@
 import styles from "./Home.module.css";
-import LayoutPage from "../layout/Layout";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import logo from '../../images/Vector.png'
 import Stats from "../../components/Stats/Stats";
-import { useEffect, useState } from "react";
-import HowItWorks from "../../components/HowItWorks/HowItWorks";
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
 
-  const navigate = useNavigate();
+  const { t } = useTranslation();
 
-  const [blockchain, setBlockchain] = useState('');
-  const blockchainText = 'BLOCKCHAIN';
-  const [index, setIndex] = useState(0);
+  const navigate = useNavigate();
 
   return (
 
@@ -26,13 +22,13 @@ const Home = () => {
             <Stats />
 
             <div className={styles.buttonsBox}>
-              <Button type="button" onClick={() => navigate('/borrows')} title={"GO TO INVEST"} />
-              <Button type="button" onClick={() => navigate('borrows/addborrow')} style={{ backgroundColor: 'transparent', border: '1px solid black', color: 'black' }} title={"GET A BORROW"} />
+              <Button type="button" onClick={() => navigate('/borrows')} title={t("GO TO INVEST")} />
+              <Button type="button" onClick={() => navigate('borrows/addborrow')} style={{ backgroundColor: 'transparent', border: '1px solid black', color: 'black' }} title={t("GET A BORROW")} />
             </div>
 
             <div className={styles.description}>
               <p>
-                Early Bird uses smart contracts to provide loans to companies, significantly reducing the cost of raising funds. Connect your wallets to get started.
+                {t("About")}
               </p>
             </div>
 
