@@ -16,9 +16,9 @@ const LngHandler = () => {
   return (
     <DropDown img={i18n.language.includes("ru") ? rU : eN} height="30px" width="30px">
       {Object.keys(lngs).map((lng) => (
-        <div className={styles.item}>
+        <div className={styles.item} key={lng} onClick={() => i18n.changeLanguage(lng)}>
           <img src={lngs[lng as keyof typeof lngs].img} alt="" height="25px" width="25px"/>
-          <p key={lng} onClick={() => i18n.changeLanguage(lng)}>{lngs[lng as keyof typeof lngs].nativeName}</p>
+          <p>{lngs[lng as keyof typeof lngs].nativeName}</p>
         </div>
       ))}
     </DropDown>

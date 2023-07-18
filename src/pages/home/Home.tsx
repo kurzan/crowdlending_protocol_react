@@ -14,31 +14,31 @@ const Home = () => {
   return (
 
 
-      <div className="container">
-        <div className={styles.mainInfo}>
-          <div className={styles.info}>
-            <h1 className={styles.heading}><p className={styles.animatedText}>WEB 3.0</p> <span className={styles.fut}>CROWDLENDING</span> <br></br>PROTOCOL</h1>
+    <div className="container">
+      <div className={styles.mainInfo}>
+        <div className={styles.info}>
+          <h1 className={styles.heading}><p className={styles.animatedText}>WEB 3.0</p> <span className={styles.fut}>CROWDLENDING</span> <br></br>PROTOCOL</h1>
 
-            <Stats />
+          <Stats />
 
-            <div className={styles.buttonsBox}>
-              <Button type="button" onClick={() => navigate('/borrows')} title={t("GO TO INVEST")} />
-              <Button type="button" onClick={() => navigate('borrows/addborrow')} style={{ backgroundColor: 'transparent', border: '1px solid black', color: 'black' }} title={t("GET A BORROW")} />
-            </div>
-
-            <div className={styles.description}>
-              <p>
-                {t("About")}
-              </p>
-            </div>
-
+          <div className={styles.buttonsBox}>
+            <Button type="button" onClick={() => navigate('/borrows')} title={t("GO TO INVEST")} />
+            <Button type="button" onClick={() => navigate('borrows/addborrow')} style={{ backgroundColor: 'transparent', border: '1px solid black', color: 'black' }} title={t("GET A BORROW")} />
           </div>
 
-          <div className={styles.bigLogo}>
-            <img src={logo} alt="" />
+          <div className={styles.description}>
+            <p>
+              {t("About")}
+            </p>
           </div>
+
+        </div>
+
+        <div className={styles.bigLogo}>
+          <img src={logo} alt="" />
         </div>
       </div>
+    </div>
 
 
 
