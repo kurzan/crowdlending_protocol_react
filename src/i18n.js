@@ -68,9 +68,16 @@ const resources = {
       "View transaction": "View transaction",
       "Share to": "Share to",
 
+      "Already you have Opened borrow": "Already you have Opened borrow",
+      "Interact with a smart contract and create a borrow": "Interact with a smart contract and create a borrow",
+
+      "Borrowing goal": "Borrowing goal",
+      "Create borrow": "Create borrow",
 
 
-
+      "You are not verified borrower": "You are not verified borrower",
+      "However": "However, you can still create a loan, but note that it will be marked as unverified and high risk",
+      "to be verified": "If you would like to be verified as a borrower on our platform, please contact us",
 
     }
   },
@@ -135,6 +142,16 @@ const resources = {
       "in": 'в',
       "View transaction": "Посмотреть транзакцию",
       "Share to": "Поделиться в",
+
+      "Already you have Opened borrow": "У вас уже есть открытый займ",
+      "Interact with a smart contract and create a borrow": "Заполните поля ниже для создания займа",
+
+      "Borrowing goal": "Необходимая сумма",
+      "Create borrow": "Создать займ",
+
+      "You are not verified borrower": "Вы непроверенный заемщик",
+      "However": "Вы все равно можете создать займ, но он будет помечен как высокорисковый и непроверенный",
+      "to be verified": "Если вы хотите пройти проверку на нашей платформе свяжитесь с нами",
     }
   }
 };

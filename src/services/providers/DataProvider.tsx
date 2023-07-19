@@ -8,6 +8,7 @@ import { contract } from "../web3config";
 interface IContext {
   borrows: TBorrow[] | null,
   isError: boolean,
+  isLoading: boolean,
   borrowsIds: number[] | undefined;
   borrowers: TBorrowers[];
 };
@@ -18,6 +19,7 @@ export const DataProvider = ({ children }: { children: any }) => {
   const [borrows, setBorrows] = useState<any | null>(null);
   const [borrowers, setBorrowers] = useState<any | null>(null);
   const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [borrowsIds, setBorrowsIds] = useState<number[]>();
 
   const provider = useProvider();
@@ -52,6 +54,8 @@ export const DataProvider = ({ children }: { children: any }) => {
         return
       }
 
+      setIsLoading(true);
+
       const borrowPromises = borrowsIds.map(async (id) => {
         return contractBorrow?.getBorrow(id);
       });
@@ -73,6 +77,7 @@ export const DataProvider = ({ children }: { children: any }) => {
         return Object.assign({}, item1, item2);
       });
       setBorrows(mergedArray);
+      setIsLoading(false);
       
     } catch (error) {
       setIsError(true);
@@ -144,8 +149,8 @@ export const DataProvider = ({ children }: { children: any }) => {
   }, [getBorrows])
 
   const value = useMemo(() => ({
-    borrows, borrowers, isError, borrowsIds
-  }), [borrows, isError, borrowsIds, borrowers])
+    borrows, borrowers, isError, isLoading, borrowsIds
+  }), [borrows, isError, borrowsIds, borrowers, isLoading])
 
   return <DataContext.Provider value={value}>
     {children}
