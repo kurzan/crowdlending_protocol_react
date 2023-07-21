@@ -39,3 +39,10 @@
   height: 60px;
   padding: 8px;
 }
+
+
+.rightMenu {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}

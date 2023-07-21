@@ -4,13 +4,11 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {
   BrowserRouter,
-  createBrowserRouter,
-  createHashRouter,
   Navigate,
   Route,
-  RouterProvider,
   Routes,
 } from "react-router-dom";
+import './i18n';
 
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiConfig } from "wagmi";
@@ -23,46 +21,8 @@ import { DataProvider } from './services/providers/DataProvider';
 import Portfolio from './pages/portfolio/Portfolio';
 import { InputProvider } from './services/providers/InputProvider';
 import CreateBorrow from './pages/create-borrow/CreateBorrow';
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import LayoutPage from './pages/layout/Layout';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-    errorElement: <ErrorBoundary />
-  },
-  {
-    path: "/borrows",
-    element: <Borrows />,
-    errorElement: <ErrorBoundary />
-  },
-  {
-    path: "/portfolio",
-    element: <Portfolio />,
-    errorElement: <ErrorBoundary />
-  },
-  {
-    path: "/portfolio/investments",
-    element: <Portfolio />,
-    errorElement: <ErrorBoundary />
-  },
-  {
-    path: "/portfolio/borrows",
-    element: <Portfolio />,
-    errorElement: <ErrorBoundary />
-  },
-  {
-    path: "/borrows/:id",
-    element: <Borrow />,
-    errorElement: <ErrorBoundary />
-  },
-  {
-    path: "/addborrow",
-    element: <CreateBorrow />,
-    errorElement: <ErrorBoundary />
-  },
-]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

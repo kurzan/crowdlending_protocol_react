@@ -1,9 +1,10 @@
+import { useEffect } from "react";
 import { useAccount } from "wagmi";
 import PortfolioList from "../../components/PortfolioList/PortfolioList";
 import { useData } from "../../hooks/useData";
 import styles from "./Portfolio.module.css";
 import { TBorrow } from "../../services/types";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import portfolioImg from './../../images/portfolio.svg';
 import walletImg from './../../images/wallet.svg';
@@ -11,14 +12,16 @@ import { Oval } from "react-loader-spinner";
 import BorrowsList from "../../components/BorrowsList/BorrowsList";
 import Tabs from "../../components/Tabs/Tabs";
 import { portfolioTabs } from "../../services/tabs";
-import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 
 export type TPortfolio = Partial<TBorrow> & { amount?: number }
 
 const Portfolio = () => {
 
-  const { borrows } = useData();
+  const { t } = useTranslation();
+
+  const { borrows, isLoading } = useData();
   const { address, isConnected } = useAccount();
 
   const currentBorrows = borrows && borrows?.filter(borrow => borrow.borrower === address);
@@ -72,7 +75,7 @@ const Portfolio = () => {
           </p> : null
         }
 
-        <Tabs tabs={portfolioTabs} />
+        {portfolioCount || currentBorrows?.length ? <Tabs tabs={portfolioTabs} /> : null}
 
         {!isConnected && (
           <div className={styles.emptyPortfolio}>
@@ -85,32 +88,46 @@ const Portfolio = () => {
 
         )}
 
-        {borrows && isConnected && !portfolioCount &&
+        {/* {isConnected && borrows && !portfolioCount && !currentBorrows &&
           <div className={styles.emptyPortfolio}>
             <p>Your portfolio is emty</p>
             <div className={styles.imgBox}>
               <img src={portfolioImg} width={220} height={220} alt="" />
             </div>
             <Button style={{ width: "200px", margin: "0 auto" }} onClick={() => navigate('/borrows')} title={"GO TO INVEST"} />
-            <Button type="button" onClick={() => navigate('/addborrow')} style={{ backgroundColor: 'transparent', border: '1px solid black', color: 'black' }} title={"GET A BORROW"} />
+            <Button type="button" onClick={() => navigate('/borrows/addborrow')} style={{ backgroundColor: 'transparent', border: '1px solid black', color: 'black' }} title={"GET A BORROW"} />
           </div>
-        }
+        } */}
       </div>
 
 
-      {location.pathname === '/portfolio/investments' && borrows && portfolioCount && portfolioCount > 0 ? (
-        <div className={styles.invesmentsBox}>
+      {location.pathname === '/portfolio/investments' && (
+        <>
+        {borrows && portfolioCount && portfolioCount > 0 ? (
+          <div className={styles.invesmentsBox}>
           {ordersList?.length ? <PortfolioList titile={"Orders"} portfolio={ordersList} /> : null}
           {upcomingList?.length ? <PortfolioList titile={"Upcoming payments"} portfolio={upcomingList} /> : null}
           {payOutList?.length ? <PortfolioList titile={"Paid out"} portfolio={payOutList} /> : null}
           {сancelledList?.length ? <PortfolioList titile={"Cancelled"} portfolio={сancelledList} /> : null}
-        </div>
-      ) : null}
+        </div>) : (
+                  <div className={styles.emptyPortfolio}>
+                  <p>Your portfolio is emty</p>
+                  <div className={styles.imgBox}>
+                    <img src={portfolioImg} width={220} height={220} alt="" />
+                  </div>
+                  <Button style={{ width: "200px", margin: "0 auto" }} onClick={() => navigate('/borrows')} title={"GO TO INVEST"} />
+                  <Button type="button" onClick={() => navigate('/borrows/addborrow')} style={{ backgroundColor: 'transparent', border: '1px solid black', color: 'black' }} title={"GET A BORROW"} />
+                </div>
+        )}
+        </>
+      )}
+      
+
       {location.pathname === '/portfolio/borrows' && currentBorrows && currentBorrows.length > 0 ? (
         <BorrowsList defaultTab={0} borrows={currentBorrows} header={false} />
       ) : null}
 
-      {!borrows && isConnected && (
+      {isLoading && isConnected && (
         <div className={styles.emptyPortfolio}>
           <p>Portfolio is loading...</p>
           <Oval
